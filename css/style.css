@@ -1,0 +1,33 @@
+* {
+    font-family: 'Roboto Slab', serif;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
+header {
+    background-color: black;
+    color: white;
+    flex-basis: 3rem;
+    padding: 0.5rem;
+}
+
+main {
+    flex: 1;
+    padding: 0.5rem;
+}
+
+footer {
+    background-color: black;
+    flex-basis: 3rem;
+    padding: 0.5rem;
+}
