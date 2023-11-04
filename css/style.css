@@ -21,9 +21,72 @@ header {
     padding: 0.5rem;
 }
 
+h1 {
+    margin: 0;
+    cursor: pointer;
+}
+
+h2 {
+    margin: 0;
+}
+
 main {
     flex: 1;
-    padding: 0.5rem;
+    background-color: #4a6f6e;
+    color: #f3f1d5;
+    display: flex;
+    flex-direction: column;
+    padding-inline: 10%;
+    justify-content: center;
+}
+
+#exposition {
+    font-size: 18pt;
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+#options {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+
+#options button {
+    padding: 1rem 2rem;
+    font-size: 14pt;
+    color: #dfb66f;
+    background-color: #394f4f;
+    box-shadow: 0 0 0.5rem #303e3e inset;
+    border: none;
+    border-radius: 1rem;
+    user-select: none;
+}
+
+#options button:hover {
+    background-color: #4d9a9a;
+    color: #f3f1d5;
+    box-shadow: 0 0 0.5rem #394f4f;
+}
+
+#options button:active {
+    background-color: #70be61;
+    color: #f3f1d5;
+    box-shadow: 0 0rem 0.5rem #394f4f inset;
+}
+
+.character-card {
+    background-color: #e3e7dc;
+    color: #776342;
+    flex-basis: 20rem;
+    height: 20rem;
+    border-radius: 1rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 footer {
@@ -31,3 +94,4 @@ footer {
     flex-basis: 3rem;
     padding: 0.5rem;
 }
+
