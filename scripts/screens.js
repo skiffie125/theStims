@@ -1,9 +1,19 @@
-class Screen {
-    #id_counter = 0;
+/**
+ * Used to hold the html data of a particular view in the game.
+ */
+class GameScreen {
+    /** Internal counter used to assign unique IDs to each Screen object */
+    static #id_counter = 0; // '#' at the beginning of a field in js means private
+    /** The html skeleton of the Screen */
+    htmlContent;
+
+    /**
+     * @param {String} htmlContent The html skeleton data of the Screen
+     */
     constructor(htmlContent)
     {
         this.htmlContent = htmlContent;
-        this.id = this.#id_counter++;
+        this.id = GameScreen.#id_counter++;
     }
 }
 
@@ -11,9 +21,9 @@ class Screen {
  * Stores all the skeleton html for the different game screens. Located in a seperate module to avoid cluttering up the code
  */
 let screens = {
-    home: new Screen(`<div id="exposition">
+    home: new GameScreen(`<div id="exposition">
     <p>
-        <strong>1 in every 36 children</strong> is diagnosed with <strong>Autism Spectrum Disorder</strong> (ASD) as of 2022. They strain themselves every day just to fit in to our society, yet <strong>we understand very little</strong> about what life is like for them.
+        <strong>1 in every 36 children</strong> is diagnosed with <strong>Autism Spectrum Disorder</strong> (ASD) as of 2022. They strain themselves every day just to fit in to society, yet their peers typically <strong>understand very little</strong> about what life is like for them.
     </p>
     <p>
         Are <strong>you</strong> willing to take a walk in their shoes?
@@ -24,7 +34,7 @@ let screens = {
         Begin
     </button>
     </div>`),
-    characterSelect: new Screen(`
+    characterSelect: new GameScreen(`
     <div id="exposition">
     <p>
         Select your story:

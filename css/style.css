@@ -37,6 +37,8 @@ main {
     display: flex;
     flex-direction: column;
     padding-inline: 0.5rem;
+    padding-block: 1rem;
+    gap: 2rem;
     justify-content: center;
 }
 
@@ -49,7 +51,10 @@ main {
 #exposition {
     font-size: 18pt;
     text-align: center;
-    margin-bottom: 4rem;
+}
+
+strong {
+    color: #dfb66f;
 }
 
 #options {
@@ -67,6 +72,7 @@ main {
     border: none;
     border-radius: 1rem;
     user-select: none;
+    cursor: pointer;
 }
 
 #options button:hover {
@@ -81,44 +87,8 @@ main {
     box-shadow: 0 0rem 0.5rem #394f4f inset;
 }
 
-#character-select {
-    flex-basis: 22rem;
-    /* background-color: red; */
-}
-
-#character-list {
-    position: relative;
-    height: 22rem;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 1rem;
-}
-
-.character-card {
-    background-color: #e3e7dc;
-    color: #b08643;
-    flex-basis: 20rem;
-    height: 20rem;
-    border-radius: 1rem;
-    padding: 1rem;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    transition: all 0.2s;
-}
-
-.character-card:hover {
-    flex-basis: 22rem;
-    height: 22rem;
-    box-shadow: 0 0.5rem 1rem #394f4f;
-}
-
 footer {
     background-color: black;
     flex-basis: 3rem;
     padding: 0.5rem;
 }
-
