@@ -12,12 +12,14 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: stretch;
+    color: #f3f1d5;
 }
 
 header {
     background-color: black;
     color: white;
     flex-basis: 3rem;
+    flex-shrink: 0;
     padding: 0.5rem;
 }
 
@@ -31,15 +33,16 @@ h2 {
 }
 
 main {
-    flex: 1;
+    position: relative;
+    flex-basis: 100%;
     background-color: #4a6f6e;
-    color: #f3f1d5;
     display: flex;
     flex-direction: column;
     padding-inline: 0.5rem;
     padding-block: 1rem;
     gap: 2rem;
     justify-content: center;
+    overflow: auto;
 }
 
 @media screen and (min-width: 480px) {
@@ -48,9 +51,20 @@ main {
     }
 }
 
+main[data-bg="school"] {
+    background-image: url('../assets/bg_school.png');
+    background-position: 0 20%;
+    background-size: cover;
+}
+
 #exposition {
     font-size: 18pt;
     text-align: center;
+    border-radius: 1rem;
+}
+
+main:not([data-bg='none']) #exposition {
+    background-color: #394f4fe0;
 }
 
 strong {
@@ -61,6 +75,12 @@ strong {
     display: flex;
     justify-content: space-evenly;
     gap: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+main:not([data-bg='none']) #options {
+    background-color: #4a6f6ee0;
 }
 
 #options button {
@@ -87,8 +107,30 @@ strong {
     box-shadow: 0 0rem 0.5rem #394f4f inset;
 }
 
+#HUD {
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: #394f4fe0;
+    border-bottom-right-radius: 1rem;
+}
+
+#HUD.hide {
+    visibility: hidden;
+}
+
+#character-icon {
+    width: 4rem;
+    height: 4rem;
+}
+
 footer {
     background-color: black;
     flex-basis: 3rem;
+    flex-shrink: 0;
     padding: 0.5rem;
 }

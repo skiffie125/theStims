@@ -10,8 +10,7 @@ class GameScreen {
     /**
      * @param {String} htmlContent The html skeleton data of the Screen
      */
-    constructor(htmlContent)
-    {
+    constructor(htmlContent) {
         this.htmlContent = htmlContent;
         this.id = GameScreen.#id_counter++;
     }
@@ -34,8 +33,7 @@ let screens = {
         Begin
     </button>
     </div>`),
-    characterSelect: new GameScreen(`
-    <div id="exposition">
+    characterSelect: new GameScreen(`<div id="exposition">
     <p>
         Select your story:
     </p>
@@ -46,25 +44,125 @@ let screens = {
 <div id="character-select">
     <div id="character-list">
         <div class="character-card">
-            <img src="./assets/blank_character_icon.png" alt="blank character icon">
+            <img class="character-card-icon" src="./assets/blank_character_icon.png" alt="blank character icon">
             <h2>
-                Kevin
+                August
             </h2>
+            <div class="character-stats hidden-until-selected">
+                <p>
+                    <strong>Age:</strong> 20
+                </p>
+                <p>
+                    <strong>Gender:</strong> Female
+                </p>
+            </div>
+            <p class="character-desc hidden-until-selected">
+                <strong>Bio:</strong> August is in her second year of her associates degree at a local community college in Arizona. She comes from a suburban middle-class family, and has a mother, father, and 2 younger sisters who love her very much but put heavy pressure on her to succeed in school. She has diagnosed ADHD and an anxiety disorder, but nobody suspects that she may also have Autism.
+            </p>
+            <button class="character-back-button hidden-until-selected">
+                Back
+            </button>
+            <button class="character-confirm-button hidden-until-selected">
+                Choose
+            </button>
         </div>
         <div class="character-card">
-            <img src="./assets/blank_character_icon.png" alt="blank character icon">
+            <img class="character-card-icon" src="./assets/blank_character_icon.png" alt="blank character icon">
             <h2>
-                Kevin
+                Nora
             </h2>
+            <div class="character-stats hidden-until-selected">
+                <p>
+                    <strong>Age:</strong> 14
+                </p>
+                <p>
+                    <strong>Gender:</strong> Female
+                </p>
+            </div>
+            <p class="character-desc hidden-until-selected">
+                <strong>Bio:</strong> Nora is in the 8th grade at her local public middle school in Vermont. She comes from an immigrant family and has had trouble with bullies at school, despite being quite friendly and sociable and a talented artist. Her family knows she has Autism because her Aunt has it as well and displays similar traits, but they are unable to afford testing and thus she has no formal diagnosis.
+            </p>
+            <button class="character-back-button hidden-until-selected">
+                Back
+            </button>
+            <button class="character-confirm-button hidden-until-selected">
+                Choose
+            </button>
         </div>
         <div class="character-card">
-            <img src="./assets/blank_character_icon.png" alt="blank character icon">
+            <img class="character-card-icon" src="./assets/blank_character_icon.png" alt="blank character icon">
             <h2>
-                Kevin
+                Roman
             </h2>
+            <div class="character-stats hidden-until-selected">
+                <p>
+                    <strong>Age:</strong> 31
+                </p>
+                <p>
+                    <strong>Gender:</strong> male
+                </p>
+            </div>
+            <p class="character-desc hidden-until-selected">
+                <strong>Bio:</strong> Roman is a retail worker at a home improvement shop in Portland, Oregon, and lives in a nearby apartment with his mother. He was diagnosed with Autism at age 5 and received therapies throughout his adolescence to help develop his social skills. He speaks very politely and tries his best to be approachable, but for some reason, people often seem intimidated by him and he has never held a job for longer than 6 months.
+            </p>
+            <button class="character-back-button hidden-until-selected">
+                Back
+            </button>
+            <button class="character-confirm-button hidden-until-selected">
+                Choose
+            </button>
         </div>
     </div>
-</div>`)
+</div>
+`),
+    disclaimer: new GameScreen(`<div id="exposition">
+    <p>
+        This story you are about to play through is inspired by <strong>real stories from the ASD community</strong>.
+    </p>
+    <p>
+        However, this is just <strong>one story of many</strong>. Everybody's experience is different, and no one story can provide a complete understanding of the Autistic experience.
+    </p>
+</div>
+<div id="options">
+    <button class="button-continue">
+        I understand
+    </button>
+</div>`),
+    scenario: new GameScreen(`<div id="exposition">
+    <p>
+        You are approached by your friend <strong>Joanna</strong> after school and she asks you, out of the blue, <strong>"Why are you always so awkward?"</strong>
+    </p>
+    <p>
+        How do you respond?
+    </p>
+</div>
+<div id="options">
+    <button class="button-option">
+        Witty Retort
+    </button>
+    <button class="button-option">
+        "My family says I have Autism..."
+    </button>
+    <button class="button-option">
+        "What are you talking about?"
+    </button>
+</div>`),
+    scenarioResponse: new GameScreen(`<div id="exposition">
+    <p>
+        You tell Joanna that sometimes you behave strangely <strong>without realizing</strong> it because of your Autism.
+    </p>
+    <p>
+        Joanna says, <strong>"Yeah, I know that, dummy. Never mind..."</strong>
+    </p>
+    <p>
+        You must have <strong>missed something</strong>. She seems upset, maybe about something from earlier that day, but you can't be sure.
+    </p>
+</div>
+<div id="options">
+    <button class="button-continue">
+        Continue
+    </button>
+</div>`),
 };
 
 export default screens;
