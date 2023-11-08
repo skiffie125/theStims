@@ -32,6 +32,14 @@ h2 {
     margin: 0;
 }
 
+h3 {
+    margin: 0;
+}
+
+h4 {
+    margin: 0;
+}
+
 main {
     position: relative;
     flex-basis: 100%;
@@ -61,6 +69,34 @@ main[data-bg="school"] {
     font-size: 18pt;
     text-align: center;
     border-radius: 1rem;
+    padding: 1rem;
+}
+
+#exposition p {
+    position: relative;
+    animation: 1s ease-out fade-in, 1s ease-out slide-down;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    to {
+        opacity: 1;
+        pointer-events: initial;
+    }
+}
+
+@keyframes slide-down {
+    from {
+        top: -1rem;
+    }
+
+    to {
+        top: 0;
+    }
 }
 
 main:not([data-bg='none']) #exposition {
@@ -72,18 +108,22 @@ strong {
 }
 
 #options {
+    align-self: center;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     gap: 1rem;
     padding: 1rem;
     border-radius: 1rem;
+    flex-wrap: wrap;
+    position: relative;
+    animation: 0.5s ease-out 1s fade-in backwards;
 }
 
 main:not([data-bg='none']) #options {
     background-color: #4a6f6ee0;
 }
 
-#options button {
+main button {
     padding: 1rem 2rem;
     font-size: 14pt;
     color: #dfb66f;
@@ -95,13 +135,13 @@ main:not([data-bg='none']) #options {
     cursor: pointer;
 }
 
-#options button:hover {
+main button:hover {
     background-color: #4d9a9a;
     color: #f3f1d5;
     box-shadow: 0 0 0.5rem #394f4f;
 }
 
-#options button:active {
+main button:active {
     background-color: #70be61;
     color: #f3f1d5;
     box-shadow: 0 0rem 0.5rem #394f4f inset;
@@ -126,6 +166,23 @@ main:not([data-bg='none']) #options {
 #character-icon {
     width: 4rem;
     height: 4rem;
+}
+
+#end-card {
+    background-color: #f3f1d5;
+    color: #b08643;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+#end-card h2 {
+    text-align: center;
+}
+
+#end-buttons {
+    justify-content: center;
+    display: flex;
+    gap: 1rem;
 }
 
 footer {

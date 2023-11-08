@@ -163,6 +163,46 @@ let screens = {
         Continue
     </button>
 </div>`),
+    end: new GameScreen(`
+    <div id="end-card">
+        <h2>You completed the game!</h2>
+        <h3>Results:</h3>
+        
+        <h4>Stress Management: 3/5</h4>
+        <p>
+            You managed to keep your stress level relatively under control.
+        </p>
+    
+        <h4>
+            Academic Performance: 2/5
+        </h4>
+        <p>
+            You were neglected your classwork at times, which may have saved you a bit of stress in the short term, but it's only going to make life harder in the long run. 
+        </p>
+    
+        <h4>
+            Social Standing: 4/5
+        </h4>
+        <p>
+            You managed to fit in pretty well with your peers! Your friends describe you as quirky but charming.
+        </p>
+        
+    
+        <div id="end-buttons">
+            <button id="button-share">
+                Share this with your friends!
+            </button>
+            <button id="button-play-again">
+                New Story
+            </button>
+            <button id="button-resources">
+                Resources for individuals with Autism
+            </button>
+            <button id="button-survey">
+                Help us improve!
+            </button>
+        </div>
+    </div>`),
 };
 
 export default screens;

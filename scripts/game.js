@@ -160,5 +160,17 @@ function render_scenarioResponse() {
     // set the background
     dom_main.dataset.bg = 'school';
 
-    dom_main.querySelector('.button-continue').addEventListener('click', () => { render_home() });
+    dom_main.querySelector('.button-continue').addEventListener('click', () => { render_end() });
+}
+
+function render_end() {
+    // overwrite contents of main
+    dom_main.innerHTML = screens.end.htmlContent;
+    activeScreenId = screens.end.id;
+    dom_hud.classList.remove('hide');
+
+    // set the background
+    dom_main.dataset.bg = 'none';
+
+    dom_main.querySelector('#button-play-again').addEventListener('click', () => { render_home() });
 }
