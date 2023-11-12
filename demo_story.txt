@@ -44,7 +44,7 @@ Scenario: You are at lunch with a group of friends one of them says something.
 Options:
 - Respond literally 
 Threshold Stress must be 5 or higher 
-Response: “It was a joke, Nora.” You feel like that was the right response, but clearly it wasn’t. 
+Response: “It was a joke, Nora.” You thought that was the right response, but clearly it wasn’t. 
 Social -1
 - Laugh and nod
 Threshold Stress must be 4 or higher 
@@ -99,7 +99,7 @@ Response: It feels so loud. Between the bus, the conversations, and the chaos in
 Topics: Post-restraint collapse 
 Scenario: You get home after school, and you have a bit of time before you have to do anything. 
 Options:
-- Get a snack and Take a nap
+- Get a snack and take a nap
 +1 Stress 
 Response: It feels good to take a second and just relax, you wake up feeling a little better 
 - Stim and Draw
