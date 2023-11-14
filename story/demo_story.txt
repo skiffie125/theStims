@@ -1,0 +1,159 @@
+Demo Story 
+
+The story follows Nora throughout a school day
+We are going to have several meters that track Nora’s progress. All start at full bars. 
+
+Meters
+Stress: 8/8
+Academic success: 3/3
+Social standing: 3/3
+
+
+1) Getting ready
+Topics: sensory 
+Scenario: You start your day getting ready for your day. You are picking out what to wear, nothing that feels good to wear is clean at the moment. 
+Options:
+- Wear dirty clothes 
+Response: You feel comfortable in your own skin. You get a few looks when you step on the bus but who cares?
+Social standing -1 
+- Wear something you hate 
+Response: The tag on the back of your shirt scrapes the back of your neck at unpredictable intervals and the weight of your pants feels wrong. The waistband of your pants pinches and the lack of the usual helpful pressure of a sweatshirt makes it feel ungrounded. Furthermore, you feel self-conscious and start adjusting your clothes constantly.  
+Stress -2 
+- Try to clean your clothes before school 
+Response: It's not perfect, the oil stain on your shirt still shows a little bit, but it's better than it would otherwise be. It messed up your usual morning routine which makes you feel even more tired but at least when you get on the bus to go to school you don’t feel like crawling out of your own skin. 
+Stress -1
+
+
+2) Attention in class
+Topics: executive function, sensory 
+Scenario: You are in English class, your first class of the day. You are trying to pay attention in class but your mind keeps wandering. The book you are discussing couldn’t be more boring, 
+Options:
+- Do everything you can to pay attention
+Response: You take intense notes and by the time class is over the on your notes words and the words the teacher is saying are blurring together. You definitely understood a lot, but that didn’t stop your mind from blanking occasionally. You leave for the next class tired. 
+Stress -2 
+- Doodle scenes from the book 
+Response: You don’t understand everything in the lecture, but drawing out the scenes helps you stay engaged, and may have even understood more than you would have if you sat up straight and made eye contact. 
+Academic success -1 
+- Fully stop paying attention
+Response: You stare at the window engrossed in your own thoughts. When the bell rings to go to your next class, you look bleary-eyed at the board. You don’t know anything that was said. 
+Academic success -2 
+
+3) Lunch
+Topics: Struggle with friends
+Scenario: You are at lunch with a group of friends one of them says something. 
+Options:
+- Respond literally 
+Threshold Stress must be 5 or higher 
+Response: “It was a joke, Nora.” You thought that was the right response, but clearly it wasn’t. 
+Social -1
+- Laugh and nod
+Threshold Stress must be 4 or higher 
+Response: You smile and while you don’t say anything significant it was enough to get you through the interaction. 
+Stress -1
+- Don’t respond at all
+Response: You don’t make eye contact and just stare down at the lunch table, you don’t have a good response so you don’t say anything. You get some looks from the people around you but the conversation shifts away from you and you can finish eating
+Social -2 
+- Take time to consider what it is she’s saying and respond as best you can
+Threshold: Stress must be 6 or higher 
+Response: You realize what she is actually saying and respond in kind. 
+Stress -1
+
+4) Frustrated in class
+Topics: Learning
+Scenario: You are in science class which normally you have no problems with. However, the teacher gave you unclear directions and said that he didn’t want any more questions on how to do the worksheet he just put in front of you. The rest of the class starts working on the worksheet. A few students exchange looks with each other.
+Options:
+- Ask the teacher anyway
+Response: You raise your hand and ask the teacher despite the warning. Talking in class is stressful for you and you feel like everyone’s eyes are drilling into you. He clarifies the instructions and you can tell something is going on with either him or the class but you can’t tell what. 
+-1 social 
+Threshold: Stress 5
+- Ask your neighbor
+Response: You turn and whisper to your neighbor, asking them what do to. You feel self-conscious like you are the only one who doesn’t understand. You don’t know why everyone else seems to get it but you just can’t. They tell you what you need to know and then you both get to work. 
+-1 stress
+Threshold:
+- Attempt to Complete the assignment with no idea what you are doing 
+-1 academic
+Response: You do your best but when you go over it at the end of the period you realize you missed a big piece of everything. You feel like if the teacher was just clear it would have been fine but you did your best with the information you have. 
+- Don’t do the assignment. 
+Response: You sit back and look at the assignment but you just can’t do anything 
+-2 academic
+
+5) Riding home on the bus
+Topics: Social
+Scenario: You are riding home on the bus, it is loud and boisterous. Kids are screaming in the back, as per usual, and the bus driver greets you as you get on. 
+Options
+- Join the chaos in the back
+Response: You sit laughing loudly with everyone but you feel tired and drained when you get off the bus 
+-1 stress
+Threshold: stress 6 or higher 
+- Sit with one of your friends and chat
+Threshold: stress 4 or higher 
+- Sit across from one of your friends and sketch 
+Threshold: 2 or higher 
+- Sit by yourself and cover your ears to try and block out the noise 
+Response: It feels so loud. Between the bus, the conversations, and the chaos in the back it feels far too loud. None of the other people around you are having the same reaction you are and you feel alone. 
+-1 Stress 
+-1 Social 
+
+
+6) Getting home
+Topics: Post-restraint collapse 
+Scenario: You get home after school, and you have a bit of time before you have to do anything. 
+Options:
+- Get a snack and take a nap
++1 Stress 
+Response: It feels good to take a second and just relax, you wake up feeling a little better 
+- Stim and Draw
+Threshold 4
+Response: It feels good to take a second and just relax, you start a drawing an just take a second to do something that actually interests you
++1 Stress
+- Sit in front of the TV. 
+Response: You sit down and stare, it feels good to turn your brain off and not need to comprehend everything around you. You can pause and take a break from the noise if you need to. 
+- Go hang out with a friend
+Threshold 4 Stress 
+Reponse: You get a chance to go hang out with your neighbor and you play a game together, a wonderful way to spend the afternoon. 
+- Get started on chores immediately 
+Threshold 4 Stress 
+Response: Your family is happy to see that the kitchen is clean. 
+-1 stress
+
+7) Homework
+Topics:  executive function
+Scenario: You have some homework you need to do before tomorrow
+Options
+- Do it 
+Threshold 3 stress 
+Response: You complete your homework. 
+- 1  stress
+- Don’t 
+-1 academic 
+Response: You sit and stare at the backpack across the room and it just stares back at you. You try to tell yourself to do it but you can’t make yourself. You want to be a good student and normally you are but you don’t have it in you right now. 
+ 
+8) Family Meal
+Topics: Trying something new/ break in routine 
+Scenario: Your dad cooked a new thing for dinner and wants the whole family to try it.
+Options:
+- Eat it
+Threshold 5 stress 
+Response: You try it and like it, your dad is very happy. 
+- Attempt to Eat it
+Threshold 3 Stress
+Response: You take a bite but you can’t bring yourself to eat anymore. You don’t want to make your dad sad but the new texture and taste were not what you were expecting. 
+- Refuse
+Response: Your dad looks hurt but you can’t bring yourself to do it. You don’t want to make him sad but the idea of a new texture, taste, and change in routine is just too much right now
+-2 Stress
+
+
+Going to Bed
+If Social Standing or academic success were negative at the end:
+Your mom comes into your room after dinner and says “Hey honey, I got a call from the school today. They are kinda concerned about ____”. Are you doing okay with everything?
+
+The day ends here
+
+If stress goes to negative 0 or lower:
+You stop. Your heart feels too big for your chest and the sounds around you blend into an overwhelming cacophony. 
+Find a quiet space to calm down
+Response: You go get away as soon as you can. You to the bathroom and cross your arms with your hands on your shoulders. You breathe in a way your aunt showed you and it helps you calm down for the moment. 
+Stress +2, go to next scene
+
+
+
