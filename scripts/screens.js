@@ -16,6 +16,45 @@ class GameScreen {
     }
 }
 
+
+// Ideas for storing senarios and responses 
+
+
+class Senario {
+    htmlContent;
+    id;
+    responses;
+
+    constructor(id, htmlContent, responses) {
+        this.htmlContent = htmlContent;
+        this.id = id;
+        this.responses = responses;
+    }
+
+    //make getters
+}
+
+class Response  {
+    stressEffect;
+    socialEffect;
+    schoolEffect;
+    threshold; 
+    
+    htmlContent;
+
+    constructor(threshold, stressEffect, socialEffect, schoolEffect, htmlContent) {
+        this.htmlContent = htmlContent;
+        this.threshold = threshold;
+        this.stressEffect = stressEffect;
+        this.socialEffect = socialEffect;
+        this.schoolEffect = schoolEffect;
+    }
+
+    //make getters 
+}
+
+
+
 /**
  * Stores all the skeleton html for the different game screens. Located in a seperate module to avoid cluttering up the code
  */
@@ -205,4 +244,8 @@ let screens = {
     </div>`),
 };
 
+// Storing Nora's story scenes 
+
+
 export default screens;
+//export default noraScreens;
