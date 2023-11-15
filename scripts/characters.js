@@ -270,6 +270,218 @@ const noraSenarioResponse3 ={
         )
 }
 
+const noraSenarioResponse4 ={
+    askTeacher: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Ask the teacher anyway
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        You raise your hand and ask the teacher despite the warning. Talking in class is stressful for you and you feel like everyone’s eyes are drilling into you. He clarifies the instructions and you can tell something is going on with either him or the class but you can’t tell what.
+    </p>
+    </div>`
+    ), 
+    askStudent: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Ask your neighbor 
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        You turn and whisper to your neighbor, asking them what do to. You feel self-conscious like you are the only one who doesn’t understand. You don’t know why everyone else seems to get it but you just can’t. They tell you what you need to know and then you both get to work.
+    </p>
+    </div>`
+    ), 
+    attempt: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Attempt to complete the assignment anyway   
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        You do your best but when you go over it at the end of the period you realize you missed a big piece of the assignment. You feel like if the teacher was just clear it would have been fine but you did your best with the information you have.
+    </p>
+    </div>`
+    ),
+    nope: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Don't do the assignment   
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        You sit and look at the assignment but you just can't do anything, the lack of clarity feels paralyzing. You end the class feeling like a failure, even though you know you aren't. 
+    </p>
+    </div>`
+    )
+}
+
+const noraSenarioResponse5 ={
+    backOfTheBus: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Join the chaos in the back
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        You sit laughing loudly with everyone but you feel tired and drained when you get off the bus.
+    </p>
+    </div>`
+    ), 
+    friend: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Sit with one of your friends and chat
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        You sit by one of your friends and have a fun conversation about your art.
+    </p>
+    </div>`
+    ), 
+    sketch: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Sit across from one of your friends and sketch   
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        You sit in the front where there aren't too many people, and you are able to tune out the noise in the back. Sketching always brings you joy.
+    </p>
+    </div>`
+    ),
+    alone: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Sit by yourself and cover your ears   
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        It feels so loud. Between the bus, the conversations, and the chaos in the back, it feels far too loud. None of the other people around you are having the same reaction you are and you feel alone. 
+    </p>
+    </div>`
+    )
+}
+
+const noraSenarioResponse6 ={
+    rest: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Get a snack and take a nap
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        It feels good to take a second and just relax, you wake up feeling a little better
+    </p>
+    </div>`
+    ), 
+    stim: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Stim and draw
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        You are able to drop your mask and let your leg start bouncing like it wants too. You start a drawing that you have been thinking about all day. It feels good to just take a second to do something that actually interests you.
+    </p>
+    </div>`
+    ), 
+    tv: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Sit in front of the TV 
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        You sit down and stare, it feels good to turn your brain off and not need to comprehend everything around you. You can pause and take a break from the noise if you need to.
+    </p>
+    </div>`
+    ),
+    friend: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Go hang out with a friend   
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        You get a chance to go hang out with your neighbor and you play a game together, a wonderful way to spend the afternoon.
+    </p>
+    </div>`
+    ),
+    chores: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Get started on chores immediately   
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        Your family is happy to see that the kitchen is clean.
+    </p>
+    </div>`
+    )
+}
+
+const noraSenarioResponse7 ={
+    doIt: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Do it
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        You complete your homework
+    </p>
+    </div>`
+    ), 
+    nope: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Don't 
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        You sit and stare at the backpack across the room and it just stares back at you. You try to tell yourself to do it but you can't make yourself. You want to be a good student and normally you are but you don't have it in you right now. 
+    </p>
+    </div>`
+    )
+}
+const noraSenarioResponse8 ={
+    eat: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Eat it
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        You try it and like it, your dad is very happy. 
+    </p>
+    </div>`
+    ), 
+    attempt: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Attempt to eat it 
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        You take a bite but you can't bring yourself to eat anymore. You don't want to make your dad sad but the new texture and taste were not what you were expecting.
+    </p>
+    </div>`
+    ), 
+    refuse: new ScenarioResponse(
+    `<div id="options">
+    <button class="button-option">
+        Refuse   
+    </button>
+    </div>`, `<div id="exposition">
+    <p>
+        Your dad looks hurt but you can't bring yourself to do it. You don't want to make him sad but the idea of a new texture, taste, and change in routine is just too much right now
+    </p>
+    </div>`
+    )
+}
+
 
 //List of senarios
 
@@ -284,17 +496,52 @@ const noraSenarios = {
     noraSenario2: new Scenario(
     `<div id="exposition">
     <p>
-    You are in English class, your first class of the day. You are trying to pay attention in class but your mind keeps wandering. The book you are discussing couldn’t be more boring, and it feels painful to try and keep your focus. What do you do?
+        You are in English class, your first class of the day. You are trying to pay attention in class but your mind keeps wandering. The book you are discussing couldn’t be more boring, and it feels painful to try and keep your focus. What do you do?
     </p>
     </div>`, noraSenarioResponse2, `Placeholder`
     ), 
     noraSenario3: new Scenario(
     `<div id="exposition">
     <p>
-    You are at lunch with a group of friends when one of them says something. How do you respond?
+        You are at lunch with a group of friends when one of them says something. How do you respond?
     </p>
     </div>`, noraSenarioResponse3, `Placeholder`
-    ), 
+    ),
+    noraSenario4: new Scenario(
+    `<div id="exposition">
+    <p>
+        You are in science class which normally you have no problems with. However, the teacher gave you unclear directions and said that he didn't want any more questions on how to do the worksheet he just put in front of you. The rest of the class starts working on the worksheet. A few students exchange looks with each other.
+    </p>
+    </div>`, noraSenarioResponse4, `Placeholder`
+    ),
+    noraSenario5: new Scenario(
+    `<div id="exposition">
+    <p>
+        You are riding home on the bus, it is loud and boisterous. Kids are screaming in the back, as per usual, and the bus driver greets you as you get on.
+    </p>
+    </div>`, noraSenarioResponse5, `Placeholder`
+    ),
+    noraSenario6: new Scenario(
+    `<div id="exposition">
+    <p>
+        You get home after school, and you have a bit of time before you have to do anything.
+    </p>
+    </div>`, noraSenarioResponse6, `Placeholder`
+    ),
+    noraSenario7: new Scenario(
+    `<div id="exposition">
+    <p>
+        You have some homework you need to do before tomorrow.
+    </p>
+    </div>`, noraSenarioResponse7, `Placeholder`
+    ),
+    noraSenario8: new Scenario(
+    `<div id="exposition">
+    <p>
+        Your dad cooked a new thing for dinner and wants the whole family to try it.
+    </p>
+    </div>`, noraSenarioResponse8, `Placeholder`
+    )
 }
 
 
