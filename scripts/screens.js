@@ -6,6 +6,7 @@ class GameScreen {
     static #id_counter = 0; // '#' at the beginning of a field in js means private
     /** The html skeleton of the Screen */
     htmlContent;
+    id;
 
     /**
      * @param {String} htmlContent The html skeleton data of the Screen
@@ -58,7 +59,7 @@ class Response  {
 /**
  * Stores all the skeleton html for the different game screens. Located in a seperate module to avoid cluttering up the code
  */
-let screens = {
+const screens = {
     home: new GameScreen(`<div id="exposition">
     <p>
         <strong>1 in every 36 children</strong> is diagnosed with <strong>Autism Spectrum Disorder</strong> (ASD) as of 2022. They strain themselves every day just to fit in to society, yet their peers typically <strong>understand very little</strong> about what life is like for them.

@@ -1,4 +1,6 @@
 import screens from './screens.js';
+import characters from './characters.js';
+
 /** @type {HTMLElement} reference to 'main' element */
 let dom_main;
 /** @type {HTMLElement} reference to HUD element */
@@ -6,6 +8,10 @@ let dom_hud;
 
 /** ID of the current screen being displayed */
 let activeScreenId = screens.home.id;
+/** @type {Character} the {@link Character} the player is currently playing as */
+let chosenCharacter;
+/** @type {number} index of the currently active {@link Scenario} in the {@link Character}'s scenarioList */
+let storyProgress = 0;
 
 // This event fires once the page is fully loaded, any code which reads/modifies the page data must be called after the page is loaded.
 window.addEventListener('load', event => {
@@ -27,6 +33,29 @@ window.addEventListener('load', event => {
 function handle_scroll_characters() {
     if (activeScreenId != screens.home.id) throw new Error("Character screen not active");
 
+    // TODO: implement
+}
+
+/**
+ * Sets the chosen character, performs any additional setup, then goes to the next screen
+ * @param {Character} c 
+ */
+function handle_select_character(c) {
+    // TODO: implement
+}
+
+/**
+ * Executes any effects of the response, then goes to the response screen
+ * @param {ScenarioResponse} r 
+ */
+function handle_select_response(r) {
+    // TODO: implement
+}
+
+/**
+ * Advances to the next scenario in the storyline or the end screen if this was the last scenario
+ */
+function handle_response_continue() {
     // TODO: implement
 }
 
@@ -61,6 +90,8 @@ function render_characterSelect() {
 
     // set the background
     dom_main.dataset.bg = 'none';
+
+    // TODO: Generate character cards from character data
 
     // Getting character cards from the html for now, eventually these will be generated
     let charCards = dom_main.querySelectorAll('.character-card');
@@ -131,15 +162,18 @@ function render_disclaimer() {
 }
 
 /**
- * Renders the scenario screen
+ * Renders the scenario screen with a given scenario
+ * @param {Scenario} s The {@link Scenario} object to render data from
  */
-function render_scenario() {
+function render_scenario(s) {
     // overwrite contents of main
     dom_main.innerHTML = screens.scenario.htmlContent;
     activeScreenId = screens.scenario.id;
     dom_hud.classList.remove('hide');
 
-    dom_main.dataset.bg = 'school';
+    // TODO: Generate screen content from scenario data
+
+    dom_main.dataset.bg = 'school'; // replace this
 
     // add listeners to scenario choice buttons
     dom_main.querySelectorAll('.button-option').forEach(el => {
@@ -150,15 +184,17 @@ function render_scenario() {
 
 /**
  * Renders the scenario response screen
+ * @param {ScenarioResponse} r The {@link ScenarioResponse} object to render data from
  */
-function render_scenarioResponse() {
+function render_scenarioResponse(r) {
     // overwrite contents of main
     dom_main.innerHTML = screens.scenarioResponse.htmlContent;
     activeScreenId = screens.scenarioResponse.id;
     dom_hud.classList.remove('hide');
 
-    // set the background
-    dom_main.dataset.bg = 'school';
+    // TODO: Generate screen content from response data
+
+    dom_main.dataset.bg = 'school'; // replace this
 
     dom_main.querySelector('.button-continue').addEventListener('click', () => { render_end() });
 }
