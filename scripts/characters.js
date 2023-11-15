@@ -13,7 +13,7 @@ class Character {
     /** @type {String} Displayed on the character card */
     gender;
     /** @type {String} Displayed on the character card */
-    description;
+    bio;
     /** Array of Scenarios in order of how they will appear in game. */
     scenarioList;
 
@@ -22,16 +22,16 @@ class Character {
      * @param {String} name Displayed on the character card as well as the HUD when the character is selected to play
      * @param {number} age Displayed on the character card
      * @param {String} gender Displayed on the character card
-     * @param {String} description Displayed on the character card
+     * @param {String} bio Displayed on the character card
      * @param {Scenario[]} scenarioList Array of Scenarios in order of how they will appear in game.
      */
-    constructor(name, age, gender, description, scenarioList) {
+    constructor(name, age, gender, bio, scenarioList) {
         this.id = Character.#id_counter++;
 
         this.name = name;
         this.age = age;
         this.gender = gender;
-        this.description = description;
+        this.bio = bio;
         this.scenarioList = scenarioList;
     }
 
@@ -81,12 +81,13 @@ class Scenario {
 
     /**
      * 
-     * @param {*} exposition html to display in the top section of the screen when scenario is entered
+     * @param {String} exposition html to display in the top section of the screen when scenario is entered
      * (each top-level element will appear with a short delay after the last)
-     * @param {*} responses list of responses in the order they will display from left to right
-     * @param {*} theme used to determine the background image and ambient sound during the scenario
+     * @param {ScenarioResponse[]} responses list of responses in the order they will display from left to right
+     * @param {String} [theme] used to determine the background image and ambient sound during the scenario. valid themes are:
+     * **none** (default), **school**
      */
-    constructor(exposition, responses, theme) {
+    constructor(exposition, responses, theme = 'none') {
         this.id = Scenario.#id_counter++;
 
         this.exposition = exposition;
@@ -306,7 +307,50 @@ const noraSenarios = {
  * @type {Character[]}
  */
 const characters = [
+{
+    name: 'August',
+    age: '20',
+    gender: 'female',
+    bio: 'August is in her second year of her associates degree at a local community college in Arizona. She comes from a suburban middle-class family, and has a mother, father, and 2 younger sisters who love her very much but put heavy pressure on her to succeed in school. She has diagnosed ADHD and an anxiety disorder, but nobody suspects that she may also have Autism.',
+    scenarioList: [
 
+    ]
+},
+{
+    name: 'Nora',
+    age: '14',
+    gender: 'female',
+    bio: 'Nora is in the 8th grade at her local public middle school in Vermont. She comes from an immigrant family and has had trouble with bullies at school, despite being quite friendly and sociable and a talented artist. Her family knows she has Autism because her Aunt has it as well and displays similar traits, but they are unable to afford testing and thus she has no formal diagnosis.',
+    scenarioList: [
+        {
+            exposition: '<p> You are approached by your friend <strong>Joanna</strong> after school and she asks you, out of the blue, <strong>"Why are you always so awkward?"</strong> </p> <p> How do you respond? </p>',
+            theme: 'school',
+            responses: [
+                {
+                    buttonText: 'Witty Retort',
+                    resultExposition: 'not written yet'
+                },
+                {
+                    buttonText: '"My family says I have Autism"',
+                    resultExposition: `<p> You tell Joanna that sometimes you behave strangely <strong>without realizing</strong> it because of your Autism. </p> <p> Joanna says, <strong>"Yeah, I know that, dummy. Never mind..."</strong> </p> <p> You must have <strong>missed something</strong>. She seems upset, maybe about something from earlier that day, but you can't be sure. </p>`
+                },
+                {
+                    buttonText: '"What are you talking about?"',
+                    resultExposition: 'not written yet'
+                }
+            ]
+        }
+    ]
+},
+{
+    name: 'Roman',
+    age: '31',
+    gender: 'male',
+    bio: 'Roman is a retail worker at a home improvement shop in Portland, Oregon, and lives in a nearby apartment with his mother. He was diagnosed with Autism at age 5 and received therapies throughout his adolescence to help develop his social skills. He speaks very politely and tries his best to be approachable, but for some reason, people often seem intimidated by him and he has never held a job for longer than 6 months.',
+    scenarioList: [
+
+    ]
+}
 ].map(c => Character.buildCharacter(c));
 
 export default characters;

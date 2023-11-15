@@ -59,6 +59,14 @@ function handle_response_continue() {
     // TODO: implement
 }
 
+/**
+ * Handles scrolling up and down in the main element since we don't like the ugly default scroll bar
+ * @param {number} amount distance to scroll vertically, negative indicates scrolling up
+ */
+function handle_scroll_main(amount) {
+    // TODO: implement
+}
+
 /* -------------------------------------------------------------------------- */
 /*                Rendering functions (because who needs React)               */
 /* -------------------------------------------------------------------------- */
@@ -72,8 +80,13 @@ function render_home() {
     activeScreenId = screens.home.id;
     dom_hud.classList.add('hide');
 
+
     // set the background
-    dom_main.dataset.bg = 'none';
+    document.body.dataset.bg = 'none';
+
+    // set up initial animations
+    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'),1000,1000);
+    reveal_children_consecutively(dom_main.querySelector('#options'),500,250,delay,false,false);
 
     // Must attach all event listeners here because js modules are not accessible from the html
     dom_main.querySelector('#button-begin').addEventListener('click', () => { render_characterSelect() });
@@ -89,7 +102,11 @@ function render_characterSelect() {
     dom_hud.classList.add('hide');
 
     // set the background
-    dom_main.dataset.bg = 'none';
+    document.body.dataset.bg = 'none';
+
+    // set up initial animations
+    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'),500,500);
+    reveal_children_consecutively(dom_main.querySelector('#character-list'),500,250,delay,false);
 
     // TODO: Generate character cards from character data
 
@@ -156,7 +173,11 @@ function render_disclaimer() {
     dom_hud.classList.add('hide');
 
     // set the background
-    dom_main.dataset.bg = 'none';
+    document.body.dataset.bg = 'none';
+
+    // set up initial animations
+    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'),1000,1000);
+    reveal_children_consecutively(dom_main.querySelector('#options'),500,250,delay,false,false);
 
     dom_main.querySelector('.button-continue').addEventListener('click', () => { render_scenario() });
 }
@@ -171,9 +192,14 @@ function render_scenario(s) {
     activeScreenId = screens.scenario.id;
     dom_hud.classList.remove('hide');
 
+
     // TODO: Generate screen content from scenario data
 
-    dom_main.dataset.bg = 'school'; // replace this
+    document.body.dataset.bg = 'school'; // replace this
+
+    // set up initial animations
+    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'),1000,1000);
+    reveal_children_consecutively(dom_main.querySelector('#options'),500,250,delay,false,false);
 
     // add listeners to scenario choice buttons
     dom_main.querySelectorAll('.button-option').forEach(el => {
@@ -194,7 +220,11 @@ function render_scenarioResponse(r) {
 
     // TODO: Generate screen content from response data
 
-    dom_main.dataset.bg = 'school'; // replace this
+    document.body.dataset.bg = 'school'; // replace this
+
+    // set up initial animations
+    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'),1000,1000);
+    reveal_children_consecutively(dom_main.querySelector('#options'),500,250,delay,false,false);
 
     dom_main.querySelector('.button-continue').addEventListener('click', () => { render_end() });
 }
@@ -206,7 +236,55 @@ function render_end() {
     dom_hud.classList.remove('hide');
 
     // set the background
-    dom_main.dataset.bg = 'none';
+    document.body.dataset.bg = 'none';
 
     dom_main.querySelector('#button-play-again').addEventListener('click', () => { render_home() });
+}
+
+/**
+ * Applies fade/slide-in animation to each child of an element at increasing delays for each subsequent child.
+ * @param {HTMLElement} el parent element
+ * @param {number} [duration] duration of each animation in milliseconds
+ * @param {number} [interdelay] delay between the start of each animation in milliseconds
+ * @param {number} [startdelay] delay before start of the first animation in milliseconds
+ * @param {Boolean} [slide] set to false to disable vertical movement in the animation
+ * @param {Boolean} [hide] whether the elements should have the *hidden* attribute set before animating
+ * @returns {number} delay to use for further animations
+ */
+function reveal_children_consecutively(el, duration = 1000, interdelay = 1000, startdelay = 0, slide = true, hide = true)
+{
+    // construct keyframe object
+    let kf = {
+        opacity: [0,1],
+        pointerEvents: ['none', 'initial']
+    }
+    if(slide) kf.top = ['-0.5rem',0];
+
+    let i = 0;
+    for(const child of el.children)
+    {
+        // set the child initially to 'hidden' so it doesn't affect the scroll height of main
+        if(hide) child.setAttribute('hidden','');
+
+        // apply the animation with delay
+        child.animate(
+            kf,
+            {
+                id: 'reveal',
+                duration: duration,
+                delay: i*interdelay+startdelay,
+                fill: 'backwards',
+                easing: 'ease-out'
+            }
+        )
+
+        // un-hide the element and scroll it into view when it starts animating
+        window.setTimeout(() => {
+            if(hide) child.removeAttribute('hidden');
+            dom_main.scrollTo({top: dom_main.scrollHeight});
+        }, i*interdelay+startdelay);
+
+        i++;
+    }
+    return i*interdelay+startdelay;
 }

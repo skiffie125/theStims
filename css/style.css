@@ -13,10 +13,18 @@ body {
     flex-direction: column;
     justify-content: stretch;
     color: #f3f1d5;
+
+    background-color: #498290;
+}
+
+body[data-bg="school"] {
+    background-image: url('../assets/bg_school.png');
+    background-position: 0 20%;
+    background-size: cover;
 }
 
 header {
-    background-color: black;
+    background-color: #1a2a46;
     color: white;
     flex-basis: 3rem;
     flex-shrink: 0;
@@ -43,38 +51,54 @@ h4 {
 main {
     position: relative;
     flex-basis: 100%;
-    background-color: #4a6f6e;
     display: flex;
     flex-direction: column;
-    padding-inline: 0.5rem;
-    padding-block: 1rem;
-    gap: 2rem;
-    justify-content: center;
-    overflow: auto;
+    margin-inline: 0.5rem;
+    margin-block: 1rem;
+    border-radius: 1rem;
+    gap: 1rem;
+    /* justify-content: center; */
+    overflow: hidden;
+
+    background-color: #00000022;
+}
+
+body:not([data-bg='none']) main {
+    background-color: #223e4bcc;
 }
 
 @media screen and (min-width: 480px) {
     main {
-        padding-inline: 10%;
+        margin-inline: 10%;
     }
 }
 
-main[data-bg="school"] {
-    background-image: url('../assets/bg_school.png');
-    background-position: 0 20%;
-    background-size: cover;
+
+.spacer {
+    height: 4rem;
 }
 
 #exposition {
+    flex-grow: 1;
+    width: 100%;
+    box-sizing: border-box;
     font-size: 18pt;
     text-align: center;
     border-radius: 1rem;
-    padding: 1rem;
+    padding-inline: 1rem;
+    padding-block: 4rem;
+}
+
+#exposition.no-vertical-pad {
+    padding-block: 0;
 }
 
 #exposition p {
     position: relative;
-    animation: 1s ease-out fade-in, 1s ease-out slide-down;
+}
+
+#exposition p.small {
+    font-size: 12pt;
 }
 
 @keyframes fade-in {
@@ -99,36 +123,43 @@ main[data-bg="school"] {
     }
 }
 
-main:not([data-bg='none']) #exposition {
+/* body:not([data-bg='none']) #exposition {
     background-color: #394f4fe0;
-}
+} */
 
 strong {
     color: #dfb66f;
 }
 
 #options {
+    width: 100%;
+    flex-basis: 12rem;
+    flex-shrink: 0;
+    box-sizing: border-box;
     align-self: center;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 1rem;
     padding: 1rem;
-    border-radius: 1rem;
     flex-wrap: wrap;
     position: relative;
-    animation: 0.5s ease-out 1s fade-in backwards;
 }
 
-main:not([data-bg='none']) #options {
-    background-color: #4a6f6ee0;
+body:not([data-bg='none']) #options {
+    background-color: #3b858f;
 }
+
+/* body:not([data-bg='none']) #options {
+    background-color: #4a6f6ee0;
+} */
 
 main button {
     padding: 1rem 2rem;
     font-size: 14pt;
     color: #dfb66f;
-    background-color: #394f4f;
-    box-shadow: 0 0 0.5rem #303e3e inset;
+    background-color: #39494f;
+    box-shadow: 0 0 0.5rem #212d3b inset;
     border: none;
     border-radius: 1rem;
     user-select: none;
@@ -138,13 +169,13 @@ main button {
 main button:hover {
     background-color: #4d9a9a;
     color: #f3f1d5;
-    box-shadow: 0 0 0.5rem #394f4f;
+    box-shadow: 0 0 0.5rem #39494f;
 }
 
 main button:active {
     background-color: #70be61;
     color: #f3f1d5;
-    box-shadow: 0 0rem 0.5rem #394f4f inset;
+    box-shadow: 0 0rem 0.5rem #212d3b inset;
 }
 
 #HUD {
@@ -155,7 +186,7 @@ main button:active {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    background-color: #394f4fe0;
+    background-color: #223e4bcc;
     border-bottom-right-radius: 1rem;
 }
 
@@ -173,6 +204,7 @@ main button:active {
     color: #b08643;
     padding: 2rem;
     border-radius: 1rem;
+    height: 100%;
 }
 
 #end-card h2 {
@@ -186,7 +218,7 @@ main button:active {
 }
 
 footer {
-    background-color: black;
+    background-color: #1a2a46;
     flex-basis: 3rem;
     flex-shrink: 0;
     padding: 0.5rem;

@@ -34,11 +34,11 @@ const screens = {
         Begin
     </button>
     </div>`),
-    characterSelect: new GameScreen(`<div id="exposition">
+    characterSelect: new GameScreen(`<div id="exposition" class="no-vertical-pad">
     <p>
         Select your story:
     </p>
-    <p>
+    <p class="small">
         (Click a card to see more info)
     </p>
 </div>
