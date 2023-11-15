@@ -206,7 +206,6 @@ const screens = {
     </div>`),
 };
 
-// Storing Nora's story scenes 
 
 
 export default screens;
