@@ -18,6 +18,8 @@ class Character {
     scenarioList;
     /** @type {int} Integer stress level of character (0 - 100) */
     stress_level;
+    /** @type {int} Integer reputation level of character (0 - 100) */
+    reputation_level;
 
     /**
      * 
@@ -27,6 +29,7 @@ class Character {
      * @param {String} bio Displayed on the character card
      * @param {Scenario[]} scenarioList Array of Scenarios in order of how they will appear in game
      * @param {int} stress_level Integer stress level of character (0 - 100)
+     * @param {int} reputation_level Integer reputation level of character (0 - 100)
      */
     constructor(name, age, gender, bio, scenarioList) {
         this.id = Character.#id_counter++;
@@ -37,6 +40,7 @@ class Character {
         this.bio = bio;
         this.scenarioList = scenarioList;
         this.stress_level = 0;
+        this.reputation_level = 65; // Default to a D reputation socre, to be changed
     }
 
     /**
@@ -65,10 +69,36 @@ class Character {
     }
 
     adjustStress(stress) {
-        this.stressLevel += stress;
-        this.stressLevel = Math.max(this.stressLevel, 0); 
-        this.stressLevel = Math.min(this.stressLevel, 100);
+        this.stress_level += stress;
+        this.stress_level = Math.max(this.stress_level, 0); 
+        this.stress_level = Math.min(this.stress_level, 100);
         // Trigger effects if stress reaches a certian 
+    }
+
+    adjustReputation(reputation) {
+        this.reputation_level += reputation;
+        this.reputation_level = Math.max(this.reputation_level, 0); 
+        this.reputation_level = Math.min(this.reputation_level, 100);
+    }
+
+    getLetterReputation(){
+        if (this.reputation_level == 100) {
+            return 'A+';
+        } else if (reputation_level >= 90) {
+            return 'A';
+        } else if (reputation_level >= 88) {
+            return 'B+';
+        } else if (reputation_level >= 80) {
+            return 'B';
+        } else if (reputation_level >= 78) {
+            return 'C+';
+        } else if (reputation_level >= 70) {
+            return 'C';
+        } else if (reputation_level >= 68) {
+            return 'D+';
+        } else {
+            return 'D';
+        }
     }
 }
 
