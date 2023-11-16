@@ -16,6 +16,8 @@ class Character {
     bio;
     /** Array of Scenarios in order of how they will appear in game. */
     scenarioList;
+    /** @type {int} Integer stress level of character (0 - 100) */
+    stress_level;
 
     /**
      * 
@@ -23,7 +25,8 @@ class Character {
      * @param {number} age Displayed on the character card
      * @param {String} gender Displayed on the character card
      * @param {String} bio Displayed on the character card
-     * @param {Scenario[]} scenarioList Array of Scenarios in order of how they will appear in game.
+     * @param {Scenario[]} scenarioList Array of Scenarios in order of how they will appear in game
+     * @param {int} stress_level Integer stress level of character (0 - 100)
      */
     constructor(name, age, gender, bio, scenarioList) {
         this.id = Character.#id_counter++;
@@ -33,6 +36,7 @@ class Character {
         this.gender = gender;
         this.bio = bio;
         this.scenarioList = scenarioList;
+        this.stress_level = 0;
     }
 
     /**
@@ -58,6 +62,13 @@ class Character {
     static buildCharacter(data)
     {
         // TODO: implement
+    }
+
+    adjustStress(stress) {
+        this.stressLevel += stress;
+        this.stressLevel = Math.max(this.stressLevel, 0); 
+        this.stressLevel = Math.min(this.stressLevel, 100);
+        // Trigger effects if stress reaches a certian 
     }
 }
 
