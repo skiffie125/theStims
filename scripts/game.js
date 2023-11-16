@@ -24,6 +24,18 @@ window.addEventListener('load', event => {
 
     // add event listener to scroll main element with wheel
     dom_main.addEventListener('wheel', (ev) => handle_scroll_main(ev.deltaY));
+    
+    document.addEventListener('keydown', (ev) => {
+        switch(ev.key)
+        {
+            case 'ArrowDown':
+                handle_scroll_main(1);
+                break;
+            case 'ArrowUp':
+                handle_scroll_main(-1);
+                break;
+        }
+    });
 
     // Make the title text link to the home screen
     document.querySelector('h1').addEventListener('click', () => render_home());
@@ -64,10 +76,29 @@ function handle_response_continue() {
 
 /**
  * Handles scrolling up and down in the main element since we don't like the ugly default scroll bar
- * @param {number} amount distance to scroll vertically, negative indicates scrolling up
+ * @param {number} direction a positive number (or 0) indicates scrolling down; a negative number indicates scrolling up.
  */
-function handle_scroll_main(amount) {
-    dom_main.scrollBy({ top: amount });
+function handle_scroll_main(direction) {
+    let exposition = dom_main.querySelector('#exposition');
+    if(exposition == null) return;
+
+    // generate a list of all the scroll positions of the child elements
+    const snap_heights = [...exposition.children].map(child => child.offsetTop);
+    // Must round current scroll height to avoid bugs
+    const current_height = Math.round(dom_main.scrollTop);
+    let target_height;
+    
+    // Choose nearest snap height in respective direction
+    if(direction<=0)
+    {
+        target_height = Math.max(...snap_heights.filter(x => x<current_height));
+    }
+    else
+    {
+        target_height = Math.min(...snap_heights.filter(x => x>current_height));
+    }
+
+    dom_main.scrollTo({top: target_height});
 }
 
 /* -------------------------------------------------------------------------- */
@@ -88,7 +119,7 @@ function render_home() {
     document.body.dataset.bg = 'none';
 
     // this is just to test scroll behavior, remove later
-    // dom_main.querySelector('#exposition').innerHTML += "<p>blah blah blah</p>".repeat(12);
+    // dom_main.querySelector('#exposition').innerHTML += "<p>blah blah blah</p>".repeat(7);
 
     // set up initial animations
     let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);

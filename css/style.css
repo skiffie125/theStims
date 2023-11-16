@@ -87,14 +87,20 @@ body:not([data-bg='none']) main {
     border-radius: 1rem;
     padding-inline: 1rem;
     padding-block: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 1rem;
 }
 
 #exposition.no-vertical-pad {
-    padding-block: 0;
+    padding-block: 1rem;
+    justify-content: flex-start;
 }
 
 #exposition p {
     position: relative;
+    margin: 0;
 }
 
 #exposition p.small {
