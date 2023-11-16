@@ -22,8 +22,11 @@ window.addEventListener('load', event => {
     // Set screen to home
     render_home();
 
+    // add event listener to scroll main element with wheel
+    dom_main.addEventListener('wheel', (ev) => handle_scroll_main(ev.deltaY));
+
     // Make the title text link to the home screen
-    document.querySelector('h1').addEventListener('click', () => { render_home() });
+    document.querySelector('h1').addEventListener('click', () => render_home());
 });
 
 /* -------------------------------------------------------------------------- */
@@ -64,7 +67,7 @@ function handle_response_continue() {
  * @param {number} amount distance to scroll vertically, negative indicates scrolling up
  */
 function handle_scroll_main(amount) {
-    // TODO: implement
+    dom_main.scrollBy({ top: amount });
 }
 
 /* -------------------------------------------------------------------------- */
@@ -84,9 +87,12 @@ function render_home() {
     // set the background
     document.body.dataset.bg = 'none';
 
+    // this is just to test scroll behavior, remove later
+    // dom_main.querySelector('#exposition').innerHTML += "<p>blah blah blah</p>".repeat(12);
+
     // set up initial animations
-    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'),1000,1000);
-    reveal_children_consecutively(dom_main.querySelector('#options'),500,250,delay,false,false);
+    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
+    reveal_children_consecutively(dom_main.querySelector('#options'), 500, 250, delay, false, false);
 
     // Must attach all event listeners here because js modules are not accessible from the html
     dom_main.querySelector('#button-begin').addEventListener('click', () => { render_characterSelect() });
@@ -105,8 +111,8 @@ function render_characterSelect() {
     document.body.dataset.bg = 'none';
 
     // set up initial animations
-    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'),500,500);
-    reveal_children_consecutively(dom_main.querySelector('#character-list'),500,250,delay,false);
+    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 500, 500);
+    reveal_children_consecutively(dom_main.querySelector('#character-list'), 500, 250, delay, false);
 
     // TODO: Generate character cards from character data
 
@@ -176,8 +182,8 @@ function render_disclaimer() {
     document.body.dataset.bg = 'none';
 
     // set up initial animations
-    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'),1000,1000);
-    reveal_children_consecutively(dom_main.querySelector('#options'),500,250,delay,false,false);
+    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
+    reveal_children_consecutively(dom_main.querySelector('#options'), 500, 250, delay, false, false);
 
     dom_main.querySelector('.button-continue').addEventListener('click', () => { render_scenario() });
 }
@@ -198,8 +204,8 @@ function render_scenario(s) {
     document.body.dataset.bg = 'school'; // replace this
 
     // set up initial animations
-    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'),1000,1000);
-    reveal_children_consecutively(dom_main.querySelector('#options'),500,250,delay,false,false);
+    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
+    reveal_children_consecutively(dom_main.querySelector('#options'), 500, 250, delay, false, false);
 
     // add listeners to scenario choice buttons
     dom_main.querySelectorAll('.button-option').forEach(el => {
@@ -223,8 +229,8 @@ function render_scenarioResponse(r) {
     document.body.dataset.bg = 'school'; // replace this
 
     // set up initial animations
-    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'),1000,1000);
-    reveal_children_consecutively(dom_main.querySelector('#options'),500,250,delay,false,false);
+    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
+    reveal_children_consecutively(dom_main.querySelector('#options'), 500, 250, delay, false, false);
 
     dom_main.querySelector('.button-continue').addEventListener('click', () => { render_end() });
 }
@@ -251,20 +257,19 @@ function render_end() {
  * @param {Boolean} [hide] whether the elements should have the *hidden* attribute set before animating
  * @returns {number} delay to use for further animations
  */
-function reveal_children_consecutively(el, duration = 1000, interdelay = 1000, startdelay = 0, slide = true, hide = true)
-{
+function reveal_children_consecutively(el, duration = 1000, interdelay = 1000, startdelay = 0, slide = true, hide = true) {
     // construct keyframe object
     let kf = {
-        opacity: [0,1],
+        opacity: [0, 1],
         pointerEvents: ['none', 'initial']
     }
-    if(slide) kf.top = ['-0.5rem',0];
+    if (slide) kf.top = ['-0.5rem', 0];
 
     let i = 0;
-    for(const child of el.children)
+    for (const child of el.children)
     {
         // set the child initially to 'hidden' so it doesn't affect the scroll height of main
-        if(hide) child.setAttribute('hidden','');
+        if (hide) child.setAttribute('hidden', '');
 
         // apply the animation with delay
         child.animate(
@@ -272,7 +277,7 @@ function reveal_children_consecutively(el, duration = 1000, interdelay = 1000, s
             {
                 id: 'reveal',
                 duration: duration,
-                delay: i*interdelay+startdelay,
+                delay: i * interdelay + startdelay,
                 fill: 'backwards',
                 easing: 'ease-out'
             }
@@ -280,11 +285,11 @@ function reveal_children_consecutively(el, duration = 1000, interdelay = 1000, s
 
         // un-hide the element and scroll it into view when it starts animating
         window.setTimeout(() => {
-            if(hide) child.removeAttribute('hidden');
-            dom_main.scrollTo({top: dom_main.scrollHeight});
-        }, i*interdelay+startdelay);
+            if (hide) child.removeAttribute('hidden');
+            dom_main.scrollTo({ top: dom_main.scrollHeight });
+        }, i * interdelay + startdelay);
 
         i++;
     }
-    return i*interdelay+startdelay;
+    return i * interdelay + startdelay;
 }
