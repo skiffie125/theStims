@@ -14,6 +14,8 @@ class Character {
     gender;
     /** @type {String} Displayed on the character card */
     bio;
+    /** @type {String} URL string for the image to display on the character card & HUD */
+    icon;
     /** Array of Scenarios in order of how they will appear in game. */
     scenarioList;
     /** @type {int} Integer stress level of character (0 - 100) */
@@ -27,17 +29,19 @@ class Character {
      * @param {number} age Displayed on the character card
      * @param {String} gender Displayed on the character card
      * @param {String} bio Displayed on the character card
+     * @param {String} icon URL string for the image to display on the character card & HUD
      * @param {Scenario[]} scenarioList Array of Scenarios in order of how they will appear in game
      * @param {int} stress_level Integer stress level of character (0 - 100)
      * @param {int} reputation_level Integer reputation level of character (0 - 100)
      */
-    constructor(name, age, gender, bio, scenarioList) {
+    constructor(name, age, gender, bio, icon = '../assets/blank_character_icon.png', scenarioList) {
         this.id = Character.#id_counter++;
 
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.bio = bio;
+        this.icon = icon;
         this.scenarioList = scenarioList;
         this.stress_level = 0;
         this.reputation_level = 65; // Default to a D reputation socre, to be changed
@@ -71,6 +75,7 @@ class Character {
             data.age,
             data.gender,
             data.bio,
+            data.icon,
             data.scenarioList.map(s => {
                 return new Scenario(
                     s.exposition,
@@ -200,12 +205,13 @@ class ScenarioResponse {
     }
 }
 
-// TODO: Add character data
+/* -------------------------------------------------------------------------- */
+/*                               Character Data                               */
+/* -------------------------------------------------------------------------- */
 
-
-//Character 
-
-
+/* ------------------------------- Guidelines ------------------------------- */
+// Exposition can be as long as needed but try to limit the size of each <p> tag
+// Make sure all apostrophes are the same if pasting from word processor
 
 /**
  * @type {Character[]}
@@ -215,6 +221,7 @@ const characters = [
     name: 'August',
     age: '20',
     gender: 'female',
+    icon: undefined,
     bio: 'August is in her second year of her associates degree at a local community college in Arizona. She comes from a suburban middle-class family, and has a mother, father, and 2 younger sisters who love her very much but put heavy pressure on her to succeed in school. She has diagnosed ADHD and an anxiety disorder, but nobody suspects that she may also have Autism.',
     scenarioList: [
 
@@ -224,6 +231,7 @@ const characters = [
     name: 'Nora',
     age: '14',
     gender: 'female',
+    icon: undefined,
     bio: 'Nora is in the 8th grade at her local public middle school in Vermont. She comes from an immigrant family and has had trouble with bullies at school, despite being quite friendly and sociable and a talented artist. Her family knows she has Autism because her Aunt has it as well and displays similar traits, but they are unable to afford testing and thus she has no formal diagnosis.',
     scenarioList: [
         {
@@ -240,7 +248,7 @@ const characters = [
                 },
                 {
                     buttonText: 'Try to clean your clothes before school',
-                    resultExposition: `<p> It's not perfect, the oil stain on your shirt still shows a little bit, but it's better than it would otherwise be. It messed up your usual morning routine which makes you feel even more tired but at least when you get on the bus to go to school you don’t feel like crawling out of your own skin. </p>`
+                    resultExposition: `<p> It's not perfect, the oil stain on your shirt still shows a little bit, but it's better than it would otherwise be. It messed up your usual morning routine which makes you feel even more tired but at least when you get on the bus to go to school you don't feel like crawling out of your own skin. </p>`
                 }
             ]
         },
@@ -290,11 +298,11 @@ const characters = [
             responses: [
                 {
                     buttonText: `Ask the teacher anyway`,
-                    resultExposition: `<p> You raise your hand and ask the teacher despite the warning. Talking in class is stressful for you and you feel like everyone’s eyes are drilling into you. He clarifies the instructions and you can tell something is going on with either him or the class but you can’t tell what. </p>`
+                    resultExposition: `<p> You raise your hand and ask the teacher despite the warning. Talking in class is stressful for you and you feel like everyone's eyes are drilling into you. He clarifies the instructions and you can tell something is going on with either him or the class but you can't tell what. </p>`
                 },
                 {
                     buttonText: `Ask your neighbor`,
-                    resultExposition: `<p> You turn and whisper to your neighbor, asking them what do to. You feel self-conscious like you are the only one who doesn’t understand. You don’t know why everyone else seems to get it but you just can’t. They tell you what you need to know and then you both get to work. </p>`
+                    resultExposition: `<p> You turn and whisper to your neighbor, asking them what do to. You feel self-conscious like you are the only one who doesn't understand. You don't know why everyone else seems to get it but you just can't. They tell you what you need to know and then you both get to work. </p>`
                 },
                 {
                     buttonText: `Attempt to complete the assignment anyway`,
@@ -392,6 +400,7 @@ const characters = [
     name: 'Roman',
     age: '31',
     gender: 'male',
+    icon: undefined,
     bio: 'Roman is a retail worker at a home improvement shop in Portland, Oregon, and lives in a nearby apartment with his mother. He was diagnosed with Autism at age 5 and received therapies throughout his adolescence to help develop his social skills. He speaks very politely and tries his best to be approachable, but for some reason, people often seem intimidated by him and he has never held a job for longer than 6 months.',
     scenarioList: [
 

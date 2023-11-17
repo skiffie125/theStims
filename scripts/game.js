@@ -6,12 +6,33 @@ let dom_main;
 /** @type {HTMLElement} reference to HUD element */
 let dom_hud;
 
-/** ID of the current screen being displayed */
-let activeScreenId = screens.home.id;
-/** @type {Character} the {@link Character} the player is currently playing as */
-let chosenCharacter;
-/** @type {number} index of the currently active {@link Scenario} in the {@link Character}'s scenarioList */
-let storyProgress = 0;
+/**
+ * Singleton object responsible for holding game state and observers
+ */
+let Game = (function () {
+    // treat these like private members for Game
+    // ik this syntax is confusing af but that's javascript for you
+    let chosenCharacterPrivate;
+    let storyProgressPrivate = 0;
+
+    // this is where the object with its public members are defined
+    return {
+        /** ID of the current screen being displayed */
+        activeScreenId: screens.home.id,
+        /** @type {Character} the {@link Character} the player is currently playing as */
+        get chosenCharacter() { return chosenCharacterPrivate; },
+        set chosenCharacter(c) {
+            chosenCharacterPrivate = c;
+            update_HUD();
+        },
+        /** @type {number} index of the currently active {@link Scenario} in the {@link Character}'s scenarioList */
+        get storyProgress() { return storyProgressPrivate; },
+        set storyProgress(num) {
+            storyProgressPrivate = num;
+            update_HUD();
+        }
+    }
+})();
 
 // This event fires once the page is fully loaded, any code which reads/modifies the page data must be called after the page is loaded.
 window.addEventListener('load', event => {
@@ -24,9 +45,9 @@ window.addEventListener('load', event => {
 
     // add event listener to scroll main element with wheel
     dom_main.addEventListener('wheel', (ev) => handle_scroll_main(ev.deltaY));
-    
+
     document.addEventListener('keydown', (ev) => {
-        switch(ev.key)
+        switch (ev.key)
         {
             case 'ArrowDown':
                 handle_scroll_main(1);
@@ -48,7 +69,7 @@ window.addEventListener('load', event => {
 /* -------------------------------------------------------------------------- */
 
 function handle_scroll_characters() {
-    if (activeScreenId != screens.home.id) throw new Error("Character screen not active");
+    if (Game.activeScreenId != screens.home.id) throw new Error("Character screen not active");
 
     // TODO: implement
 }
@@ -58,7 +79,9 @@ function handle_scroll_characters() {
  * @param {Character} c 
  */
 function handle_select_character(c) {
-    // TODO: implement
+    Game.chosenCharacter = c;
+    Game.storyProgress = 0;
+    render_disclaimer();
 }
 
 /**
@@ -82,25 +105,25 @@ function handle_response_continue() {
  */
 function handle_scroll_main(direction) {
     let exposition = dom_main.querySelector('#exposition');
-    if(exposition == null) return;
+    if (exposition == null) return;
 
     // generate a list of all the scroll positions of the child elements
     const snap_heights = [...exposition.children].map(child => child.offsetTop);
     // Must round current scroll height to avoid bugs
     const current_height = Math.round(dom_main.scrollTop);
     let target_height;
-    
+
     // Choose nearest snap height in respective direction
-    if(direction<=0)
+    if (direction <= 0)
     {
-        target_height = Math.max(...snap_heights.filter(x => x<current_height));
+        target_height = Math.max(...snap_heights.filter(x => x < current_height));
     }
     else
     {
-        target_height = Math.min(...snap_heights.filter(x => x>current_height));
+        target_height = Math.min(...snap_heights.filter(x => x > current_height));
     }
 
-    dom_main.scrollTo({top: target_height});
+    dom_main.scrollTo({ top: target_height });
 }
 
 /* -------------------------------------------------------------------------- */
@@ -113,7 +136,7 @@ function handle_scroll_main(direction) {
 function render_home() {
     // overwrite contents of main
     dom_main.innerHTML = screens.home.htmlContent;
-    activeScreenId = screens.home.id;
+    Game.activeScreenId = screens.home.id;
     dom_hud.classList.add('hide');
 
 
@@ -137,58 +160,53 @@ function render_home() {
 function render_characterSelect() {
     // overwrite contents of main
     dom_main.innerHTML = screens.characterSelect.htmlContent;
-    activeScreenId = screens.characterSelect.id;
+    Game.activeScreenId = screens.characterSelect.id;
     dom_hud.classList.add('hide');
+    const charSelect = dom_main.querySelector('#character-select');
+    const characterList = dom_main.querySelector('#character-list');
 
     // set the background
     document.body.dataset.bg = 'none';
 
-    // set up initial animations
-    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 500, 500);
-    reveal_children_consecutively(dom_main.querySelector('#character-list'), 500, 250, delay, false);
+    // generate character cards from data
+    characters.forEach(c => {
+        // create card from html and insert data
+        let el = htmlToElement(`<div class="character-card">
+            <img class="character-card-icon" src="${c.icon}" alt="${c.name} icon">
+            <h2> ${c.name} </h2>
+            <div class="character-stats hidden-until-selected">
+                <p> <strong>Age:</strong> ${c.age} </p>
+                <p> <strong>Gender:</strong> ${c.gender} </p>
+            </div>
+            <p class="character-desc hidden-until-selected"> <strong>Bio:</strong> ${c.bio} </p>
+            <button class="character-back-button hidden-until-selected"> Back </button>
+            <button class="character-confirm-button hidden-until-selected"> Choose ${c.name} </button>
+        </div>`);
 
-    // TODO: Generate character cards from character data
-
-    // Getting character cards from the html for now, eventually these will be generated
-    let charCards = dom_main.querySelectorAll('.character-card');
-    let charSelect = dom_main.querySelector('#character-select');
-
-    // add listeners for character cards
-    charCards.forEach((el, i) => {
-        // add click behavior for card
+        // click behavior for card
         el.addEventListener('click', () => {
             // cancels the event if the card is already selected
             if (el.classList.contains('selected')) return;
 
+            // Remove selection from any other character card
+            characterList.querySelectorAll('.character-card.selected').forEach(el2 => {
+                el2.classList.remove('selected');
+            })
             // Apply css classes to select the character card
             charSelect.classList.add('selection-on');
             el.classList.add('selected');
-            // Remove selection from any other character card
-            charCards.forEach(el2 => {
-                if (el2 != el)
-                {
-                    el2.classList.remove('selected');
-                }
-            })
 
             // Animate stuff appearing after a short delay
             window.setTimeout(() => {
                 el.querySelectorAll('.hidden-until-selected').forEach(el2 => el2.classList.add('selected'));
             }, 200);
         }, true);
-        // This 'true' makes the event occur in the capturing phase of event handling so that we can cancel it before the back button event occurs
 
-        // add click behavior for character confirm buttons
-        el.querySelector('.character-confirm-button').addEventListener('click', () => {
-            // TODO: make confirm button actually select a character
-            console.log(`Chose character #${i}`);
+        // click behavior for confirm button
+        el.querySelector('.character-confirm-button').addEventListener('click', () => { handle_select_character(c) });
 
-            // go to next screen
-            render_disclaimer();
-        });
-
-        // add click behavior for back button
-        el.querySelector('.character-back-button').addEventListener('click', function () {
+        // click behavior for back button
+        el.querySelector('.character-back-button').addEventListener('click', () => {
             charSelect.classList.remove('selection-on');
             el.classList.remove('selected');
             console.log('going back');
@@ -196,8 +214,15 @@ function render_characterSelect() {
 
             // Animate stuff disappearing
             el.querySelectorAll('.hidden-until-selected').forEach(el2 => el2.classList.remove('selected'));
-        });
-    });
+        })
+
+        // add card to the document
+        characterList.appendChild(el);
+    })
+
+    // set up initial animations
+    let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 500, 500);
+    reveal_children_consecutively(dom_main.querySelector('#character-list'), 500, 250, delay, false);
 
     // TODO: add listeners for scrolling between selected characters
 }
@@ -208,7 +233,7 @@ function render_characterSelect() {
 function render_disclaimer() {
     // overwrite contents of main
     dom_main.innerHTML = screens.disclaimer.htmlContent;
-    activeScreenId = screens.disclaimer.id;
+    Game.activeScreenId = screens.disclaimer.id;
     dom_hud.classList.add('hide');
 
     // set the background
@@ -228,7 +253,7 @@ function render_disclaimer() {
 function render_scenario(s) {
     // overwrite contents of main
     dom_main.innerHTML = screens.scenario.htmlContent;
-    activeScreenId = screens.scenario.id;
+    Game.activeScreenId = screens.scenario.id;
     dom_hud.classList.remove('hide');
 
 
@@ -254,7 +279,7 @@ function render_scenario(s) {
 function render_scenarioResponse(r) {
     // overwrite contents of main
     dom_main.innerHTML = screens.scenarioResponse.htmlContent;
-    activeScreenId = screens.scenarioResponse.id;
+    Game.activeScreenId = screens.scenarioResponse.id;
     dom_hud.classList.remove('hide');
 
     // TODO: Generate screen content from response data
@@ -271,7 +296,7 @@ function render_scenarioResponse(r) {
 function render_end() {
     // overwrite contents of main
     dom_main.innerHTML = screens.end.htmlContent;
-    activeScreenId = screens.end.id;
+    Game.activeScreenId = screens.end.id;
     dom_hud.classList.remove('hide');
 
     // set the background
@@ -279,6 +304,10 @@ function render_end() {
 
     dom_main.querySelector('#button-play-again').addEventListener('click', () => { render_home() });
 }
+
+/* -------------------------------------------------------------------------- */
+/*                               Other Functions                              */
+/* -------------------------------------------------------------------------- */
 
 /**
  * Applies fade/slide-in animation to each child of an element at increasing delays for each subsequent child.
@@ -325,4 +354,24 @@ function reveal_children_consecutively(el, duration = 1000, interdelay = 1000, s
         i++;
     }
     return i * interdelay + startdelay;
+}
+
+/**
+ * Updates the HUD with data from Game. Triggered any time relevant data is changed
+ */
+function update_HUD() {
+    dom_hud.querySelector('#character-icon').src = Game.chosenCharacter.icon;
+    dom_hud.querySelector('#character-name').innerText = `Story: ${Game.chosenCharacter.name}`;
+    dom_hud.querySelector('#scenario-num').innerText = `Scenario ${Game.storyProgress}`;
+}
+
+/**
+ * Simple utility function to transform html data into an {@link Element}
+ * @param {String} str html string to convert
+ * @returns {Element}
+ */
+function htmlToElement(str) {
+    let t = document.createElement('template');
+    t.innerHTML = str.trim();
+    return t.content.firstChild;
 }

@@ -44,75 +44,7 @@ const screens = {
 </div>
 <div id="character-select">
     <div id="character-list">
-        <div class="character-card">
-            <img class="character-card-icon" src="./assets/blank_character_icon.png" alt="blank character icon">
-            <h2>
-                August
-            </h2>
-            <div class="character-stats hidden-until-selected">
-                <p>
-                    <strong>Age:</strong> 20
-                </p>
-                <p>
-                    <strong>Gender:</strong> Female
-                </p>
-            </div>
-            <p class="character-desc hidden-until-selected">
-                <strong>Bio:</strong> August is in her second year of her associates degree at a local community college in Arizona. She comes from a suburban middle-class family, and has a mother, father, and 2 younger sisters who love her very much but put heavy pressure on her to succeed in school. She has diagnosed ADHD and an anxiety disorder, but nobody suspects that she may also have Autism.
-            </p>
-            <button class="character-back-button hidden-until-selected">
-                Back
-            </button>
-            <button class="character-confirm-button hidden-until-selected">
-                Choose
-            </button>
-        </div>
-        <div class="character-card">
-            <img class="character-card-icon" src="./assets/blank_character_icon.png" alt="blank character icon">
-            <h2>
-                Nora
-            </h2>
-            <div class="character-stats hidden-until-selected">
-                <p>
-                    <strong>Age:</strong> 14
-                </p>
-                <p>
-                    <strong>Gender:</strong> Female
-                </p>
-            </div>
-            <p class="character-desc hidden-until-selected">
-                <strong>Bio:</strong> Nora is in the 8th grade at her local public middle school in Vermont. She comes from an immigrant family and has had trouble with bullies at school, despite being quite friendly and sociable and a talented artist. Her family knows she has Autism because her Aunt has it as well and displays similar traits, but they are unable to afford testing and thus she has no formal diagnosis.
-            </p>
-            <button class="character-back-button hidden-until-selected">
-                Back
-            </button>
-            <button class="character-confirm-button hidden-until-selected">
-                Choose
-            </button>
-        </div>
-        <div class="character-card">
-            <img class="character-card-icon" src="./assets/blank_character_icon.png" alt="blank character icon">
-            <h2>
-                Roman
-            </h2>
-            <div class="character-stats hidden-until-selected">
-                <p>
-                    <strong>Age:</strong> 31
-                </p>
-                <p>
-                    <strong>Gender:</strong> male
-                </p>
-            </div>
-            <p class="character-desc hidden-until-selected">
-                <strong>Bio:</strong> Roman is a retail worker at a home improvement shop in Portland, Oregon, and lives in a nearby apartment with his mother. He was diagnosed with Autism at age 5 and received therapies throughout his adolescence to help develop his social skills. He speaks very politely and tries his best to be approachable, but for some reason, people often seem intimidated by him and he has never held a job for longer than 6 months.
-            </p>
-            <button class="character-back-button hidden-until-selected">
-                Back
-            </button>
-            <button class="character-confirm-button hidden-until-selected">
-                Choose
-            </button>
-        </div>
+        
     </div>
 </div>
 `),
