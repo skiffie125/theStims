@@ -197,11 +197,12 @@ class ScenarioResponse {
      * @param {String} resultExposition html to display in the top section of the screen when the response is chosen
      * (each top-level element will appear with a short delay after the last)
      */
-    constructor(buttonText, resultExposition) {
+    constructor(buttonText, resultExposition, stressEffect) {
         this.id = ScenarioResponse.#id_counter++;
 
         this.buttonText = buttonText;
         this.resultExposition = resultExposition;
+        this.stressEffect = stressEffect
     }
 }
 
@@ -240,15 +241,18 @@ const characters = [
             responses: [
                 {
                     buttonText: 'Wear dirty clothes',
-                    resultExposition: `<p> You feel comfortable in your own skin. You get a few looks when you step on the bus but who cares? </p>`
+                    resultExposition: `<p> You feel comfortable in your own skin. You get a few looks when you step on the bus but who cares? </p>`,
+                    stressEffect: 0
                 },
                 {
                     buttonText: 'Wear something you hate',
-                    resultExposition: `<p> The tag on the back of your shirt scrapes the back of your neck at unpredictable intervals and the weight of your pants feels wrong. The waistband of your pants pinches and the lack of the usual helpful pressure of a sweatshirt makes it feel ungrounded. Furthermore, you feel self-conscious and start adjusting your clothes constantly. </p>`
+                    resultExposition: `<p> The tag on the back of your shirt scrapes the back of your neck at unpredictable intervals and the weight of your pants feels wrong. The waistband of your pants pinches and the lack of the usual helpful pressure of a sweatshirt makes it feel ungrounded. Furthermore, you feel self-conscious and start adjusting your clothes constantly. </p>`,
+                    stressEffect: -20
                 },
                 {
                     buttonText: 'Try to clean your clothes before school',
-                    resultExposition: `<p> It's not perfect, the oil stain on your shirt still shows a little bit, but it's better than it would otherwise be. It messed up your usual morning routine which makes you feel even more tired but at least when you get on the bus to go to school you don't feel like crawling out of your own skin. </p>`
+                    resultExposition: `<p> It's not perfect, the oil stain on your shirt still shows a little bit, but it's better than it would otherwise be. It messed up your usual morning routine which makes you feel even more tired but at least when you get on the bus to go to school you don't feel like crawling out of your own skin. </p>`,
+                    stressEffect: -10
                 }
             ]
         },
@@ -258,15 +262,18 @@ const characters = [
             responses: [
                 {
                     buttonText: `Do everything you can to pay attention`,
-                    resultExposition: `<p> You take intense notes and by the time class is over the words you wrote and the words the teacher is saying are blurring together. You definitely understood a lot, but that didn't stop your mind from blanking occasionally. You leave for the next class tired. </p>`
+                    resultExposition: `<p> You take intense notes and by the time class is over the words you wrote and the words the teacher is saying are blurring together. You definitely understood a lot, but that didn't stop your mind from blanking occasionally. You leave for the next class tired. </p>`,
+                    stressEffect: -20
                 },
                 {
                     buttonText: `Doodle scenes from the book`,
-                    resultExposition: `<p> You don't understand everything in the lecture, but drawing out the scenes helps you stay engaged, and may have even understood more than you would have if you sat up straight and made eye contact. </p>`
+                    resultExposition: `<p> You don't understand everything in the lecture, but drawing out the scenes helps you stay engaged, and may have even understood more than you would have if you sat up straight and made eye contact. </p>`,
+                    stressEffect: 0
                 },
                 {
                     buttonText: `Stop paying attention`,
-                    resultExposition: `<p> You stare at the window engrossed in your own thoughts. When the bell rings to go to your next class, you look bleary-eyed at the board. You don't know anything that was said. </p>`
+                    resultExposition: `<p> You stare at the window engrossed in your own thoughts. When the bell rings to go to your next class, you look bleary-eyed at the board. You don't know anything that was said. </p>`,
+                    stressEffect: 0
                 }
             ]
         },
@@ -276,19 +283,23 @@ const characters = [
             responses: [
                 {
                     buttonText: `Respond literally`,
-                    resultExposition: `<p> "It was a joke, Nora." You feel like that was the right response, but clearly it wasn't </p>`
+                    resultExposition: `<p> "It was a joke, Nora." You feel like that was the right response, but clearly it wasn't </p>`,
+                    stressEffect: 0
                 },
                 {
                     buttonText: `Laugh and nod`,
-                    resultExposition: `<p> You smile and while you don't say anything significant it was enough to get you through the interaction. </p>`
+                    resultExposition: `<p> You smile and while you don't say anything significant it was enough to get you through the interaction. </p>`,
+                    stressEffect: -10
                 },
                 {
                     buttonText: `Don't respond at all`,
-                    resultExposition: `<p> You don't make eye contact and just stare down at the lunch table, you don't have a good response so you don't say anything. You get some looks from the people around you but the conversation shifts away from you and you can finish eating. </p>`
+                    resultExposition: `<p> You don't make eye contact and just stare down at the lunch table, you don't have a good response so you don't say anything. You get some looks from the people around you but the conversation shifts away from you and you can finish eating. </p>`,
+                    stressEffect: 0
                 },
                 {
                     buttonText: `Take time to consider and respond`,
-                    resultExposition: `<p> You take a second and realize what she is actually saying. You are then able to respond in kind, and get smiles from your friends. It makes you feel good that you were able to communicate but it feels like it took more work for you than everyone else. </p>`
+                    resultExposition: `<p> You take a second and realize what she is actually saying. You are then able to respond in kind, and get smiles from your friends. It makes you feel good that you were able to communicate but it feels like it took more work for you than everyone else. </p>`,
+                    stressEffect: -20
                 }
             ]
         },
@@ -298,19 +309,23 @@ const characters = [
             responses: [
                 {
                     buttonText: `Ask the teacher anyway`,
-                    resultExposition: `<p> You raise your hand and ask the teacher despite the warning. Talking in class is stressful for you and you feel like everyone's eyes are drilling into you. He clarifies the instructions and you can tell something is going on with either him or the class but you can't tell what. </p>`
+                    resultExposition: `<p> You raise your hand and ask the teacher despite the warning. Talking in class is stressful for you and you feel like everyone's eyes are drilling into you. He clarifies the instructions and you can tell something is going on with either him or the class but you can't tell what. </p>`,
+                    stressEffect: -20
                 },
                 {
                     buttonText: `Ask your neighbor`,
-                    resultExposition: `<p> You turn and whisper to your neighbor, asking them what do to. You feel self-conscious like you are the only one who doesn't understand. You don't know why everyone else seems to get it but you just can't. They tell you what you need to know and then you both get to work. </p>`
+                    resultExposition: `<p> You turn and whisper to your neighbor, asking them what do to. You feel self-conscious like you are the only one who doesn't understand. You don't know why everyone else seems to get it but you just can't. They tell you what you need to know and then you both get to work. </p>`,
+                    stressEffect: -10
                 },
                 {
                     buttonText: `Attempt to complete the assignment anyway`,
-                    resultExposition: `<p> You do your best but when you go over it at the end of the period you realize you missed a big piece of the assignment. You feel like if the teacher was just clear it would have been fine but you did your best with the information you have. </p>`
+                    resultExposition: `<p> You do your best but when you go over it at the end of the period you realize you missed a big piece of the assignment. You feel like if the teacher was just clear it would have been fine but you did your best with the information you have. </p>`,
+                    stressEffect: -10
                 },
                 {
                     buttonText: `Don't do the assignment `,
-                    resultExposition: `<p> You sit and look at the assignment but you just can't do anything, the lack of clarity feels paralyzing. You end the class feeling like a failure, even though you know you aren't. </p>`
+                    resultExposition: `<p> You sit and look at the assignment but you just can't do anything, the lack of clarity feels paralyzing. You end the class feeling like a failure, even though you know you aren't. </p>`,
+                    stressEffect: 0
                 }
             ]
         },
@@ -320,19 +335,23 @@ const characters = [
             responses: [
                 {
                     buttonText: `Join the chaos in the back`,
-                    resultExposition: `<p> You sit laughing loudly with everyone but you feel tired and drained when you get off the bus. </p>`
+                    resultExposition: `<p> You sit laughing loudly with everyone but you feel tired and drained when you get off the bus. </p>`,
+                    stressEffect: -20
                 },
                 {
                     buttonText: `Sit with one of your friends and chat`,
-                    resultExposition: `<p> You sit by one of your friends and have a fun conversation about your art. </p>`
+                    resultExposition: `<p> You sit by one of your friends and have a fun conversation about your art. </p>`,
+                    stressEffect: -10
                 },
                 {
                     buttonText: `Sit across from one of your friends and sketch`,
-                    resultExposition: `<p> You sit in the front where there aren't too many people, and you are able to tune out the noise in the back. Sketching always brings you joy. </p>`
+                    resultExposition: `<p> You sit in the front where there aren't too many people, and you are able to tune out the noise in the back. Sketching always brings you joy. </p>`,
+                    stressEffect: 0
                 },
                 {
                     buttonText: `Sit by yourself and cover your ears`,
-                    resultExposition: `<p> It feels so loud. Between the bus, the conversations, and the chaos in the back, it feels far too loud. None of the other people around you are having the same reaction you are and you feel alone. </p>`
+                    resultExposition: `<p> It feels so loud. Between the bus, the conversations, and the chaos in the back, it feels far too loud. None of the other people around you are having the same reaction you are and you feel alone. </p>`,
+                    stressEffect: -10
                 }
             ]
         },
@@ -342,23 +361,28 @@ const characters = [
             responses: [
                 {
                     buttonText: `Get a snack and take a nap`,
-                    resultExposition: `<p> It feels good to take a second and just relax, you wake up feeling a little better </p>`
+                    resultExposition: `<p> It feels good to take a second and just relax, you wake up feeling a little better </p>`,
+                    stressEffect: 10
                 },
                 {
                     buttonText: `Stim and draw`,
-                    resultExposition: `<p> You are able to drop your mask and let your leg start bouncing like it wants too. You start a drawing that you have been thinking about all day. It feels good to just take a second to do something that actually interests you. </p>`
+                    resultExposition: `<p> You are able to drop your mask and let your leg start bouncing like it wants too. You start a drawing that you have been thinking about all day. It feels good to just take a second to do something that actually interests you. </p>`,
+                    stressEffect: 10
                 },
                 {
                     buttonText: `Sit in front of the TV `,
-                    resultExposition: `<p> You sit down and stare, it feels good to turn your brain off and not need to comprehend everything around you. You can pause and take a break from the noise if you need to. </p>`
+                    resultExposition: `<p> You sit down and stare, it feels good to turn your brain off and not need to comprehend everything around you. You can pause and take a break from the noise if you need to. </p>`,
+                    stressEffect: 0
                 },
                 {
                     buttonText: `Go hang out with a friend`,
-                    resultExposition: `<p> You get a chance to go hang out with your neighbor and you play a game together, a wonderful way to spend the afternoon. </p>`
+                    resultExposition: `<p> You get a chance to go hang out with your neighbor and you play a game together, a wonderful way to spend the afternoon. </p>`,
+                    stressEffect: 10
                 },
                 {
                     buttonText: `Get started on chores immediately`,
-                    resultExposition: `<p> Your family is happy to see that the kitchen is clean. </p>`
+                    resultExposition: `<p> Your family is happy to see that the kitchen is clean. </p>`,
+                    stressEffect: 10
                 }
             ]
         },
@@ -368,11 +392,13 @@ const characters = [
             responses: [
                 {
                     buttonText: `Do it`,
-                    resultExposition: `<p> You complete your homework </p>`
+                    resultExposition: `<p> You complete your homework </p>`,
+                    stressEffect: -20
                 },
                 {
                     buttonText: `Don't`,
-                    resultExposition: `<p> You sit and stare at the backpack across the room and it just stares back at you. You try to tell yourself to do it but you can't make yourself. You want to be a good student and normally you are but you don't have it in you right now. </p>`
+                    resultExposition: `<p> You sit and stare at the backpack across the room and it just stares back at you. You try to tell yourself to do it but you can't make yourself. You want to be a good student and normally you are but you don't have it in you right now. </p>`,
+                    stressEffect: 0
                 }
             ]
         },
@@ -382,15 +408,18 @@ const characters = [
             responses: [
                 {
                     buttonText: `Eat it`,
-                    resultExposition: `<p> You try it and like it, your dad is very happy. </p>`
+                    resultExposition: `<p> You try it and like it, your dad is very happy. </p>`,
+                    stressEffect: 20
                 },
                 {
                     buttonText: `Attempt to eat it`,
-                    resultExposition: `<p> You take a bite but you can't bring yourself to eat anymore. You don't want to make your dad sad but the new texture and taste were not what you were expecting. </p>`
+                    resultExposition: `<p> You take a bite but you can't bring yourself to eat anymore. You don't want to make your dad sad but the new texture and taste were not what you were expecting. </p>`,
+                    stressEffect: 20
                 },
                 {
                     buttonText: `Refuse`,
-                    resultExposition: `<p> Your dad looks hurt but you can't bring yourself to do it. You don't want to make him sad but the idea of a new texture, taste, and change in routine is just too much right now </p>`
+                    resultExposition: `<p> Your dad looks hurt but you can't bring yourself to do it. You don't want to make him sad but the idea of a new texture, taste, and change in routine is just too much right now </p>`,
+                    stressEffect: 0
                 }
             ]
         }

@@ -85,15 +85,55 @@ function handle_select_character(c) {
 }
 
 /**
+ * Executes any effects of the senario, reworking of the render senario method below, didn't want to mess up what worked 
+ */
+function render_story_scenario() {
+
+    char = Game.chosenCharacter();
+    if(storyProgress() >= char.scenarioList.length){ // stopping if you've reached the end
+        render_end();
+    }
+    cur_senario = char.scenarioList[Game.storyProgress()];
+    // overwrite contents of main
+    dom_main.innerHTML = cur_senario.exposition;
+    Game.activeScreenId = cur_senario.id;
+    dom_hud.classList.remove('hide');
+    // still need assets/ visuals
+    // add scenario choice buttons
+    cur_senario.responses.forEach(reponse => {
+        // Don't know if this is right? need feedback
+        //also should be checking for threshold, again though in milestone 3
+        const newButton = document.createElement('button');
+        newButton.textContent = reponse.buttonText; 
+        document.body.appendChild(newButton);
+        newButton.addEventListener('click', () => { handle_select_response(reponse) });
+    });
+}
+
+/**
  * Executes any effects of the response, then goes to the response screen
  * @param {ScenarioResponse} r 
  */
 function handle_select_response(r) {
     // TODO: implement
+    //rendering the response
+    dom_main.innerHTML = r.resultExposition;
+    dom_hud.classList.remove('hide');
+     // Don't know if this is right? need feedback
+    const newButton = document.createElement('button');
+    newButton.textContent = "Continue"; 
+    document.body.appendChild(newButton);
+    Game.chosenCharacter().adjustStress(r.stressEffect);
+    //if there was a greater stress than you could go to overwhelm, for milestone 3
+
+    Game.storyProgress(Game.storyProgress() + 1); // updating game
+    newButton.addEventListener('click', () => { render_story_scenario() }); //going to next scene
+    
 }
 
 /**
  * Advances to the next scenario in the storyline or the end screen if this was the last scenario
+ * Kinda already does this in handle select response 
  */
 function handle_response_continue() {
     // TODO: implement
