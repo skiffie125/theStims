@@ -80,34 +80,22 @@ function handle_scroll_characters() {
  */
 function handle_select_character(c) {
     Game.chosenCharacter = c;
-    Game.storyProgress = 0;
     render_disclaimer();
 }
 
 /**
- * Executes any effects of the senario, reworking of the render senario method below, didn't want to mess up what worked 
+ * Resets game state and starts the first scenario
  */
-function render_story_scenario() {
-
-    char = Game.chosenCharacter();
-    if(storyProgress() >= char.scenarioList.length){ // stopping if you've reached the end
+function handle_start_game() {
+    Game.storyProgress = 0;
+    if (Game.chosenCharacter.scenarioList.length > 0)
+    {
+        render_scenario(Game.chosenCharacter.scenarioList[0]);
+    }
+    else
+    {
         render_end();
     }
-    cur_senario = char.scenarioList[Game.storyProgress()];
-    // overwrite contents of main
-    dom_main.innerHTML = cur_senario.exposition;
-    Game.activeScreenId = cur_senario.id;
-    dom_hud.classList.remove('hide');
-    // still need assets/ visuals
-    // add scenario choice buttons
-    cur_senario.responses.forEach(reponse => {
-        // Don't know if this is right? need feedback
-        //also should be checking for threshold, again though in milestone 3
-        const newButton = document.createElement('button');
-        newButton.textContent = reponse.buttonText; 
-        document.body.appendChild(newButton);
-        newButton.addEventListener('click', () => { handle_select_response(reponse) });
-    });
 }
 
 /**
@@ -115,20 +103,8 @@ function render_story_scenario() {
  * @param {ScenarioResponse} r 
  */
 function handle_select_response(r) {
-    // TODO: implement
-    //rendering the response
-    dom_main.innerHTML = r.resultExposition;
-    dom_hud.classList.remove('hide');
-     // Don't know if this is right? need feedback
-    const newButton = document.createElement('button');
-    newButton.textContent = "Continue"; 
-    document.body.appendChild(newButton);
-    Game.chosenCharacter().adjustStress(r.stressEffect);
-    //if there was a greater stress than you could go to overwhelm, for milestone 3
-
-    Game.storyProgress(Game.storyProgress() + 1); // updating game
-    newButton.addEventListener('click', () => { render_story_scenario() }); //going to next scene
-    
+    Game.chosenCharacter.adjustStress(r.stressEffect);
+    render_scenarioResponse(r);
 }
 
 /**
@@ -136,7 +112,15 @@ function handle_select_response(r) {
  * Kinda already does this in handle select response 
  */
 function handle_response_continue() {
-    // TODO: implement
+    if (Game.storyProgress+1 < Game.chosenCharacter.scenarioList.length)
+    {
+        Game.storyProgress++;
+        render_scenario(Game.chosenCharacter.scenarioList[Game.storyProgress]);
+    }
+    else
+    {
+        render_end();
+    }
 }
 
 /**
@@ -283,7 +267,7 @@ function render_disclaimer() {
     let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
     reveal_children_consecutively(dom_main.querySelector('#options'), 500, 250, delay, false, false);
 
-    dom_main.querySelector('.button-continue').addEventListener('click', () => { render_scenario() });
+    dom_main.querySelector('.button-continue').addEventListener('click', handle_start_game);
 }
 
 /**
@@ -295,21 +279,24 @@ function render_scenario(s) {
     dom_main.innerHTML = screens.scenario.htmlContent;
     Game.activeScreenId = screens.scenario.id;
     dom_hud.classList.remove('hide');
+    const options = dom_main.querySelector('#options');
 
+    dom_main.querySelector('#exposition').innerHTML = s.exposition;
 
-    // TODO: Generate screen content from scenario data
+    s.responses.forEach(reponse => {
+        const newButton = document.createElement('button');
+        newButton.textContent = reponse.buttonText;
+        newButton.classList.add('button-option');
+        options.appendChild(newButton);
+
+        newButton.addEventListener('click', () => { handle_select_response(reponse) });
+    })
 
     document.body.dataset.bg = 'school'; // replace this
 
     // set up initial animations
     let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
     reveal_children_consecutively(dom_main.querySelector('#options'), 500, 250, delay, false, false);
-
-    // add listeners to scenario choice buttons
-    dom_main.querySelectorAll('.button-option').forEach(el => {
-        // TODO: add logic to scenario choices
-        el.addEventListener('click', () => { render_scenarioResponse() });
-    });
 }
 
 /**
@@ -322,15 +309,17 @@ function render_scenarioResponse(r) {
     Game.activeScreenId = screens.scenarioResponse.id;
     dom_hud.classList.remove('hide');
 
-    // TODO: Generate screen content from response data
+    // Generate screen content from response data
+    dom_main.querySelector('#exposition').innerHTML = r.resultExposition;
 
-    document.body.dataset.bg = 'school'; // replace this
+    // Don't set the theme since we just want the previous theme to carry over
+    // document.body.dataset.bg = 'school';
 
     // set up initial animations
     let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
     reveal_children_consecutively(dom_main.querySelector('#options'), 500, 250, delay, false, false);
 
-    dom_main.querySelector('.button-continue').addEventListener('click', () => { render_end() });
+    dom_main.querySelector('.button-continue').addEventListener('click', handle_response_continue);
 }
 
 function render_end() {
@@ -402,7 +391,7 @@ function reveal_children_consecutively(el, duration = 1000, interdelay = 1000, s
 function update_HUD() {
     dom_hud.querySelector('#character-icon').src = Game.chosenCharacter.icon;
     dom_hud.querySelector('#character-name').innerText = `Story: ${Game.chosenCharacter.name}`;
-    dom_hud.querySelector('#scenario-num').innerText = `Scenario ${Game.storyProgress}`;
+    dom_hud.querySelector('#scenario-num').innerText = `Scenario ${Game.storyProgress+1}`;
 }
 
 /**

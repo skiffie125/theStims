@@ -31,8 +31,6 @@ class Character {
      * @param {String} bio Displayed on the character card
      * @param {String} icon URL string for the image to display on the character card & HUD
      * @param {Scenario[]} scenarioList Array of Scenarios in order of how they will appear in game
-     * @param {int} stress_level Integer stress level of character (0 - 100)
-     * @param {int} reputation_level Integer reputation level of character (0 - 100)
      */
     constructor(name, age, gender, bio, icon = '../assets/blank_character_icon.png', scenarioList) {
         this.id = Character.#id_counter++;
@@ -43,6 +41,7 @@ class Character {
         this.bio = bio;
         this.icon = icon;
         this.scenarioList = scenarioList;
+        
         this.stress_level = 0;
         this.reputation_level = 65; // Default to a D reputation socre, to be changed
     }

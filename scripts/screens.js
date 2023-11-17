@@ -61,36 +61,10 @@ const screens = {
         I understand
     </button>
 </div>`),
-    scenario: new GameScreen(`<div id="exposition">
-    <p>
-        You are approached by your friend <strong>Joanna</strong> after school and she asks you, out of the blue, <strong>"Why are you always so awkward?"</strong>
-    </p>
-    <p>
-        How do you respond?
-    </p>
-</div>
+    scenario: new GameScreen(`<div id="exposition"></div>
 <div id="options">
-    <button class="button-option">
-        Witty Retort
-    </button>
-    <button class="button-option">
-        "My family says I have Autism..."
-    </button>
-    <button class="button-option">
-        "What are you talking about?"
-    </button>
 </div>`),
-    scenarioResponse: new GameScreen(`<div id="exposition">
-    <p>
-        You tell Joanna that sometimes you behave strangely <strong>without realizing</strong> it because of your Autism.
-    </p>
-    <p>
-        Joanna says, <strong>"Yeah, I know that, dummy. Never mind..."</strong>
-    </p>
-    <p>
-        You must have <strong>missed something</strong>. She seems upset, maybe about something from earlier that day, but you can't be sure.
-    </p>
-</div>
+    scenarioResponse: new GameScreen(`<div id="exposition"></div>
 <div id="options">
     <button class="button-continue">
         Continue
