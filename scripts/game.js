@@ -37,6 +37,8 @@ window.addEventListener('load', event => {
         }
     });
 
+    // console.log(characters);
+
     // Make the title text link to the home screen
     document.querySelector('h1').addEventListener('click', () => render_home());
 });
