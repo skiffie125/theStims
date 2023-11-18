@@ -55,6 +55,14 @@ window.addEventListener('load', event => {
             case 'ArrowUp':
                 handle_scroll_main(-1);
                 break;
+            case 'm':
+                open_modal(`<p>testing testing!</p>
+                <p>testing testing!</p>
+                <p>testing testing!</p>
+                <p>testing testing!</p>
+                <p>testing testing!</p>
+                <p>testing testing!</p>`);
+                break;
         }
     });
 
@@ -112,7 +120,7 @@ function handle_select_response(r) {
  * Kinda already does this in handle select response 
  */
 function handle_response_continue() {
-    if (Game.storyProgress+1 < Game.chosenCharacter.scenarioList.length)
+    if (Game.storyProgress + 1 < Game.chosenCharacter.scenarioList.length)
     {
         Game.storyProgress++;
         render_scenario(Game.chosenCharacter.scenarioList[Game.storyProgress]);
@@ -121,6 +129,47 @@ function handle_response_continue() {
     {
         render_end();
     }
+}
+
+/**
+ * Displays a modal box (dialog box) on top of the rest of the page, darkening the page and blocking interaction
+ * with anything besides the box.
+ * @param {String} htmlContent An html string to render inside the modal box content area
+ * @param {Boolean} [dissmissable] Whether the modal can be closed by clicking the background (default **true**)
+ * @returns {Element} The generated modal element
+ */
+function open_modal(htmlContent, dissmissable = true) {
+    // generating html
+    let modal = document.createElement('div');
+    modal.classList.add('modal');
+    modal.innerHTML = `<div class="modal-box">
+        <div class="modal-header"></div>
+        <div class="modal-content">${htmlContent}</div>
+    </div>`;
+
+    // initial animations
+    modal.animate({ opacity: [0, 1] },
+        {
+            id: 'reveal',
+            duration: 500,
+            fill: 'backwards',
+            easing: 'ease-out'
+        });
+    reveal_children_consecutively(modal.querySelector('.modal-content'), 500, 250, 0, false, false);
+
+    // event listeners
+    if (dissmissable) modal.addEventListener('click', (ev) => {
+        if (ev.target == modal) close_modal(modal);
+    });
+    document.querySelector('#modals').appendChild(modal);
+}
+
+/**
+ * Closes a modal box, (dialog box) hiding it and restoring interactability with other elements on the page.
+ * @param {Element} modal An element with class *modal*
+ */
+function close_modal(modal) {
+    modal.remove();
 }
 
 /**
@@ -292,7 +341,7 @@ function render_scenario(s) {
         newButton.addEventListener('click', () => { handle_select_response(reponse) });
     })
 
-    document.body.dataset.bg = s.theme; 
+    document.body.dataset.bg = s.theme;
 
     // set up initial animations
     let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
@@ -391,7 +440,7 @@ function reveal_children_consecutively(el, duration = 1000, interdelay = 1000, s
 function update_HUD() {
     dom_hud.querySelector('#character-icon').src = Game.chosenCharacter.icon;
     dom_hud.querySelector('#character-name').innerText = `Story: ${Game.chosenCharacter.name}`;
-    dom_hud.querySelector('#scenario-num').innerText = `Scenario ${Game.storyProgress+1}`;
+    dom_hud.querySelector('#scenario-num').innerText = `Scenario ${Game.storyProgress + 1}`;
 }
 
 /**

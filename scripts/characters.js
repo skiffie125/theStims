@@ -81,7 +81,9 @@ class Character {
                     s.responses.map(r => {
                         return new ScenarioResponse(
                             r.buttonText,
-                            r.resultExposition);
+                            r.resultExposition,
+                            r.resultInfo,
+                            r.stressEffect);
                     }),
                     s.theme);
             }))
@@ -172,6 +174,10 @@ class ScenarioResponse {
      * (each top-level element will appear with a short delay after the last)
      */
     resultExposition;
+    /**
+     * @type {String} html to display in a pop-up box after continue is clicked on the response screen
+     */
+    resultInfo;
     
     
     // Added the following
@@ -196,11 +202,12 @@ class ScenarioResponse {
      * @param {String} resultExposition html to display in the top section of the screen when the response is chosen
      * (each top-level element will appear with a short delay after the last)
      */
-    constructor(buttonText, resultExposition, stressEffect) {
+    constructor(buttonText, resultExposition, resultInfo, stressEffect) {
         this.id = ScenarioResponse.#id_counter++;
 
         this.buttonText = buttonText;
         this.resultExposition = resultExposition;
+        this.resultInfo = resultInfo;
         this.stressEffect = stressEffect
     }
 }
