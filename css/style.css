@@ -17,9 +17,51 @@ body {
     background-color: #498290;
 }
 
-body[data-bg="school"] {
+body[data-bg="school hallway"] {
     background-image: url('../assets/bg_school.png');
     background-position: 0 20%;
+    background-size: cover;
+}
+
+body[data-bg="bedroom"] {
+    background-image: url('../assets/bedroom.jpg');
+    background-position: 0 20%;
+    background-size: cover;
+}
+
+body[data-bg="living room"] {
+    background-image: url('../assets/living_room.jpg');
+    background-position: 0 30%;
+    background-size: cover;
+}
+
+body[data-bg="classroom 1"] {
+    background-image: url('../assets/classroom_1.jpg');
+    background-position: 0 70%;
+    background-size: cover;
+}
+
+body[data-bg="classroom 2"] {
+    background-image: url('../assets/classroom_2.jpg');
+    background-position: 0 0%;
+    background-size: cover;
+}
+
+body[data-bg="cafeteria"] {
+    background-image: url('../assets/cafeteria.jpg');
+    background-position: 0 0%;
+    background-size: cover;
+}
+
+body[data-bg="dinner table"] {
+    background-image: url('../assets/family_dinner.jpg');
+    background-position: 0 40%;
+    background-size: cover;
+}
+
+body[data-bg="school bus"] {
+    background-image: url('../assets/school_bus.jpg');
+    background-position: 0 100%;
     background-size: cover;
 }
 

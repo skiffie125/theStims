@@ -212,6 +212,7 @@ class ScenarioResponse {
 /* ------------------------------- Guidelines ------------------------------- */
 // Exposition can be as long as needed but try to limit the size of each <p> tag
 // Make sure all apostrophes are the same if pasting from word processor
+// <strong></strong> tags can be used to emphasize important phrases / dialogue
 
 /**
  * @type {Character[]}
@@ -257,7 +258,7 @@ const characters = [
         },
         {
             exposition: `<p> You are in English class, your first class of the day. You are trying to pay attention in class but your mind keeps wandering. The book you are discussing couldn't be more boring, and it feels painful to try and keep your focus. What do you do? </p>`,
-            theme: 'classroom_1',
+            theme: 'classroom 1',
             responses: [
                 {
                     buttonText: `Do everything you can to pay attention`,
@@ -304,7 +305,7 @@ const characters = [
         },
         {
             exposition: `<p> You are in science class which normally you have no problems with. However, the teacher gave you unclear directions and said that he didn't want any more questions on how to do the worksheet he just put in front of you. The rest of the class starts working on the worksheet. A few students exchange looks with each other. </p>`,
-            theme: 'classroom_2',
+            theme: 'classroom 2',
             responses: [
                 {
                     buttonText: `Ask the teacher anyway`,
@@ -330,7 +331,7 @@ const characters = [
         },
         {
             exposition: `<p> You are riding home on the bus, it is loud and boisterous. Kids are screaming in the back, as per usual, and the bus driver greets you as you get on. </p>`,
-            theme: 'school_bus',
+            theme: 'school bus',
             responses: [
                 {
                     buttonText: `Join the chaos in the back`,
@@ -356,7 +357,7 @@ const characters = [
         },
         {
             exposition: `<p> You get home after school, and you have a bit of time before you have to do anything. </p>`,
-            theme: 'living_room',
+            theme: 'living room',
             responses: [
                 {
                     buttonText: `Get a snack and take a nap`,
@@ -403,7 +404,7 @@ const characters = [
         },
         {
             exposition: `<p> Your dad cooked a new thing for dinner and wants the whole family to try it. </p>`,
-            theme: 'family_dinner',
+            theme: 'dinner table',
             responses: [
                 {
                     buttonText: `Eat it`,

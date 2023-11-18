@@ -292,7 +292,7 @@ function render_scenario(s) {
         newButton.addEventListener('click', () => { handle_select_response(reponse) });
     })
 
-    document.body.dataset.bg = 'school'; // replace this
+    document.body.dataset.bg = s.theme; 
 
     // set up initial animations
     let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
