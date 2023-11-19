@@ -55,13 +55,11 @@ window.addEventListener('load', event => {
             case 'ArrowUp':
                 handle_scroll_main(-1);
                 break;
-            case 'm':
-                open_modal(`<p>testing testing!</p>
+            case 'm': // TODO: Remove this
+                show_message(`<p>testing testing!</p>
                 <p>testing testing!</p>
                 <p>testing testing!</p>
-                <p>testing testing!</p>
-                <p>testing testing!</p>
-                <p>testing testing!</p>`);
+                <p>testing testing!</p>`,() => {console.log('clicked continue')});
                 break;
         }
     });
@@ -116,10 +114,18 @@ function handle_select_response(r) {
 }
 
 /**
- * Advances to the next scenario in the storyline or the end screen if this was the last scenario
- * Kinda already does this in handle select response 
+ * Shows an info box if this particular response has a **resultInfo** field. Otherwise, advances the story.
+ * @param {ScenarioResponse} r
  */
-function handle_response_continue() {
+function handle_response_continue(r) {
+    if(r.resultInfo == undefined) handle_next_scenario();
+    else show_message(r.resultInfo, handle_next_scenario);
+}
+
+/**
+ * Advances to the next scenario in the storyline or the end screen if this was the last scenario
+ */
+function handle_next_scenario() {
     if (Game.storyProgress + 1 < Game.chosenCharacter.scenarioList.length)
     {
         Game.storyProgress++;
@@ -129,47 +135,6 @@ function handle_response_continue() {
     {
         render_end();
     }
-}
-
-/**
- * Displays a modal box (dialog box) on top of the rest of the page, darkening the page and blocking interaction
- * with anything besides the box.
- * @param {String} htmlContent An html string to render inside the modal box content area
- * @param {Boolean} [dissmissable] Whether the modal can be closed by clicking the background (default **true**)
- * @returns {Element} The generated modal element
- */
-function open_modal(htmlContent, dissmissable = true) {
-    // generating html
-    let modal = document.createElement('div');
-    modal.classList.add('modal');
-    modal.innerHTML = `<div class="modal-box">
-        <div class="modal-header"></div>
-        <div class="modal-content">${htmlContent}</div>
-    </div>`;
-
-    // initial animations
-    modal.animate({ opacity: [0, 1] },
-        {
-            id: 'reveal',
-            duration: 500,
-            fill: 'backwards',
-            easing: 'ease-out'
-        });
-    reveal_children_consecutively(modal.querySelector('.modal-content'), 500, 250, 0, false, false);
-
-    // event listeners
-    if (dissmissable) modal.addEventListener('click', (ev) => {
-        if (ev.target == modal) close_modal(modal);
-    });
-    document.querySelector('#modals').appendChild(modal);
-}
-
-/**
- * Closes a modal box, (dialog box) hiding it and restoring interactability with other elements on the page.
- * @param {Element} modal An element with class *modal*
- */
-function close_modal(modal) {
-    modal.remove();
 }
 
 /**
@@ -368,7 +333,7 @@ function render_scenarioResponse(r) {
     let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
     reveal_children_consecutively(dom_main.querySelector('#options'), 500, 250, delay, false, false);
 
-    dom_main.querySelector('.button-continue').addEventListener('click', handle_response_continue);
+    dom_main.querySelector('.button-continue').addEventListener('click', () => handle_response_continue(r));
 }
 
 function render_end() {
@@ -441,6 +406,67 @@ function update_HUD() {
     dom_hud.querySelector('#character-icon').src = Game.chosenCharacter.icon;
     dom_hud.querySelector('#character-name').innerText = `Story: ${Game.chosenCharacter.name}`;
     dom_hud.querySelector('#scenario-num').innerText = `Scenario ${Game.storyProgress + 1}`;
+}
+
+/**
+ * Displays a modal box (dialog box) on top of the rest of the page, darkening the page and blocking interaction
+ * with anything besides the box.
+ * @param {String} htmlContent An html string to render inside the modal box content area
+ * @param {Boolean} [dissmissable] Whether the modal can be closed by clicking the background (default **true**)
+ * @returns {Element} The generated modal element
+ */
+function show_modal(htmlContent, dissmissable = true) {
+    // generating html
+    let modal = document.createElement('div');
+    modal.classList.add('modal');
+    modal.innerHTML = `<div class="modal-box">
+        <div class="modal-header"></div>
+        <div class="modal-content">${htmlContent}</div>
+    </div>`;
+
+    // initial animations
+    modal.animate({ opacity: [0, 1] },
+        {
+            id: 'reveal',
+            duration: 500,
+            fill: 'backwards',
+            easing: 'ease-out'
+        });
+    reveal_children_consecutively(modal.querySelector('.modal-content'), 500, 250, 0, false, false);
+
+    // event listeners
+    if (dissmissable) modal.addEventListener('click', (ev) => {
+        if (ev.target == modal) close_modal(modal);
+    });
+    document.querySelector('#modals').appendChild(modal);
+    return modal;
+}
+
+/**
+ * Displays a modal box (dialog box) on top of the rest of the page, darkening the page and blocking interaction
+ * with anything besides the box. This method adds a **continue** button at the bottom of the box content which
+ * closes the box and triggers an optional callback function.
+ * @param {String} htmlContent An html string to render inside the modal box content area
+ * @param {EventListenerOrEventListenerObject} [callback] Function to execute when continue button is clicked
+ * @param {Boolean} [dissmissable] Whether the modal can be closed by clicking the background (default **false**)
+ * @returns 
+ */
+function show_message(htmlContent, callback, dissmissable = false)
+{
+    const modal = show_modal(htmlContent+`<button class="button-modal-continue">Okay</button>`, dissmissable);
+    modal.querySelector('.button-modal-continue').addEventListener('click',(event) => {
+        close_modal(modal);
+        return callback(event);
+    });
+    return modal;
+}
+
+/**
+ * Closes a modal box, (dialog box) hiding it and restoring interactability with other elements on the page.
+ * @param {Element} modal An element with class *modal*
+ */
+function close_modal(modal) {
+    modal.remove();
 }
 
 /**

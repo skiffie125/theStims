@@ -203,7 +203,7 @@ body:not([data-bg='none']) #options {
     background-color: #4a6f6ee0;
 } */
 
-main button {
+button {
     padding: 1rem 2rem;
     font-size: 14pt;
     color: #dfb66f;
@@ -215,13 +215,13 @@ main button {
     cursor: pointer;
 }
 
-main button:hover {
+button:hover {
     background-color: #4d9a9a;
     color: #f3f1d5;
     box-shadow: 0 0 0.5rem #39494f;
 }
 
-main button:active {
+button:active {
     background-color: #70be61;
     color: #f3f1d5;
     box-shadow: 0 0rem 0.5rem #212d3b inset;
