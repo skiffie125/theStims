@@ -14,11 +14,19 @@ let Game = (function () {
     // ik this syntax is confusing af but that's javascript for you
     let chosenCharacterPrivate;
     let storyProgressPrivate = 0;
+    
+    const STAT_MAX = 100;
+
+    let stressPrivate = STAT_MAX;
+    let reputationPrivate = STAT_MAX;
+    let performancePrivate = STAT_MAX;
 
     // this is where the object with its public members are defined
     return {
         /** ID of the current screen being displayed */
         activeScreenId: screens.home.id,
+
+
         /** @type {Character} the {@link Character} the player is currently playing as */
         get chosenCharacter() { return chosenCharacterPrivate; },
         set chosenCharacter(c) {
@@ -30,6 +38,18 @@ let Game = (function () {
         set storyProgress(num) {
             storyProgressPrivate = num;
             update_HUD();
+        },
+        get stress() { return stressPrivate; },
+        set stress(num) {
+            stressPrivate = clamp(num,0,STAT_MAX);
+        },
+        get reputation() { return reputationPrivate; },
+        set reputation(num) {
+            reputationPrivate = clamp(num,0,STAT_MAX);
+        },
+        get performance() { return performancePrivate; },
+        set performance(num) {
+            performancePrivate = clamp(num,0,STAT_MAX);
         }
     }
 })();
@@ -59,7 +79,7 @@ window.addEventListener('load', event => {
                 show_message(`<p>testing testing!</p>
                 <p>testing testing!</p>
                 <p>testing testing!</p>
-                <p>testing testing!</p>`,() => {console.log('clicked continue')});
+                <p>testing testing!</p>`, () => { console.log('clicked continue') });
                 break;
         }
     });
@@ -94,6 +114,13 @@ function handle_select_character(c) {
  */
 function handle_start_game() {
     Game.storyProgress = 0;
+    Game.stress = Game.chosenCharacter.stress_start;
+    Game.reputation = Game.chosenCharacter.reputation_start;
+    Game.performance = Game.chosenCharacter.performance_start;
+
+    console.log('Starting Game as ',Game.chosenCharacter.name);
+    logDebug();
+
     if (Game.chosenCharacter.scenarioList.length > 0)
     {
         render_scenario(Game.chosenCharacter.scenarioList[0]);
@@ -109,7 +136,10 @@ function handle_start_game() {
  * @param {ScenarioResponse} r 
  */
 function handle_select_response(r) {
-    Game.chosenCharacter.adjustStress(r.stressEffect);
+    // Game.chosenCharacter.adjustStress(r.stressEffect);
+    r.applyEffects(Game);
+    console.log(r.buttonText);
+    logDebug();
     render_scenarioResponse(r);
 }
 
@@ -118,7 +148,7 @@ function handle_select_response(r) {
  * @param {ScenarioResponse} r
  */
 function handle_response_continue(r) {
-    if(r.resultInfo == undefined) handle_next_scenario();
+    if (r.resultInfo == undefined) handle_next_scenario();
     else show_message(r.resultInfo, handle_next_scenario);
 }
 
@@ -451,10 +481,9 @@ function show_modal(htmlContent, dissmissable = true) {
  * @param {Boolean} [dissmissable] Whether the modal can be closed by clicking the background (default **false**)
  * @returns 
  */
-function show_message(htmlContent, callback, dissmissable = false)
-{
-    const modal = show_modal(htmlContent+`<button class="button-modal-continue">Okay</button>`, dissmissable);
-    modal.querySelector('.button-modal-continue').addEventListener('click',(event) => {
+function show_message(htmlContent, callback, dissmissable = false) {
+    const modal = show_modal(htmlContent + `<button class="button-modal-continue">Okay</button>`, dissmissable);
+    modal.querySelector('.button-modal-continue').addEventListener('click', (event) => {
         close_modal(modal);
         return callback(event);
     });
@@ -478,4 +507,26 @@ function htmlToElement(str) {
     let t = document.createElement('template');
     t.innerHTML = str.trim();
     return t.content.firstChild;
+}
+
+/**
+ * Simple helper function to clamp a value *x* between a lower and upper bound
+ * @param {number} x 
+ * @param {number} lower 
+ * @param {number} upper 
+ * @returns {number}
+ */
+function clamp(x,lower,upper)
+{
+    return x > lower ? x < upper ? x : upper : lower;
+}
+
+/**
+ * Log various game info for debugging purposes
+ */
+function logDebug()
+{
+    console.log('Stress: ', Game.stress);
+    console.log('Reputation: ', Game.reputation);
+    console.log('Performance: ', Game.performance);
 }

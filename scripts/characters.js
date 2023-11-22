@@ -19,9 +19,13 @@ class Character {
     /** Array of Scenarios in order of how they will appear in game. */
     scenarioList;
     /** @type {int} Integer stress level of character (0 - 100) */
-    stress_level;
+    // stress_level;
     /** @type {int} Integer reputation level of character (0 - 100) */
-    reputation_level;
+    // reputation_level;
+
+    stress_start;
+    reputation_start;
+    performance_start;
 
     /**
      * 
@@ -32,7 +36,8 @@ class Character {
      * @param {String} icon URL string for the image to display on the character card & HUD
      * @param {Scenario[]} scenarioList Array of Scenarios in order of how they will appear in game
      */
-    constructor(name, age, gender, bio, icon = '../assets/blank_character_icon.png', scenarioList) {
+    constructor(name, age, gender, bio, icon = '../assets/blank_character_icon.png', scenarioList,
+        stress_start = 100, reputation_start = 100, performance_start = 100) {
         this.id = Character.#id_counter++;
 
         this.name = name;
@@ -42,8 +47,12 @@ class Character {
         this.icon = icon;
         this.scenarioList = scenarioList;
 
-        this.stress_level = 0;
-        this.reputation_level = 65; // Default to a D reputation socre, to be changed
+        this.stress_start = stress_start;
+        this.reputation_start = reputation_start;
+        this.performance_start = performance_start;
+        
+        // this.stress_level = 0;
+        // this.reputation_level = 65; // Default to a D reputation socre, to be changed
     }
 
     /**
@@ -82,13 +91,18 @@ class Character {
                             r.buttonText,
                             r.resultExposition,
                             r.resultInfo,
-                            r.stressEffect);
+                            (r.effects == undefined) ? new ResponseEffects() : new ResponseEffects(
+                                r.effects.stress,
+                                r.effects.reputation,
+                                r.effects.performance,
+                                r.effects.extra),
+                            r.isEnabled);
                     }),
                     s.theme);
             }))
     }
 
-    adjustStress(stress) {
+    /* adjustStress(stress) {
         this.stress_level += stress;
         this.stress_level = Math.max(this.stress_level, 0);
         this.stress_level = Math.min(this.stress_level, 100);
@@ -127,7 +141,7 @@ class Character {
         {
             return 'D';
         }
-    }
+    } */
 }
 
 /**
@@ -186,18 +200,16 @@ class ScenarioResponse {
      */
     resultInfo;
 
-
-    // Added the following
-    // TODO: Add to constructor
+    /**
+     * @type {ResponseEffects} used to determine what should happen when the response is chosen
+     */
+    effects;
 
     /**
-     * @type {int} effect response has on stress if chosen
+     * @type {(Game) => Boolean} used to determine if the response should be available to the player or disabled
      */
-    stressEffect;
-    /**
-     * @type {int} threshold of stress needed to take this action
-     */
-    threshold;
+    condition;
+
 
     // TODO:
     // figure out how we want to represent other metrics 
@@ -209,13 +221,50 @@ class ScenarioResponse {
      * @param {String} resultExposition html to display in the top section of the screen when the response is chosen
      * (each top-level element will appear with a short delay after the last)
      */
-    constructor(buttonText, resultExposition, resultInfo, stressEffect) {
+    constructor(buttonText, resultExposition, resultInfo, effects, condition) {
         this.id = ScenarioResponse.#id_counter++;
 
         this.buttonText = buttonText;
         this.resultExposition = resultExposition;
         this.resultInfo = resultInfo;
-        this.stressEffect = stressEffect
+        this.effects = effects;
+        this.condition = (condition == undefined) ? () => true : condition;
+    }
+
+    /**
+     * applies modifications to game state when response button is clicked.
+     * @param {Object} Game the game object
+     */
+    applyEffects(Game) {
+        Game.stress += this.effects.stress;
+        Game.reputation += this.effects.reputation;
+        Game.performance += this.effects.performance;
+        this.effects.extra(Game);
+    }
+}
+
+class ResponseEffects {
+    /**@type {number} added to stress level when response is chosen */
+    stress;
+    /**@type {number} added to reputation level when response is chosen */
+    reputation;
+    /**@type {number} added to performance level when response is chosen */
+    performance;
+    /**@type {(Game) => any} function to perform any additional logic when response is chosen */
+    extra;
+
+    /**
+     * 
+     * @param {number} stress added to stress level when response is chosen
+     * @param {number} reputation added to reputation level when response is chosen
+     * @param {number} performance added to performance level when response is chosen
+     * @param {(Game) => any} extra function to perform any additional logic when response is chosen
+     */
+    constructor(stress = 0, reputation = 0, performance = 0, extra = () => { }) {
+        this.stress = stress;
+        this.reputation = reputation;
+        this.performance = performance;
+        this.extra = extra;
     }
 }
 
@@ -226,7 +275,12 @@ class ScenarioResponse {
 /* ------------------------------- Guidelines ------------------------------- */
 // Exposition can be as long as needed but try to limit the size of each <p> tag
 // Make sure all apostrophes are the same if pasting from word processor
-// <strong></strong> tags can be used to emphasize important phrases / dialogue
+// <strong></strong> tags can be used to emphasize vocab words / important phrases / dialogue
+
+// Not every response needs an info box, can be added later during research
+// Start each story with a couple low-stakes scenarios to act as a sort of tutorial
+// Decisions generally ramp up in stakes throughout story
+// Each scenario should be crafted to emphasize a unique challenge/aspect of ASD, no need to repeat the same concept
 
 /**
  * @type {Character[]}
@@ -256,18 +310,24 @@ const characters = [
                     {
                         buttonText: 'Wear dirty clothes',
                         resultExposition: `<p> You feel comfortable in your own skin. You get a few looks when you step on the bus but who cares? </p>`,
-                        stressEffect: 0
+                        effects: {
+                            stress: 0
+                        }
                     },
                     {
                         buttonText: 'Wear something you hate',
                         resultExposition: `<p> The tag on the back of your shirt scrapes the back of your neck at unpredictable intervals and the weight of your pants feels wrong. The waistband of your pants pinches and the lack of the usual helpful pressure of a sweatshirt makes it feel ungrounded. Furthermore, you feel self-conscious and start adjusting your clothes constantly. </p>`,
-                        stressEffect: -20,
+                        effects: {
+                            stress: -20
+                        },
                         resultInfo: `<p> People with Autism may experience <strong>over-sensitivity</strong> to certain textures which can cause discomfort or even panic in extreme cases. What you're sensitive to, though, and how severely <strong>varies greatly depending on the person</strong>. </p>`
                     },
                     {
                         buttonText: 'Try to clean your clothes before school',
                         resultExposition: `<p> It's not perfect, the oil stain on your shirt still shows a little bit, but it's better than it would otherwise be. It messed up your usual morning routine which makes you feel even more tired but at least when you get on the bus to go to school you don't feel like crawling out of your own skin. </p>`,
-                        stressEffect: -10
+                        effects: {
+                            stress: -10
+                        }
                     }
                 ]
             },
@@ -278,17 +338,23 @@ const characters = [
                     {
                         buttonText: `Do everything you can to pay attention`,
                         resultExposition: `<p> You take intense notes and by the time class is over the words you wrote and the words the teacher is saying are blurring together. You definitely understood a lot, but that didn't stop your mind from blanking occasionally. You leave for the next class tired. </p>`,
-                        stressEffect: -20
+                        effects: {
+                            stress: -20
+                        }
                     },
                     {
                         buttonText: `Doodle scenes from the book`,
                         resultExposition: `<p> You don't understand everything in the lecture, but drawing out the scenes helps you stay engaged, and may have even understood more than you would have if you sat up straight and made eye contact. </p>`,
-                        stressEffect: 0
+                        effects: {
+                            stress: 0
+                        }
                     },
                     {
                         buttonText: `Stop paying attention`,
                         resultExposition: `<p> You stare at the window engrossed in your own thoughts. When the bell rings to go to your next class, you look bleary-eyed at the board. You don't know anything that was said. </p>`,
-                        stressEffect: 0
+                        effects: {
+                            stress: 0
+                        }
                     }
                 ]
             },
@@ -299,22 +365,30 @@ const characters = [
                     {
                         buttonText: `Respond literally`,
                         resultExposition: `<p> "It was a joke, Nora." You feel like that was the right response, but clearly it wasn't </p>`,
-                        stressEffect: 0
+                        effects: {
+                            stress: 0
+                        }
                     },
                     {
                         buttonText: `Laugh and nod`,
                         resultExposition: `<p> You smile and while you don't say anything significant it was enough to get you through the interaction. </p>`,
-                        stressEffect: -10
+                        effects: {
+                            stress: -10
+                        }
                     },
                     {
                         buttonText: `Don't respond at all`,
                         resultExposition: `<p> You don't make eye contact and just stare down at the lunch table, you don't have a good response so you don't say anything. You get some looks from the people around you but the conversation shifts away from you and you can finish eating. </p>`,
-                        stressEffect: 0
+                        effects: {
+                            stress: 0
+                        }
                     },
                     {
                         buttonText: `Take time to consider and respond`,
                         resultExposition: `<p> You take a second and realize what she is actually saying. You are then able to respond in kind, and get smiles from your friends. It makes you feel good that you were able to communicate but it feels like it took more work for you than everyone else. </p>`,
-                        stressEffect: -20
+                        effects: {
+                            stress: -20
+                        }
                     }
                 ]
             },
@@ -325,22 +399,30 @@ const characters = [
                     {
                         buttonText: `Ask the teacher anyway`,
                         resultExposition: `<p> You raise your hand and ask the teacher despite the warning. Talking in class is stressful for you and you feel like everyone's eyes are drilling into you. He clarifies the instructions and you can tell something is going on with either him or the class but you can't tell what. </p>`,
-                        stressEffect: -20
+                        effects: {
+                            stress: -20
+                        }
                     },
                     {
                         buttonText: `Ask your neighbor`,
                         resultExposition: `<p> You turn and whisper to your neighbor, asking them what do to. You feel self-conscious like you are the only one who doesn't understand. You don't know why everyone else seems to get it but you just can't. They tell you what you need to know and then you both get to work. </p>`,
-                        stressEffect: -10
+                        effects: {
+                            stress: -10
+                        }
                     },
                     {
                         buttonText: `Attempt to complete the assignment anyway`,
                         resultExposition: `<p> You do your best but when you go over it at the end of the period you realize you missed a big piece of the assignment. You feel like if the teacher was just clear it would have been fine but you did your best with the information you have. </p>`,
-                        stressEffect: -10
+                        effects: {
+                            stress: -10
+                        }
                     },
                     {
                         buttonText: `Don't do the assignment `,
                         resultExposition: `<p> You sit and look at the assignment but you just can't do anything, the lack of clarity feels paralyzing. You end the class feeling like a failure, even though you know you aren't. </p>`,
-                        stressEffect: 0
+                        effects: {
+                            stress: 0
+                        }
                     }
                 ]
             },
@@ -351,22 +433,30 @@ const characters = [
                     {
                         buttonText: `Join the chaos in the back`,
                         resultExposition: `<p> You sit laughing loudly with everyone but you feel tired and drained when you get off the bus. </p>`,
-                        stressEffect: -20
+                        effects: {
+                            stress: -20
+                        }
                     },
                     {
                         buttonText: `Sit with one of your friends and chat`,
                         resultExposition: `<p> You sit by one of your friends and have a fun conversation about your art. </p>`,
-                        stressEffect: -10
+                        effects: {
+                            stress: -10
+                        }
                     },
                     {
                         buttonText: `Sit across from one of your friends and sketch`,
                         resultExposition: `<p> You sit in the front where there aren't too many people, and you are able to tune out the noise in the back. Sketching always brings you joy. </p>`,
-                        stressEffect: 0
+                        effects: {
+                            stress: 0
+                        }
                     },
                     {
                         buttonText: `Sit by yourself and cover your ears`,
                         resultExposition: `<p> It feels so loud. Between the bus, the conversations, and the chaos in the back, it feels far too loud. None of the other people around you are having the same reaction you are and you feel alone. </p>`,
-                        stressEffect: -10
+                        effects: {
+                            stress: -10
+                        }
                     }
                 ]
             },
@@ -377,27 +467,37 @@ const characters = [
                     {
                         buttonText: `Get a snack and take a nap`,
                         resultExposition: `<p> It feels good to take a second and just relax, you wake up feeling a little better </p>`,
-                        stressEffect: 10
+                        effects: {
+                            stress: 10
+                        }
                     },
                     {
                         buttonText: `Stim and draw`,
                         resultExposition: `<p> You are able to drop your mask and let your leg start bouncing like it wants too. You start a drawing that you have been thinking about all day. It feels good to just take a second to do something that actually interests you. </p>`,
-                        stressEffect: 10
+                        effects: {
+                            stress: 10
+                        }
                     },
                     {
                         buttonText: `Sit in front of the TV `,
                         resultExposition: `<p> You sit down and stare, it feels good to turn your brain off and not need to comprehend everything around you. You can pause and take a break from the noise if you need to. </p>`,
-                        stressEffect: 0
+                        effects: {
+                            stress: 0
+                        }
                     },
                     {
                         buttonText: `Go hang out with a friend`,
                         resultExposition: `<p> You get a chance to go hang out with your neighbor and you play a game together, a wonderful way to spend the afternoon. </p>`,
-                        stressEffect: 10
+                        effects: {
+                            stress: 10
+                        }
                     },
                     {
                         buttonText: `Get started on chores immediately`,
                         resultExposition: `<p> Your family is happy to see that the kitchen is clean. </p>`,
-                        stressEffect: 10
+                        effects: {
+                            stress: 10
+                        }
                     }
                 ]
             },
@@ -408,12 +508,16 @@ const characters = [
                     {
                         buttonText: `Do it`,
                         resultExposition: `<p> You complete your homework </p>`,
-                        stressEffect: -20
+                        effects: {
+                            stress: -20
+                        }
                     },
                     {
                         buttonText: `Don't`,
                         resultExposition: `<p> You sit and stare at the backpack across the room and it just stares back at you. You try to tell yourself to do it but you can't make yourself. You want to be a good student and normally you are but you don't have it in you right now. </p>`,
-                        stressEffect: 0
+                        effects: {
+                            stress: 0
+                        }
                     }
                 ]
             },
@@ -424,17 +528,23 @@ const characters = [
                     {
                         buttonText: `Eat it`,
                         resultExposition: `<p> You try it and like it, your dad is very happy. </p>`,
-                        stressEffect: 20
+                        effects: {
+                            stress: 20
+                        }
                     },
                     {
                         buttonText: `Attempt to eat it`,
                         resultExposition: `<p> You take a bite but you can't bring yourself to eat anymore. You don't want to make your dad sad but the new texture and taste were not what you were expecting. </p>`,
-                        stressEffect: 20
+                        effects: {
+                            stress: 20
+                        }
                     },
                     {
                         buttonText: `Refuse`,
                         resultExposition: `<p> Your dad looks hurt but you can't bring yourself to do it. You don't want to make him sad but the idea of a new texture, taste, and change in routine is just too much right now </p>`,
-                        stressEffect: 0
+                        effects: {
+                            stress: 0
+                        }
                     }
                 ]
             }
