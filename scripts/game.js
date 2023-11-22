@@ -60,6 +60,8 @@ window.addEventListener('load', event => {
     dom_main = document.querySelector('main');
     dom_hud = document.querySelector('#HUD');
 
+
+
     // Set screen to home
     render_home();
 
@@ -87,7 +89,7 @@ window.addEventListener('load', event => {
     // console.log(characters);
 
     // Make the title text link to the home screen
-    document.querySelector('h1').addEventListener('click', () => render_home());
+    document.querySelector('h1').addEventListener('click', () => render_home());   
 });
 
 /* -------------------------------------------------------------------------- */
@@ -227,6 +229,7 @@ function render_home() {
  */
 function render_characterSelect() {
     // overwrite contents of main
+    playAudio(); // Plays inital audio contained in html
     dom_main.innerHTML = screens.characterSelect.htmlContent;
     Game.activeScreenId = screens.characterSelect.id;
     dom_hud.classList.add('hide');
@@ -530,3 +533,27 @@ function logDebug()
     console.log('Reputation: ', Game.reputation);
     console.log('Performance: ', Game.performance);
 }
+
+
+/**
+ * Plays background audio contained in html
+ */
+function playAudio(){
+    document.getElementById("GameAudio").play();
+}
+
+/**
+ * Pauses background site audio
+ */
+function pauseAudio(){
+    document.getElementById("GameAudio").pause();
+}
+
+/** 
+ * Loads new audio for background. This should change with scenario. 
+ */
+function loadAudio(src){
+    var audio = document.getElementById("GameAudio");
+    audio.src = src;
+    audio.load();
+}   
