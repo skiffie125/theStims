@@ -18,6 +18,9 @@ class Character {
     icon;
     /** Array of Scenarios in order of how they will appear in game. */
     scenarioList;
+    /** the senario that is triggered when things go to overwhelm. */
+    overwhelmScenario
+
     /** @type {int} Integer stress level of character (0 - 100) */
     // stress_level;
     /** @type {int} Integer reputation level of character (0 - 100) */
@@ -36,7 +39,7 @@ class Character {
      * @param {String} icon URL string for the image to display on the character card & HUD
      * @param {Scenario[]} scenarioList Array of Scenarios in order of how they will appear in game
      */
-    constructor(name, age, gender, bio, icon = '../assets/blank_character_icon.png', scenarioList,
+    constructor(name, age, gender, bio, icon = '../assets/blank_character_icon.png', scenarioList, overwhelmScenario,
         stress_start = 100, reputation_start = 100, performance_start = 100) {
         this.id = Character.#id_counter++;
 
@@ -46,6 +49,7 @@ class Character {
         this.bio = bio;
         this.icon = icon;
         this.scenarioList = scenarioList;
+        this.overwhelmScenario = overwhelmScenario
 
         this.stress_start = stress_start;
         this.reputation_start = reputation_start;
@@ -99,7 +103,9 @@ class Character {
                             r.isEnabled);
                     }),
                     s.theme);
-            }))
+            })),
+            //may need a map to be the correct object here?
+            data.overwhelmScenario
     }
 
     /* adjustStress(stress) {
@@ -604,7 +610,22 @@ const characters = [
                     }
                 ]
             }
-        ]
+        ],
+        overwhelmScenario: {
+            exposition: `<p> You stop. Your heart feels too big for your chest and the sounds around you blend into an overwhelming cacophony. You know you have to find a quiet space to calm down. </p>`,
+            //theme: 
+            responses: [
+                {
+                    buttonText: `Continue`,
+                    resultExposition: `<p> You go get away as soon as you can. You to the bathroom and cross your arms with your hands on your shoulders. You breathe in a way your aunt showed you and it helps you calm down for the moment. You go through what just happened in your head, looking for what made you feel overwhelmed. It takes you a while to sort it all out. </p>`,
+                    effects: {
+                        stress: 20,
+                        reputation: -10,
+                        performance: -10
+                    }
+                }
+            ]
+        }
     },
     {
         name: 'Roman',

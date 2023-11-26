@@ -160,8 +160,15 @@ function handle_response_continue(r) {
 function handle_next_scenario() {
     if (Game.storyProgress + 1 < Game.chosenCharacter.scenarioList.length)
     {
-        Game.storyProgress++;
-        render_scenario(Game.chosenCharacter.scenarioList[Game.storyProgress]);
+        // not sure if this is the correct place to put this or not
+        if(Game.stress <= 50){
+            render_scenario(Game.chosenCharacter.overwhelmScenario);
+        } else {
+            Game.storyProgress++;
+            render_scenario(Game.chosenCharacter.scenarioList[Game.storyProgress]);
+        }
+
+        
     }
     else
     {
