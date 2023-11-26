@@ -294,7 +294,6 @@ function render_characterSelect() {
     // set up initial animations
     let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 500, 500);
     reveal_children_consecutively(dom_main.querySelector('#character-list'), 500, 250, delay, false);
-
     // TODO: add listeners for scrolling between selected characters
 }
 
@@ -323,6 +322,9 @@ function render_disclaimer() {
  */
 function render_scenario(s) {
     // overwrite contents of main
+    pauseAudio();
+    loadAudio("/assets/coffee_shop_chatter.mp3");
+    playAudio();
     dom_main.innerHTML = screens.scenario.htmlContent;
     Game.activeScreenId = screens.scenario.id;
     dom_hud.classList.remove('hide');
