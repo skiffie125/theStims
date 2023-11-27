@@ -296,7 +296,7 @@ const characters = [
         name: 'August',
         age: '20',
         gender: 'female',
-        icon: '../assets/augest.png',
+        icon: './assets/august.png',
         bio: 'August is in her second year of her associates degree at a local community college in Arizona. She comes from a suburban middle-class family, and has a mother, father, and 2 younger sisters who love her very much but put heavy pressure on her to succeed in school. She has diagnosed ADHD and an anxiety disorder, but nobody suspects that she may also have Autism.',
         scenarioList: [
 
@@ -306,7 +306,7 @@ const characters = [
         name: 'Nora',
         age: '14',
         gender: 'female',
-        icon: '../assets/nora.png',
+        icon: './assets/nora.png',
         bio: 'Nora is in the 8th grade at her local public middle school in Vermont. She comes from an immigrant family and has had trouble with bullies at school, despite being quite friendly and sociable and a talented artist. Her family knows she has Autism because her Aunt has it as well and displays similar traits, but they are unable to afford testing and thus she has no formal diagnosis.',
         scenarioList: [
             {
@@ -632,7 +632,7 @@ const characters = [
         name: 'Roman',
         age: '31',
         gender: 'male',
-        icon: '../assets/roman.png',
+        icon: './assets/roman.png',
         bio: 'Roman is a retail worker at a home improvement shop in Portland, Oregon, and lives in a nearby apartment with his mother. He was diagnosed with Autism at age 5 and received therapies throughout his adolescence to help develop his social skills. He speaks very politely and tries his best to be approachable, but for some reason, people often seem intimidated by him and he has never held a job for longer than 6 months.',
         scenarioList: [
 

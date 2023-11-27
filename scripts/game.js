@@ -355,7 +355,7 @@ function render_disclaimer() {
 function render_scenario(s) {
     // overwrite contents of main
     pauseAudio();
-    loadAudio("/assets/coffee_shop_chatter.mp3");
+    loadAudio("../assets/coffee_shop_chatter.mp3");
     playAudio();
     dom_main.innerHTML = screens.scenario.htmlContent;
     Game.activeScreenId = screens.scenario.id;
