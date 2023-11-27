@@ -25,6 +25,7 @@ let Game = (function () {
     return {
         /** ID of the current screen being displayed */
         activeScreenId: screens.home.id,
+        audioEnabled: undefined,
 
 
         /** @type {Character} the {@link Character} the player is currently playing as */
@@ -95,6 +96,31 @@ window.addEventListener('load', event => {
 /* -------------------------------------------------------------------------- */
 /*                               Event handlers                               */
 /* -------------------------------------------------------------------------- */
+
+function handle_home_continue() {
+    // If user hasn't been prompted about audio yet
+    if(Game.audioEnabled == undefined)
+    // Ask them to enable audio
+    show_question("<p>This game uses audio to create a more immersive experience. Would you like to enable audio?</p>",[
+        {
+            buttonText: "Enable Audio",
+            callback: () => {
+                Game.audioEnabled = true;
+                playAudio(); // Plays inital audio contained in html
+                render_characterSelect();
+            }
+        },
+        {
+            buttonText: "No Audio",
+            callback: () => {
+                Game.audioEnabled = false;
+                render_characterSelect();
+            }
+        }
+    ]);
+    // otherwise go directly to character select
+    else render_characterSelect();
+}
 
 function handle_scroll_characters() {
     if (Game.activeScreenId != screens.home.id) throw new Error("Character screen not active");
@@ -228,7 +254,7 @@ function render_home() {
     reveal_children_consecutively(dom_main.querySelector('#options'), 500, 250, delay, false, false);
 
     // Must attach all event listeners here because js modules are not accessible from the html
-    dom_main.querySelector('#button-begin').addEventListener('click', () => { render_characterSelect() });
+    dom_main.querySelector('#button-begin').addEventListener('click', handle_home_continue);
 }
 
 /**
@@ -236,7 +262,6 @@ function render_home() {
  */
 function render_characterSelect() {
     // overwrite contents of main
-    playAudio(); // Plays inital audio contained in html
     dom_main.innerHTML = screens.characterSelect.htmlContent;
     Game.activeScreenId = screens.characterSelect.id;
     dom_hud.classList.add('hide');
@@ -499,6 +524,39 @@ function show_message(htmlContent, callback, dissmissable = false) {
         close_modal(modal);
         return callback(event);
     });
+    return modal;
+}
+
+/**
+ * Displays a modal box (dialog box) on top of the rest of the page, darkening the page and blocking interaction
+ * with anything besides the box. This method adds a **continue** button at the bottom of the box content which
+ * closes the box and triggers an optional callback function.
+ * @param {String} htmlContent An html string to render inside the modal box content area
+ * @param {Object[]} choices
+ * @param {EventListenerOrEventListenerObject} [callback] Function to execute when continue button is clicked
+ * @param {Boolean} [dissmissable] Whether the modal can be closed by clicking the background (default **false**)
+ * @returns 
+ */
+function show_question(htmlContent, choices, dissmissable = false) {
+    // choices.forEach(choice => {
+    //     htmlContent += `<button class="button-modal-choice">${choice.buttonText}</button>`;
+    // })
+    const modal = show_modal(htmlContent, dissmissable);
+    // modal.querySelectorAll('.button-modal-choice').forEach(button => {
+    //     addEventListener('click', (event) => {
+    //         close_modal(modal);
+    //         return callback(event);
+    //     });
+    // })
+    const content = modal.querySelector('.modal-content')
+    choices.forEach(choice => {
+        const button = htmlToElement(`<button class="button-modal-choice">${choice.buttonText}</button>`);
+        button.addEventListener('click', (ev) => {
+            choice.callback(ev);
+            close_modal(modal);
+        });
+        content.appendChild(button);
+    })
     return modal;
 }
 

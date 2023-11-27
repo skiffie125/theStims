@@ -103,9 +103,9 @@ class Character {
                             r.isEnabled);
                     }),
                     s.theme);
-            })),
+            }),
             //may need a map to be the correct object here?
-            data.overwhelmScenario
+            data.overwhelmScenario)
     }
 
     /* adjustStress(stress) {
