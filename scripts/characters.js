@@ -100,7 +100,7 @@ class Character {
                                 r.effects.reputation,
                                 r.effects.performance,
                                 r.effects.extra),
-                            r.isEnabled);
+                            r.condition);
                     }),
                     s.theme);
             }),
@@ -354,7 +354,8 @@ const characters = [
                             stress: -20,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
+                        condition: (Game) => (Game.stress >= 100)
                     },
                     {
                         buttonText: `Doodle scenes from the book`,

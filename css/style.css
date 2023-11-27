@@ -213,6 +213,7 @@ button {
     border-radius: 1rem;
     user-select: none;
     cursor: pointer;
+    position: relative;
 }
 
 button:hover {
@@ -224,7 +225,31 @@ button:hover {
 button:active {
     background-color: #70be61;
     color: #f3f1d5;
-    box-shadow: 0 0rem 0.5rem #212d3b inset;
+    box-shadow: 0 0 0.5rem #212d3b inset;
+}
+
+button:disabled {
+    background-color: #606860;
+    box-shadow: 0 0 0.5rem #302020 inset;
+}
+
+button:disabled:active {
+    animation: 0.2s linear wiggle;
+}
+
+@keyframes wiggle {
+    0% {
+        left: 0;
+    }
+    25% {
+        left: -2px;
+    }
+    75% {
+        left: 2px;
+    }
+    100% {
+        left: 0;
+    }
 }
 
 #HUD {
@@ -313,6 +338,15 @@ button:active {
 .modal-content > * {
     margin: 0;
     text-align: center;
+}
+
+.modal-choice-list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 
 footer {

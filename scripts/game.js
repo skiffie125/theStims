@@ -364,13 +364,17 @@ function render_scenario(s) {
 
     dom_main.querySelector('#exposition').innerHTML = s.exposition;
 
-    s.responses.forEach(reponse => {
+    s.responses.forEach(response => {
         const newButton = document.createElement('button');
-        newButton.textContent = reponse.buttonText;
+        newButton.textContent = response.buttonText;
         newButton.classList.add('button-option');
+        // console.log(response.condition,response.condition(Game));
+        const enabled = response.condition(Game);
+        newButton.disabled = !enabled;
+        newButton.title = enabled ? "Choose this option" : 'Something is preventing you from choosing this option...';
         options.appendChild(newButton);
 
-        newButton.addEventListener('click', () => { handle_select_response(reponse) });
+        newButton.addEventListener('click', () => { handle_select_response(response) });
     })
 
     document.body.dataset.bg = s.theme;
@@ -548,14 +552,14 @@ function show_question(htmlContent, choices, dissmissable = false) {
     //         return callback(event);
     //     });
     // })
-    const content = modal.querySelector('.modal-content')
+    const choicelist = modal.querySelector('.modal-content').appendChild(htmlToElement(`<div class="modal-choice-list"></div>`));
     choices.forEach(choice => {
         const button = htmlToElement(`<button class="button-modal-choice">${choice.buttonText}</button>`);
         button.addEventListener('click', (ev) => {
             choice.callback(ev);
             close_modal(modal);
         });
-        content.appendChild(button);
+        choicelist.appendChild(button);
     })
     return modal;
 }
@@ -606,7 +610,7 @@ function logDebug()
  * Plays background audio contained in html
  */
 function playAudio(){
-    document.getElementById("GameAudio").play();
+    if(Game.audioEnabled) document.getElementById("GameAudio").play();
 }
 
 /**
