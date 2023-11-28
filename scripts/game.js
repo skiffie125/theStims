@@ -377,10 +377,11 @@ function render_scenario(s) {
 //     var lmao = new Pizzicato.Effects.Delay();
 //     background_audio.addEffect(lmao);
 //     background_audio.play();
-const sound = new Pz.Sound('../assets/cafeteria.mp3', () => {
+const sound = new Pz.Sound('../assets/' + getAudioFile(s.theme), () => {
     var distortion = new Pizzicato.Effects.Distortion({
-        gain: 0.9
+        gain: 0.3
     });
+    console.log();
     sound.addEffect(distortion);
     sound.play();
   });
@@ -633,6 +634,31 @@ function logDebug()
     console.log('Performance: ', Game.performance);
 }
 
+/** 
+ * Returns the name of the audio file corresponding to the given theme
+ */
+function getAudioFile(theme){
+    switch (theme) {
+        case "school hallway":
+            return 'loud_school.mp3';
+        case "bedroom":
+            return 'sample_menu.mp3';
+        case "living room":
+            return 'sample_menu.mp3';
+        case "classroom 1":
+            return 'sample_menu.mp3';
+        case "classroom 2":
+            return 'sample_menu.mp3';
+        case "cafeteria":
+            return 'cafeteria.mp3';
+        case "dinner table":
+            return 'sample_menu.mp3';
+        case "school bus":
+            return 'school_bus_ride.mp3';
+        default:
+            break;
+    }
+}   
 
 /**
  * Plays background audio contained in html
