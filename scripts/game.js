@@ -355,8 +355,36 @@ function render_disclaimer() {
 function render_scenario(s) {
     // overwrite contents of main
     pauseAudio();
-    loadAudio("../assets/coffee_shop_chatter.mp3");
-    playAudio();
+    // loadAudio("../assets/coffee_shop_chatter.mp3");
+    // playAudio();
+    // var background_audio = new Pizzicato.Sound({ 
+    //     source: 'file',
+    //     options: { path: './assets/coffee_shop_chatter.mp3' }
+    // }, function() {
+    //     console.log('sound file loaded!');
+    // });
+
+//     var background_audio = new Pizzicato.Sound({ 
+//         source: 'file',
+//         options: { path: '../assets/coffee_shop_chatter.mp3' }
+// });
+
+    // var distortion = new Pizzicato.Effects.Distortion({
+    //     gain: 0.4
+    // });
+    // sound.addEffect(distortion);
+    // sound.play();
+//     var lmao = new Pizzicato.Effects.Delay();
+//     background_audio.addEffect(lmao);
+//     background_audio.play();
+const sound = new Pz.Sound('../assets/cafeteria.mp3', () => {
+    var distortion = new Pizzicato.Effects.Distortion({
+        gain: 0.9
+    });
+    sound.addEffect(distortion);
+    sound.play();
+  });
+
     dom_main.innerHTML = screens.scenario.htmlContent;
     Game.activeScreenId = screens.scenario.id;
     dom_hud.classList.remove('hide');
