@@ -5,6 +5,7 @@ import characters from './characters.js';
 let dom_main;
 /** @type {HTMLElement} reference to HUD element */
 let dom_hud;
+let sound;
 
 /**
  * Singleton object responsible for holding game state and observers
@@ -355,36 +356,22 @@ function render_disclaimer() {
 function render_scenario(s) {
     // overwrite contents of main
     pauseAudio();
-    // loadAudio("../assets/coffee_shop_chatter.mp3");
-    // playAudio();
-    // var background_audio = new Pizzicato.Sound({ 
-    //     source: 'file',
-    //     options: { path: './assets/coffee_shop_chatter.mp3' }
-    // }, function() {
-    //     console.log('sound file loaded!');
-    // });
 
-//     var background_audio = new Pizzicato.Sound({ 
-//         source: 'file',
-//         options: { path: '../assets/coffee_shop_chatter.mp3' }
-// });
-
-    // var distortion = new Pizzicato.Effects.Distortion({
-    //     gain: 0.4
-    // });
-    // sound.addEffect(distortion);
-    // sound.play();
-//     var lmao = new Pizzicato.Effects.Delay();
-//     background_audio.addEffect(lmao);
-//     background_audio.play();
-const sound = new Pz.Sound('../assets/' + getAudioFile(s.theme), () => {
-    var distortion = new Pizzicato.Effects.Distortion({
-        gain: 0.3
+    // Pause audio from the previous scene
+    if (sound != null)
+    {
+        sound.pause();
+    }
+    // Play audio for the new scene based on the audio file defined in theme
+    sound = new Pz.Sound('../assets/' + getAudioFile(s.theme), () => {
+        var distortion = new Pizzicato.Effects.Distortion({
+            gain: 0.1
+        });
+        sound.addEffect(distortion);
+        sound.attack = 0.9;
+        sound.release = 0.9;
+        sound.play();
     });
-    console.log();
-    sound.addEffect(distortion);
-    sound.play();
-  });
 
     dom_main.innerHTML = screens.scenario.htmlContent;
     Game.activeScreenId = screens.scenario.id;
@@ -642,17 +629,17 @@ function getAudioFile(theme){
         case "school hallway":
             return 'loud_school.mp3';
         case "bedroom":
-            return 'sample_menu.mp3';
+            return 'room_traffic_clock.mp3';
         case "living room":
-            return 'sample_menu.mp3';
+            return 'room_traffic_clock.mp3';
         case "classroom 1":
-            return 'sample_menu.mp3';
+            return 'classrom_ambient.mp3';
         case "classroom 2":
-            return 'sample_menu.mp3';
+            return 'classrom_ambient.mp3';
         case "cafeteria":
             return 'cafeteria.mp3';
         case "dinner table":
-            return 'sample_menu.mp3';
+            return 'dinner_table.mp3';
         case "school bus":
             return 'school_bus_ride.mp3';
         default:
