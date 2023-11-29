@@ -339,7 +339,8 @@ const characters = [
                             stress: -10,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
+                        resultInfo: `<p> Changes to routines can have a greater impact on people with Autism than on people without autism. Changes can affect them even if they are doing an activity that will help their well-being. </p>`
                     }
                 ]
             },
@@ -355,7 +356,8 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: (Game) => (Game.stress >= 100)
+                        resultInfo: `<p> Autism can be comorbid with a variety of intellectual or learning disabilities, though it isn't inherently. Regardless, figuring out ways to make educational material work for students with autism can help them learn more. Not being able to process the material in a traditional classroom can be extremely frustrating, or having students push themselves to understand things can lead to negative outcomes like burnout and health issues. </p>`,
+                        condition: (Game) => (Game.stress >= 90)
                     },
                     {
                         buttonText: `Doodle scenes from the book`,
@@ -364,7 +366,8 @@ const characters = [
                             stress: 0,
                             reputation: 0,
                             performance: -10
-                        }
+                        },
+                        resultInfo: `<p> Autism can be comorbid with a variety of intellectual or learning disabilities, though it isn't inherently. Regardless, figuring out ways to make educational material work for students with autism can help them learn more. Not being able to process the material in a traditional classroom can be extremely frustrating, or having students push themselves to understand things can lead to negative outcomes like burnout and health issues. </p>`,
                     },
                     {
                         buttonText: `Stop paying attention`,
@@ -373,7 +376,8 @@ const characters = [
                             stress: 0,
                             reputation: 0,
                             performance: -20
-                        }
+                        },
+                        resultInfo: `<p> Autism can be comorbid with a variety of intellectual or learning disabilities, though it isn't inherently. Regardless, figuring out ways to make educational material work for students with autism can help them learn more. Not being able to process the material in a traditional classroom can be extremely frustrating, or having students push themselves to understand things can lead to negative outcomes like burnout and health issues. </p>`,
                     }
                 ]
             },
@@ -388,7 +392,8 @@ const characters = [
                             stress: 0,
                             reputation: -10,
                             performance: 0
-                        }
+                        },
+                        condition: (Game) => (Game.stress >= 70)
                     },
                     {
                         buttonText: `Laugh and nod`,
@@ -397,7 +402,9 @@ const characters = [
                             stress: -10,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
+                        resultInfo: `<p> This is a behavior known as masking. People with autism can learn behaviors that make them seem as if they aren’t struggling or are more “normal”. Masking is not solely found in people with Autism. </p>`,
+                        condition: (Game) => (Game.stress >= 80)
                     },
                     {
                         buttonText: `Don't respond at all`,
@@ -415,7 +422,8 @@ const characters = [
                             stress: -20,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
+                        condition: (Game) => (Game.stress >= 90)
                     }
                 ]
             },
@@ -439,7 +447,8 @@ const characters = [
                             stress: -10,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
+                        condition: (Game) => (Game.stress >= 80)
                     },
                     {
                         buttonText: `Attempt to complete the assignment anyway`,
@@ -448,7 +457,8 @@ const characters = [
                             stress: -10,
                             reputation: 0,
                             performance: -10
-                        }
+                        },
+                        condition: (Game) => (Game.stress >= 90)
                     },
                     {
                         buttonText: `Don't do the assignment `,
@@ -472,7 +482,8 @@ const characters = [
                             stress: -20,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
+                        condition: (Game) => (Game.stress >= 60)
                     },
                     {
                         buttonText: `Sit with one of your friends and chat`,
@@ -481,7 +492,8 @@ const characters = [
                             stress: -10,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
+                        condition: (Game) => (Game.stress >= 70)
                     },
                     {
                         buttonText: `Sit across from one of your friends and sketch`,
@@ -490,7 +502,8 @@ const characters = [
                             stress: 0,
                             reputation: -10,
                             performance: 0
-                        }
+                        },
+                        condition: (Game) => (Game.stress >= 80)
                     },
                     {
                         buttonText: `Sit by yourself and cover your ears`,
@@ -514,7 +527,8 @@ const characters = [
                             stress: 10,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
+                        condition: (Game) => (Game.stress >= 60)
                     },
                     {
                         buttonText: `Stim and draw`,
@@ -523,7 +537,8 @@ const characters = [
                             stress: 10,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
+                        condition: (Game) => (Game.stress >= 70)
                     },
                     {
                         buttonText: `Sit in front of the TV `,
@@ -541,7 +556,8 @@ const characters = [
                             stress: 10,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
+                        condition: (Game) => (Game.stress >= 80)
                     },
                     {
                         buttonText: `Get started on chores immediately`,
@@ -550,7 +566,8 @@ const characters = [
                             stress: 10,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
+                        condition: (Game) => (Game.stress >= 90)
                     }
                 ]
             },
@@ -565,7 +582,8 @@ const characters = [
                             stress: -20,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
+                        condition: (Game) => (Game.stress >= 70)
                     },
                     {
                         buttonText: `Don't`,
@@ -589,7 +607,8 @@ const characters = [
                             stress: -20,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
+                        condition: (Game) => (Game.stress >= 90)
                     },
                     {
                         buttonText: `Attempt to eat it`,
@@ -598,7 +617,8 @@ const characters = [
                             stress: -20,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
+                        condition: (Game) => (Game.stress >= 70)
                     },
                     {
                         buttonText: `Refuse`,
