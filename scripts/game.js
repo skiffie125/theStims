@@ -277,8 +277,6 @@ function handle_next_scenario() {
             Game.storyProgress++;
             render_scenario(Game.chosenCharacter.scenarioList[Game.storyProgress]);
         }
-
-        
     }
     else
     {
@@ -587,8 +585,8 @@ function update_HUD() {
     if(Game.chosenCharacter == undefined) return;
     dom_hud.querySelector('#character-icon').src = Game.chosenCharacter.icon;
     dom_hud.querySelector('#character-name').innerText = `Story: ${Game.chosenCharacter.name}`;
-    //dom_hud.querySelector('#scenario-num').innerText = `Scenario ${Game.storyProgress + 1}`;
-    dom_hud.querySelector('#scenario-num').innerText = `Scenario ${Game.storyProgress}`;
+    dom_hud.querySelector('#scenario-num').innerText = `Scenario ${Game.storyProgress + 1}`;
+    //dom_hud.querySelector('#scenario-num').innerText = `Scenario ${Game.storyProgress}`;
 }
 
 /**
