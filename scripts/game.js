@@ -267,8 +267,7 @@ function handle_response_continue(r) {
  * Advances to the next scenario in the storyline or the end screen if this was the last scenario
  */
 function handle_next_scenario() {
-    //if (Game.storyProgress + 1 < Game.chosenCharacter.scenarioList.length)
-    if (Game.storyProgress < Game.chosenCharacter.scenarioList.length - 1 )
+    if (Game.storyProgress + 1 < Game.chosenCharacter.scenarioList.length)
     {
         // not sure if this is the correct place to put this or not
         if(Game.stress <= 40){
@@ -585,8 +584,7 @@ function update_HUD() {
     if(Game.chosenCharacter == undefined) return;
     dom_hud.querySelector('#character-icon').src = Game.chosenCharacter.icon;
     dom_hud.querySelector('#character-name').innerText = `Story: ${Game.chosenCharacter.name}`;
-    //dom_hud.querySelector('#scenario-num').innerText = `Scenario ${Game.storyProgress + 1}`;
-    dom_hud.querySelector('#scenario-num').innerText = `Scenario ${Game.storyProgress}`;
+    dom_hud.querySelector('#scenario-num').innerText = `Scenario ${Game.storyProgress + 1}`;
 }
 
 /**
