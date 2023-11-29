@@ -25,6 +25,7 @@ let Game = (function () {
     return {
         /** ID of the current screen being displayed */
         activeScreenId: screens.home.id,
+        /** Whether audio should be enabled or not for the game. *undefined* until user is first prompted to enable audio */
         audioEnabled: undefined,
 
 
@@ -43,6 +44,8 @@ let Game = (function () {
         get stress() { return stressPrivate; },
         set stress(num) {
             stressPrivate = clamp(num,0,STAT_MAX);
+
+            // Update stress visual/audio effects here
         },
         get reputation() { return reputationPrivate; },
         set reputation(num) {

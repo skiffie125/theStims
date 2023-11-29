@@ -80,6 +80,22 @@ class Character {
      * @returns {Character}
      */
     static buildCharacter(data) {
+        const buildScenario = s => {
+            return new Scenario(
+                s.exposition,
+                s.responses.map(r => {
+                    return new ScenarioResponse(
+                        r.buttonText,
+                        r.resultExposition,
+                        r.resultInfo,
+                        (r.effects == undefined) ? new ResponseEffects() : new ResponseEffects(
+                            r.effects.stress,
+                            r.effects.reputation,
+                            r.effects.performance,
+                            r.effects.extra),
+                        r.condition);
+                }),
+                s.theme)};
         // TODO: implement
         return new Character(
             data.name,
@@ -87,25 +103,9 @@ class Character {
             data.gender,
             data.bio,
             data.icon,
-            data.scenarioList.map(s => {
-                return new Scenario(
-                    s.exposition,
-                    s.responses.map(r => {
-                        return new ScenarioResponse(
-                            r.buttonText,
-                            r.resultExposition,
-                            r.resultInfo,
-                            (r.effects == undefined) ? new ResponseEffects() : new ResponseEffects(
-                                r.effects.stress,
-                                r.effects.reputation,
-                                r.effects.performance,
-                                r.effects.extra),
-                            r.condition);
-                    }),
-                    s.theme);
-            }),
+            data.scenarioList.map(buildScenario),
             //may need a map to be the correct object here?
-            data.overwhelmScenario)
+            buildScenario(data.overwhelmScenario));
     }
 
     /* adjustStress(stress) {
