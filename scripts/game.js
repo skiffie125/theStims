@@ -259,8 +259,13 @@ function handle_select_response(r) {
  * @param {ScenarioResponse} r
  */
 function handle_response_continue(r) {
-    if (r.resultInfo == undefined) handle_next_scenario();
-    else show_message(r.resultInfo, handle_next_scenario);
+    if (r.resultInfo == undefined) 
+    {
+        handle_next_scenario();
+
+    } else {
+        show_message(r.resultInfo, handle_next_scenario);
+    }
 }
 
 /**
@@ -506,7 +511,7 @@ function render_scenarioResponse(r) {
     let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
     reveal_children_consecutively(dom_main.querySelector('#options'), 500, 250, delay, false, false);
 
-    dom_main.querySelector('.button-continue').addEventListener('click', () => handle_response_continue(r));
+    dom_main.querySelector('.button-continue').addEventListener('click', () => handle_next_scenario());
 }
 
 function render_end() {
