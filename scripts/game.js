@@ -368,7 +368,7 @@ function render_scenario(s) {
     // Play audio for the new scene based on the audio file defined in theme
     sound = new Pz.Sound('../assets/' + getAudioFile(s.theme), () => {
         var distortion = new Pizzicato.Effects.Distortion({
-            gain: 0.1
+            gain: (1 - Game.stress * 0.01)  // calculate gain based on stress level
         });
         sound.addEffect(distortion);
         sound.attack = 0.9;
@@ -434,6 +434,9 @@ function render_end() {
 
     // set the background
     document.body.dataset.bg = 'none';
+
+    // stop audio 
+    sound.pause();
 
     dom_main.querySelector('#button-play-again').addEventListener('click', () => { render_home() });
 }
