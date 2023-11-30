@@ -5,6 +5,8 @@ import characters from './characters.js';
 let dom_main;
 /** @type {HTMLElement} reference to HUD element */
 let dom_hud;
+/** @type {HTMLElement} reference to background img element */
+let dom_bg;
 let sound;
 
 /**
@@ -15,12 +17,60 @@ let Game = (function () {
     // ik this syntax is confusing af but that's javascript for you
     let chosenCharacterPrivate;
     let storyProgressPrivate = 0;
+    let themePrivate = 'none';
+    let doStressEffects = false;
     
     const STAT_MAX = 100;
 
     let stressPrivate = STAT_MAX;
     let reputationPrivate = STAT_MAX;
     let performancePrivate = STAT_MAX;
+
+    const themes = {
+        "school hallway": {
+            audio: 'loud_school.mp3',
+            backdrop: './assets/bg_school.png',
+        },
+        "bedroom": {
+            audio: 'room_traffic_clock.mp3',
+            backdrop: './assets/bedroom.jpg',
+        },
+        "living room": {
+            audio: 'room_traffic_clock.mp3',
+            backdrop: './assets/living_room.jpg',
+        },
+        "classroom 1": {
+            audio: 'classrom_ambient.mp3',
+            backdrop: './assets/classroom_1.jpg',
+        },
+        "classroom 2": {
+            audio: 'classrom_ambient.mp3',
+            backdrop: './assets/classroom_2.jpg',
+        },
+        "cafeteria": {
+            audio: 'cafeteria.mp3',
+            backdrop: './assets/cafeteria.jpg',
+        },
+        "dinner table": {
+            audio: 'dinner_table.mp3',
+            backdrop: './assets/family_dinner.jpg',
+        },
+        "school bus": {
+            audio: 'school_bus_ride.mp3',
+            backdrop: './assets/school_bus.jpg',
+        }
+    }
+
+    const updateStressEffects = () => {
+        if(doStressEffects)
+        {
+            document.body.dataset.stressEffects = stressPrivate <= 70 ? stressPrivate <= 50 ? 'high' : 'low' : 'none';
+        }
+        else
+        {
+            document.body.dataset.stressEffects = 'none';
+        }
+    }
 
     // this is where the object with its public members are defined
     return {
@@ -42,11 +92,27 @@ let Game = (function () {
             storyProgressPrivate = num;
             update_HUD();
         },
+        get theme() {return themePrivate; },
+        set theme(t) {
+            if( t in themes )
+            {
+                themePrivate = t;
+                dom_bg.hidden = false;
+                dom_main.classList.add('theme-active');
+                dom_bg.dataset.bg = t;
+            }
+            else
+            {
+                themePrivate = 'none';
+                dom_bg.hidden = true;
+                dom_main.classList.remove('theme-active');
+                dom_bg.dataset.bg = 'none';
+            }
+        },
         get stress() { return stressPrivate; },
         set stress(num) {
             stressPrivate = clamp(num,0,STAT_MAX);
-
-            // Update stress visual/audio effects here
+            updateStressEffects();
         },
         get reputation() { return reputationPrivate; },
         set reputation(num) {
@@ -55,6 +121,18 @@ let Game = (function () {
         get performance() { return performancePrivate; },
         set performance(num) {
             performancePrivate = clamp(num,0,STAT_MAX);
+        },
+        reset() {
+            this.stress = STAT_MAX;
+            this.reputation = STAT_MAX;
+            this.performance = STAT_MAX;
+            this.chosenCharacter = undefined;
+            this.storyProgress = 0;
+        },
+        stressEffects(enable)
+        {
+            doStressEffects = enable;
+            updateStressEffects();
         }
     }
 })();
@@ -64,6 +142,7 @@ window.addEventListener('load', event => {
     // Populate global DOM variables
     dom_main = document.querySelector('main');
     dom_hud = document.querySelector('#HUD');
+    dom_bg = document.querySelector('#backdrop');
 
 
 
@@ -191,7 +270,7 @@ function handle_next_scenario() {
     if (Game.storyProgress + 1 < Game.chosenCharacter.scenarioList.length)
     {
         // not sure if this is the correct place to put this or not
-        if(Game.stress <= 50){
+        if(Game.stress <= 40){
             render_scenario(Game.chosenCharacter.overwhelmScenario);
         } else {
             Game.storyProgress++;
@@ -248,7 +327,9 @@ function render_home() {
 
 
     // set the background
-    document.body.dataset.bg = 'none';
+    // document.body.dataset.bg = 'none';
+    Game.theme = 'none';
+    Game.reset();
 
     // this is just to test scroll behavior, remove later
     // dom_main.querySelector('#exposition').innerHTML += "<p>blah blah blah</p>".repeat(7);
@@ -273,7 +354,8 @@ function render_characterSelect() {
     const characterList = dom_main.querySelector('#character-list');
 
     // set the background
-    document.body.dataset.bg = 'none';
+    // document.body.dataset.bg = 'none';
+    Game.theme = 'none';
 
     // generate character cards from data
     characters.forEach(c => {
@@ -343,7 +425,8 @@ function render_disclaimer() {
     dom_hud.classList.add('hide');
 
     // set the background
-    document.body.dataset.bg = 'none';
+    // document.body.dataset.bg = 'none';
+    Game.theme = 'none';
 
     // set up initial animations
     let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
@@ -396,7 +479,9 @@ function render_scenario(s) {
         newButton.addEventListener('click', () => { handle_select_response(response) });
     })
 
-    document.body.dataset.bg = s.theme;
+    // document.body.dataset.bg = s.theme;
+    Game.theme = s.theme;
+    Game.stressEffects(true);
 
     // set up initial animations
     let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
@@ -433,7 +518,9 @@ function render_end() {
     dom_hud.classList.remove('hide');
 
     // set the background
-    document.body.dataset.bg = 'none';
+    // document.body.dataset.bg = 'none';
+    Game.theme = 'none';
+    Game.stressEffects(false);
 
     // stop audio 
     sound.pause();
@@ -496,6 +583,7 @@ function reveal_children_consecutively(el, duration = 1000, interdelay = 1000, s
  * Updates the HUD with data from Game. Triggered any time relevant data is changed
  */
 function update_HUD() {
+    if(Game.chosenCharacter == undefined) return;
     dom_hud.querySelector('#character-icon').src = Game.chosenCharacter.icon;
     dom_hud.querySelector('#character-name').innerText = `Story: ${Game.chosenCharacter.name}`;
     dom_hud.querySelector('#scenario-num').innerText = `Scenario ${Game.storyProgress + 1}`;

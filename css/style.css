@@ -15,54 +15,98 @@ body {
     color: #f3f1d5;
 
     background-color: #498290;
+    transition: all 1s;
 }
 
-body[data-bg="school hallway"] {
+#backdrop[data-bg="school hallway"] {
     background-image: url('../assets/bg_school.png');
     background-position: 0 20%;
     background-size: cover;
 }
 
-body[data-bg="bedroom"] {
+#backdrop[data-bg="bedroom"] {
     background-image: url('../assets/bedroom.jpg');
     background-position: 0 20%;
     background-size: cover;
 }
 
-body[data-bg="living room"] {
+#backdrop[data-bg="living room"] {
     background-image: url('../assets/living_room.jpg');
     background-position: 0 30%;
     background-size: cover;
 }
 
-body[data-bg="classroom 1"] {
+#backdrop[data-bg="classroom 1"] {
     background-image: url('../assets/classroom_1.jpg');
     background-position: 0 70%;
     background-size: cover;
 }
 
-body[data-bg="classroom 2"] {
+#backdrop[data-bg="classroom 2"] {
     background-image: url('../assets/classroom_2.jpg');
     background-position: 0 0%;
     background-size: cover;
 }
 
-body[data-bg="cafeteria"] {
+#backdrop[data-bg="cafeteria"] {
     background-image: url('../assets/cafeteria.jpg');
     background-position: 0 0%;
     background-size: cover;
 }
 
-body[data-bg="dinner table"] {
+#backdrop[data-bg="dinner table"] {
     background-image: url('../assets/family_dinner.jpg');
     background-position: 0 40%;
     background-size: cover;
 }
 
-body[data-bg="school bus"] {
+#backdrop[data-bg="school bus"] {
     background-image: url('../assets/school_bus.jpg');
     background-position: 0 100%;
     background-size: cover;
+}
+
+#backdrop {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    transition: filter 2s;
+}
+
+body::after {
+    position: absolute;
+    top: 4rem;
+    width: 100%;
+    height: calc(100% - 8rem);
+    content: "";
+    pointer-events: none;
+    box-shadow: none;
+    transition: all 4s;
+}
+
+[data-stress-effects="low"] #backdrop {
+    filter: brightness(150%) contrast(150%) blur(4px);
+}
+
+[data-stress-effects="low"]::after{
+    box-shadow: 0 0 16rem #ffffff inset;
+}
+
+[data-stress-effects="low"] :is(header, footer, main, #HUD){
+    filter: brightness(120%) contrast(120%);
+}
+
+[data-stress-effects="high"] #backdrop {
+    filter: brightness(200%) contrast(200%) blur(8px);
+}
+
+[data-stress-effects="high"]::after{
+    box-shadow: 0 0 16rem 2rem #ffffff inset;
+}
+
+[data-stress-effects="high"] :is(header, footer, main, #HUD){
+    filter: brightness(180%);
 }
 
 header {
@@ -71,6 +115,7 @@ header {
     flex-basis: 3rem;
     flex-shrink: 0;
     padding: 0.5rem;
+    transition: filter 2s;
 }
 
 h1 {
@@ -103,9 +148,10 @@ main {
     overflow: hidden;
 
     background-color: #00000022;
+    transition: filter 2s;
 }
 
-body:not([data-bg='none']) main {
+main.theme-active {
     background-color: #223e4bcc;
 }
 
@@ -195,7 +241,7 @@ strong {
     position: relative;
 }
 
-body:not([data-bg='none']) #options {
+main.theme-active #options {
     background-color: #3b858f;
 }
 
@@ -262,6 +308,7 @@ button:disabled:active {
     gap: 0.5rem;
     background-color: #223e4bcc;
     border-bottom-right-radius: 1rem;
+    transition: filter 2s;
 }
 
 #HUD.hide {
@@ -354,4 +401,5 @@ footer {
     flex-basis: 3rem;
     flex-shrink: 0;
     padding: 0.5rem;
+    transition: filter 2s;
 }
