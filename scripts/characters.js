@@ -105,7 +105,7 @@ class Character {
             data.icon,
             data.scenarioList.map(buildScenario),
             //may need a map to be the correct object here?
-            buildScenario(data.overwhelmScenario));
+            data.overwhelmScenario == undefined ? undefined : buildScenario(data.overwhelmScenario));
     }
 
     /* adjustStress(stress) {
