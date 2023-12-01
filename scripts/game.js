@@ -459,7 +459,8 @@ function render_scenario(s) {
         sound.addEffect(distortion);
         sound.attack = 0.9;
         sound.release = 0.9;
-        sound.play();
+        if(Game.audioEnabled) {sound.play();}
+        
     });
 
     dom_main.innerHTML = screens.scenario.htmlContent;
@@ -748,15 +749,15 @@ function getAudioFile(theme){
  * Plays background audio contained in html
  */
 function playAudio(){
-    if(Game.audioEnabled) document.getElementById("GameAudio").play();
+    if(Game.audioEnabled){document.getElementById("GameAudio").play();}
 }
 
 /**
  * Pauses background site audio
  */
 function pauseAudio(){
-    document.getElementById("GameAudio").pause();
-}
+        document.getElementById("GameAudio").pause();
+    }
 
 /** 
  * Loads new audio for background. This should change with scenario. 
