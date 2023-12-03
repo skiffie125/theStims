@@ -452,7 +452,7 @@ function render_scenario(s) {
         sound.pause();
     }
     // Play audio for the new scene based on the audio file defined in theme
-    sound = new Pz.Sound('../assets/' + getAudioFile(s.theme), () => {
+    sound = new Pz.Sound('./assets/' + getAudioFile(s.theme), () => {
         var distortion = new Pizzicato.Effects.Distortion({
             gain: (1 - Game.stress * 0.01)  // calculate gain based on stress level
         });
