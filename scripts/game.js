@@ -132,26 +132,26 @@ let Game = (function () {
 
             if (t in themes)
             {
-                themePrivate = t;
-                dom_bg.hidden = false;
-                dom_main.classList.add('theme-active');
-                dom_bg.dataset.bg = t;
                 if(themePrivate != t)
                 {
                     this.clearSounds();
                     this.playSound(`./assets/${themes[t].audio}`);
                 }
+                themePrivate = t;
+                dom_bg.hidden = false;
+                dom_main.classList.add('theme-active');
+                dom_bg.dataset.bg = t;
             }
             else
             {
-                themePrivate = 'none';
-                dom_bg.hidden = true;
-                dom_main.classList.remove('theme-active');
-                dom_bg.dataset.bg = 'none';
                 if(themePrivate != t)
                 {
                     this.clearSounds();
                 }
+                themePrivate = 'none';
+                dom_bg.hidden = true;
+                dom_main.classList.remove('theme-active');
+                dom_bg.dataset.bg = 'none';
             }
         },
         get stress() { return stressPrivate; },
