@@ -116,6 +116,44 @@ header {
     flex-shrink: 0;
     padding: 0.5rem;
     transition: filter 2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#menu {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-content: stretch;
+}
+
+#menu button {
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: background-color 0.2s;
+}
+
+#menu button:hover {
+    background-color: #ffffff88;
+}
+
+#menu button:active {
+    background-color: #ffffffcc;
+}
+
+#menu button img {
+    display: block;
+    /* width: 32px;
+    height: 32px; */
+    margin: 0;
 }
 
 h1 {

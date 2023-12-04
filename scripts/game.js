@@ -7,11 +7,14 @@ let dom_main;
 let dom_hud;
 /** @type {HTMLElement} reference to background img element */
 let dom_bg;
+
+
 let sound;
+
 
 /**
  * Singleton object responsible for holding game state and observers
- */
+*/
 let Game = (function () {
     // treat these like private members for Game
     // ik this syntax is confusing af but that's javascript for you
@@ -19,6 +22,20 @@ let Game = (function () {
     let storyProgressPrivate = 0;
     let themePrivate = 'none';
     let doStressEffects = false;
+    let audioEnabledPrivate = undefined;
+    
+    /** @type {Pizzicato.Sound[]} Keeps track of sound objects currently playing/loaded */
+    const sounds = [];
+    /** @type {Pizzicato.Group} group for all ambient sounds so they can have effects applied collectively */
+    const sound_group = new Pz.Group();
+    /** @type {Object} map of all effects attached to sound_group */
+    const global_sfx = {
+        distortion: new Pz.Effects.Distortion({
+            gain: 0
+        }),
+    }
+    // apply all the global sound effects to *sound_group*
+    Object.values(global_sfx).forEach(effect => { sound_group.addEffect(effect); });
     
     const STAT_MAX = 100;
 
@@ -61,14 +78,19 @@ let Game = (function () {
         }
     }
 
+    /**
+     * This function is responsible for all the auditory and visual effects which are triggered by stress
+     */
     const updateStressEffects = () => {
-        if(doStressEffects)
+        if (doStressEffects)
         {
-            document.body.dataset.stressEffects = stressPrivate <= 70 ? stressPrivate <= 50 ? 'high' : 'low' : 'none';
+            document.body.dataset.stressEffects = Game.stress <= 70 ? Game.stress <= 50 ? 'high' : 'low' : 'none';
+            global_sfx.distortion.gain = 1 - (Game.stress/STAT_MAX);
         }
         else
         {
             document.body.dataset.stressEffects = 'none';
+            global_sfx.distortion.gain = 0;
         }
     }
 
@@ -77,7 +99,20 @@ let Game = (function () {
         /** ID of the current screen being displayed */
         activeScreenId: screens.home.id,
         /** Whether audio should be enabled or not for the game. *undefined* until user is first prompted to enable audio */
-        audioEnabled: undefined,
+        get audioEnabled() { return audioEnabledPrivate },
+        set audioEnabled(b) {
+            audioEnabledPrivate = b;
+            if(b == true)
+            {
+                sound_group.play();
+                document.querySelector('#button-toggle-sound img').src = './assets/ui_icons/volume-on.svg';
+            }
+            else
+            {
+                sound_group.pause();
+                document.querySelector('#button-toggle-sound img').src = './assets/ui_icons/volume-mute.svg';
+            }
+        },
 
 
         /** @type {Character} the {@link Character} the player is currently playing as */
@@ -92,14 +127,20 @@ let Game = (function () {
             storyProgressPrivate = num;
             update_HUD();
         },
-        get theme() {return themePrivate; },
+        get theme() { return themePrivate; },
         set theme(t) {
-            if( t in themes )
+
+            if (t in themes)
             {
                 themePrivate = t;
                 dom_bg.hidden = false;
                 dom_main.classList.add('theme-active');
                 dom_bg.dataset.bg = t;
+                if(themePrivate != t)
+                {
+                    this.clearSounds();
+                    this.playSound(`./assets/${themes[t].audio}`);
+                }
             }
             else
             {
@@ -107,20 +148,24 @@ let Game = (function () {
                 dom_bg.hidden = true;
                 dom_main.classList.remove('theme-active');
                 dom_bg.dataset.bg = 'none';
+                if(themePrivate != t)
+                {
+                    this.clearSounds();
+                }
             }
         },
         get stress() { return stressPrivate; },
         set stress(num) {
-            stressPrivate = clamp(num,0,STAT_MAX);
+            stressPrivate = clamp(num, 0, STAT_MAX);
             updateStressEffects();
         },
         get reputation() { return reputationPrivate; },
         set reputation(num) {
-            reputationPrivate = clamp(num,0,STAT_MAX);
+            reputationPrivate = clamp(num, 0, STAT_MAX);
         },
         get performance() { return performancePrivate; },
         set performance(num) {
-            performancePrivate = clamp(num,0,STAT_MAX);
+            performancePrivate = clamp(num, 0, STAT_MAX);
         },
         reset() {
             this.stress = STAT_MAX;
@@ -129,10 +174,46 @@ let Game = (function () {
             this.chosenCharacter = undefined;
             this.storyProgress = 0;
         },
-        stressEffects(enable)
-        {
+        stressEffects(enable) {
             doStressEffects = enable;
             updateStressEffects();
+        },
+        /**
+         * Creates a *Sound* object and attaches it to the global sound_group
+         * @param {String} url URL of the sound file to play
+         * @returns {Pizzicato.Sound} the created *Sound* object
+         */
+        playSound(url) {
+            const s = new Pz.Sound({
+                source: 'file',
+                options: {
+                    path: url,
+                    loop: true,
+                    attack: 0.9,
+                    release: 0.9,
+                    detatched: true,
+                }
+            }, (error) => {
+                if(error) return;
+                
+                // register in sounds and sound_group
+                sounds.push(s);
+                sound_group.addSound(s);
+
+                //play the sound if enabled
+                if (Game.audioEnabled) { s.play(); }
+            });
+            return s;
+        },
+        /**
+         * Stops and unloads all currently loaded sounds
+         */
+        clearSounds() {
+            sounds.forEach(s => {
+                sound_group.removeSound(s);
+                s.stop();
+            })
+            while(sounds.length) sounds.pop();
         }
     }
 })();
@@ -170,10 +251,14 @@ window.addEventListener('load', event => {
         }
     });
 
+    document.querySelector('#button-toggle-sound').addEventListener('click',() => {
+        Game.audioEnabled = !Game.audioEnabled;
+    })
+
     // console.log(characters);
 
     // Make the title text link to the home screen
-    document.querySelector('h1').addEventListener('click', () => render_home());   
+    document.querySelector('h1').addEventListener('click', () => render_home());
 });
 
 /* -------------------------------------------------------------------------- */
@@ -182,25 +267,24 @@ window.addEventListener('load', event => {
 
 function handle_home_continue() {
     // If user hasn't been prompted about audio yet
-    if(Game.audioEnabled == undefined)
-    // Ask them to enable audio
-    show_question("<p>This game uses audio to create a more immersive experience. Would you like to enable audio?</p>",[
-        {
-            buttonText: "Enable Audio",
-            callback: () => {
-                Game.audioEnabled = true;
-                playAudio(); // Plays inital audio contained in html
-                render_characterSelect();
+    if (Game.audioEnabled == undefined)
+        // Ask them to enable audio
+        show_question("<p>This game uses audio to create a more immersive experience. Would you like to enable audio?</p>", [
+            {
+                buttonText: "Enable Audio",
+                callback: () => {
+                    Game.audioEnabled = true;
+                    render_characterSelect();
+                }
+            },
+            {
+                buttonText: "No Audio",
+                callback: () => {
+                    Game.audioEnabled = false;
+                    render_characterSelect();
+                }
             }
-        },
-        {
-            buttonText: "No Audio",
-            callback: () => {
-                Game.audioEnabled = false;
-                render_characterSelect();
-            }
-        }
-    ]);
+        ]);
     // otherwise go directly to character select
     else render_characterSelect();
 }
@@ -229,7 +313,7 @@ function handle_start_game() {
     Game.reputation = Game.chosenCharacter.reputation_start;
     Game.performance = Game.chosenCharacter.performance_start;
 
-    console.log('Starting Game as ',Game.chosenCharacter.name);
+    console.log('Starting Game as ', Game.chosenCharacter.name);
     logDebug();
 
     if (Game.chosenCharacter.scenarioList.length > 0)
@@ -263,7 +347,8 @@ function handle_response_continue(r) {
     {
         handle_next_scenario();
 
-    } else {
+    } else
+    {
         show_message(r.resultInfo, handle_next_scenario);
     }
 }
@@ -275,9 +360,11 @@ function handle_next_scenario() {
     if (Game.storyProgress + 1 < Game.chosenCharacter.scenarioList.length)
     {
         // not sure if this is the correct place to put this or not
-        if(Game.stress <= 40){
+        if (Game.stress <= 40)
+        {
             render_scenario(Game.chosenCharacter.overwhelmScenario);
-        } else {
+        } else
+        {
             Game.storyProgress++;
             render_scenario(Game.chosenCharacter.scenarioList[Game.storyProgress]);
         }
@@ -333,6 +420,7 @@ function render_home() {
     // document.body.dataset.bg = 'none';
     Game.theme = 'none';
     Game.reset();
+    Game.playSound('./assets/sample_menu.mp3');
 
     // this is just to test scroll behavior, remove later
     // dom_main.querySelector('#exposition').innerHTML += "<p>blah blah blah</p>".repeat(7);
@@ -444,7 +532,7 @@ function render_disclaimer() {
  */
 function render_scenario(s) {
     // overwrite contents of main
-    pauseAudio();
+    /* pauseAudio();
 
     // Pause audio from the previous scene
     if (sound != null)
@@ -452,16 +540,22 @@ function render_scenario(s) {
         sound.pause();
     }
     // Play audio for the new scene based on the audio file defined in theme
-    sound = new Pz.Sound('./assets/' + getAudioFile(s.theme), () => {
+    sound = new Pz.Sound({
+        source: 'file',
+        options: {
+            path: './assets/' + getAudioFile(s.theme),
+            loop: true,
+            attack: 0.9,
+            release: 0.9,
+            detatched: true,
+        }
+    }, () => {
         var distortion = new Pizzicato.Effects.Distortion({
             gain: (1 - Game.stress * 0.01)  // calculate gain based on stress level
         });
         sound.addEffect(distortion);
-        sound.attack = 0.9;
-        sound.release = 0.9;
-        if(Game.audioEnabled) {sound.play();}
-        
-    });
+        if (Game.audioEnabled) { sound.play(); }
+    }); */
 
     dom_main.innerHTML = screens.scenario.htmlContent;
     Game.activeScreenId = screens.scenario.id;
@@ -512,7 +606,7 @@ function render_scenarioResponse(r) {
     let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
     reveal_children_consecutively(dom_main.querySelector('#options'), 500, 250, delay, false, false);
 
-    dom_main.querySelector('.button-continue').addEventListener('click', () =>  handle_response_continue(r));
+    dom_main.querySelector('.button-continue').addEventListener('click', () => handle_response_continue(r));
 }
 
 function render_end() {
@@ -587,7 +681,7 @@ function reveal_children_consecutively(el, duration = 1000, interdelay = 1000, s
  * Updates the HUD with data from Game. Triggered any time relevant data is changed
  */
 function update_HUD() {
-    if(Game.chosenCharacter == undefined) return;
+    if (Game.chosenCharacter == undefined) return;
     dom_hud.querySelector('#character-icon').src = Game.chosenCharacter.icon;
     dom_hud.querySelector('#character-name').innerText = `Story: ${Game.chosenCharacter.name}`;
     dom_hud.querySelector('#scenario-num').innerText = `Scenario ${Game.storyProgress + 1}`;
@@ -704,16 +798,14 @@ function htmlToElement(str) {
  * @param {number} upper 
  * @returns {number}
  */
-function clamp(x,lower,upper)
-{
+function clamp(x, lower, upper) {
     return x > lower ? x < upper ? x : upper : lower;
 }
 
 /**
  * Log various game info for debugging purposes
  */
-function logDebug()
-{
+function logDebug() {
     console.log('Stress: ', Game.stress);
     console.log('Reputation: ', Game.reputation);
     console.log('Performance: ', Game.performance);
@@ -722,8 +814,9 @@ function logDebug()
 /** 
  * Returns the name of the audio file corresponding to the given theme
  */
-function getAudioFile(theme){
-    switch (theme) {
+function getAudioFile(theme) {
+    switch (theme)
+    {
         case "school hallway":
             return 'loud_school.mp3';
         case "bedroom":
@@ -743,27 +836,30 @@ function getAudioFile(theme){
         default:
             break;
     }
-}   
+}
 
 /**
  * Plays background audio contained in html
  */
-function playAudio(){
-    if(Game.audioEnabled){document.getElementById("GameAudio").play();}
+function playAudio() {
+    if (Game.audioEnabled)
+    {
+        document.getElementById("GameAudio").play();
+    }
 }
 
 /**
  * Pauses background site audio
  */
-function pauseAudio(){
-        document.getElementById("GameAudio").pause();
-    }
+function pauseAudio() {
+    document.getElementById("GameAudio").pause();
+}
 
 /** 
  * Loads new audio for background. This should change with scenario. 
  */
-function loadAudio(src){
+function loadAudio(src) {
     var audio = document.getElementById("GameAudio");
     audio.src = src;
     audio.load();
-}   
+}
