@@ -74,6 +74,22 @@ body {
     transition: filter 2s;
 }
 
+#floaty-text {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#floaty-text p {
+    position: absolute;
+    color: white;
+    transform: translate(-50%, -50%);
+    text-wrap: nowrap;
+    font-size: 14pt;
+}
+
 body::after {
     position: absolute;
     top: 4rem;

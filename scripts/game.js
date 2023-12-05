@@ -7,6 +7,8 @@ let dom_main;
 let dom_hud;
 /** @type {HTMLElement} reference to background img element */
 let dom_bg;
+/** @type {HTMLElement} reference to the floaty text element*/
+let dom_ftext;
 
 
 let sound;
@@ -22,6 +24,8 @@ let Game = (function () {
     let storyProgressPrivate = 0;
     let themePrivate = 'none';
     let doStressEffects = false;
+    let doFloatingText = false;
+    let textSpawner;
     let audioEnabledPrivate = undefined;
     
     /** @type {Pizzicato.Sound[]} Keeps track of sound objects currently playing/loaded */
@@ -38,6 +42,25 @@ let Game = (function () {
     Object.values(global_sfx).forEach(effect => { sound_group.addEffect(effect); });
     
     const STAT_MAX = 100;
+
+    const floating_text_pool = [
+        `The world is too loud.`,
+        `There is a loose hair in your collar.`,
+        `Your watch is slightly too tight.`,
+        `Your shoes are pinching.`,
+        `Your shirt tag is scratchy.`,
+        `Your hair is touching your neck.`,
+        `It's too bright here.`,
+        `Your face itches.`,
+        `It hurts to sit still.`,
+        `You can hear your heart beating.`,
+        `Your clothes feel prickly on your skin.`,
+        `Reality is moving too fast.`,
+        `People can see you.`,
+        `Don't make a scene.`,
+        `Why do you feel so irritable?`,
+        `Just ignore it.`,
+    ]
 
     let stressPrivate = STAT_MAX;
     let reputationPrivate = STAT_MAX;
@@ -138,7 +161,7 @@ let Game = (function () {
                     this.playSound(`./assets/${themes[t].audio}`);
                 }
                 themePrivate = t;
-                dom_bg.hidden = false;
+                // dom_bg.hidden = false;
                 dom_main.classList.add('theme-active');
                 dom_bg.dataset.bg = t;
             }
@@ -149,7 +172,7 @@ let Game = (function () {
                     this.clearSounds();
                 }
                 themePrivate = 'none';
-                dom_bg.hidden = true;
+                // dom_bg.hidden = true;
                 dom_main.classList.remove('theme-active');
                 dom_bg.dataset.bg = 'none';
             }
@@ -174,9 +197,68 @@ let Game = (function () {
             this.chosenCharacter = undefined;
             this.storyProgress = 0;
         },
+        /**
+         * Turns on and off the stress effects
+         * @param {Boolean} enable 
+         */
         stressEffects(enable) {
             doStressEffects = enable;
             updateStressEffects();
+        },
+        /**
+         * Turns on and off the floating text effect
+         * @param {Boolean} enable 
+         */
+        floatingText(enable) {
+            if(enable && !doFloatingText)
+            {
+                textSpawner = setInterval(() => {
+                    this.spawnText();
+                }, 500);
+            }
+            if(!enable && doFloatingText)
+            {
+                clearInterval(textSpawner);
+            }
+            doFloatingText = enable;
+        },
+        spawnText() {
+            const el = document.createElement('p');
+            el.innerText = floating_text_pool[Math.floor(Math.random()*floating_text_pool.length)];
+            dom_ftext.appendChild(el);
+            
+            const x = Math.random()*70+15;
+            const y = Math.random()*70+15;
+            const theta = Math.random()*Math.PI*2;
+            const mu = Math.random()*50+50;
+
+            el.style.left = `${x}%`;
+            el.style.top = `${y}%`;
+
+            el.animate(
+                [
+                    {
+                        opacity: 0,
+                        filter: `blur(3px)`,
+                    },
+                    {
+                        opacity: 1,
+                        filter: `blur(0)`,
+                        offset: 0.5
+                    },
+                    {
+                        opacity: 0,
+                        filter: `blur(3px)`,
+                        left: `calc(${x}% + ${Math.cos(theta)*mu}px)`,
+                        top: `calc(${y}% + ${Math.sin(theta)*mu}px)`,
+                    }
+                ],
+                {
+                    duration: 10000
+                }
+            ).onfinish = () => {
+                el.remove();
+            }
         },
         /**
          * Creates a *Sound* object and attaches it to the global sound_group
@@ -224,6 +306,7 @@ window.addEventListener('load', event => {
     dom_main = document.querySelector('main');
     dom_hud = document.querySelector('#HUD');
     dom_bg = document.querySelector('#backdrop');
+    dom_ftext = document.querySelector('#floaty-text');
 
 
 
@@ -410,6 +493,8 @@ function handle_scroll_main(direction) {
  * Renders the home screen
  */
 function render_home() {
+    Game.floatingText(true);
+
     // overwrite contents of main
     dom_main.innerHTML = screens.home.htmlContent;
     Game.activeScreenId = screens.home.id;
@@ -437,6 +522,7 @@ function render_home() {
  * Renders the character select screen
  */
 function render_characterSelect() {
+
     // overwrite contents of main
     dom_main.innerHTML = screens.characterSelect.htmlContent;
     Game.activeScreenId = screens.characterSelect.id;
@@ -809,57 +895,4 @@ function logDebug() {
     console.log('Stress: ', Game.stress);
     console.log('Reputation: ', Game.reputation);
     console.log('Performance: ', Game.performance);
-}
-
-/** 
- * Returns the name of the audio file corresponding to the given theme
- */
-function getAudioFile(theme) {
-    switch (theme)
-    {
-        case "school hallway":
-            return 'loud_school.mp3';
-        case "bedroom":
-            return 'room_traffic_clock.mp3';
-        case "living room":
-            return 'room_traffic_clock.mp3';
-        case "classroom 1":
-            return 'classrom_ambient.mp3';
-        case "classroom 2":
-            return 'classrom_ambient.mp3';
-        case "cafeteria":
-            return 'cafeteria.mp3';
-        case "dinner table":
-            return 'dinner_table.mp3';
-        case "school bus":
-            return 'school_bus_ride.mp3';
-        default:
-            break;
-    }
-}
-
-/**
- * Plays background audio contained in html
- */
-function playAudio() {
-    if (Game.audioEnabled)
-    {
-        document.getElementById("GameAudio").play();
-    }
-}
-
-/**
- * Pauses background site audio
- */
-function pauseAudio() {
-    document.getElementById("GameAudio").pause();
-}
-
-/** 
- * Loads new audio for background. This should change with scenario. 
- */
-function loadAudio(src) {
-    var audio = document.getElementById("GameAudio");
-    audio.src = src;
-    audio.load();
 }
