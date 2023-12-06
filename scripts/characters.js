@@ -307,15 +307,15 @@ const characters = [
         age: '14',
         gender: 'female',
         icon: './assets/nora.png',
-        bio: 'Nora is in the 8th grade at her local public middle school in Vermont. She comes from an immigrant family and has had trouble with bullies at school, despite being quite friendly and sociable and a talented artist. Her family knows she has Autism because her Aunt has it as well and displays similar traits, but they are unable to afford testing and thus she has no formal diagnosis.',
+        bio: 'Meet Nora, an 8th grader at her local public middle school in Vermont. Nora comes from an immigrant family, and although she used to be outgoing and sociable, she\'s facing some bullying at school. Nora\'s family is aware that she might have Autism, seeing similarities with her diagnosed Aunt. Unfortunately, Nora can\'t afford ASD testing, and she doesn\'t have a formal diagnosis yet.',
         scenarioList: [
             {
-                exposition: `<p> You start your day, getting ready. You are picking out what to wear but nothing that  <strong>feels good</strong> to wear is clean at the moment. What do you do? </p>`,
+                exposition: `<p>It's the start of your day! Time to get ready. As you look through your clothes, you notice that there's nothing that <strong>feels good</strong>. You spot your favorite set of clothes in the dirty laundry hamper.</p>`,
                 theme: 'bedroom',
                 responses: [
                     {
-                        buttonText: 'Wear dirty clothes',
-                        resultExposition: `<p> You feel comfortable in your own skin. You get a few looks when you step on the bus but who cares? </p>`,
+                        buttonText: 'Wear comfy, but smelly clothes',
+                        resultExposition: `<p>You feel comfortable in your own skin. You might get a few looks when you step onto the bus, but who cares?</p>`,
                         effects: {
                             stress: 0,
                             reputation: -20,
@@ -324,7 +324,7 @@ const characters = [
                     },
                     {
                         buttonText: 'Wear something you hate',
-                        resultExposition: `<p> The tag on the back of your shirt scrapes the back of your neck at unpredictable intervals and the weight of your pants feels wrong. The waistband of your pants pinches and the lack of the usual helpful pressure of a sweatshirt makes it feel ungrounded. Furthermore, you feel self-conscious and start adjusting your clothes constantly. </p>`,
+                        resultExposition: `<p>The tag on the back of your shirt scrapes the back of your neck at unpredictable intervals, and the weight of your pants feels off. The waistband of your pants pinches, and the absence of the usual comforting pressure from a sweatshirt makes everything feel ungrounded. You feel self-conscious and know that you will be constantly adjusting your clothes.</p>`,
                         effects: {
                             stress: -20,
                             reputation: 0,
@@ -356,7 +356,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        resultInfo: `<p> Autism can be comorbid with a variety of intellectual or learning disabilities, though it isn't inherently. Regardless, figuring out ways to make educational material work for students with autism can help them learn more. Not being able to process the material in a traditional classroom can be extremely frustrating, or having students push themselves to understand things can lead to negative outcomes like burnout and health issues. </p>`,
+                        resultInfo: `<p> Autism can be combined with a variety of intellectual or learning disabilities, though it isn't inherently. Regardless, figuring out ways to make educational material work for students with autism can help them learn more. Not being able to process the material in a traditional classroom can be extremely frustrating, or having students push themselves to understand things can lead to negative outcomes like burnout and health issues. </p>`,
                         condition: (Game) => (Game.stress >= 90)
                     },
                     {
@@ -367,7 +367,7 @@ const characters = [
                             reputation: 0,
                             performance: -10
                         },
-                        resultInfo: `<p> Autism can be comorbid with a variety of intellectual or learning disabilities, though it isn't inherently. Regardless, figuring out ways to make educational material work for students with autism can help them learn more. Not being able to process the material in a traditional classroom can be extremely frustrating, or having students push themselves to understand things can lead to negative outcomes like burnout and health issues. </p>`,
+                        resultInfo: `<p> Autism can be combined with a variety of intellectual or learning disabilities, though it isn't inherently. Regardless, figuring out ways to make educational material work for students with autism can help them learn more. Not being able to process the material in a traditional classroom can be extremely frustrating, or having students push themselves to understand things can lead to negative outcomes like burnout and health issues. </p>`,
                     },
                     {
                         buttonText: `Stop paying attention`,
@@ -377,7 +377,7 @@ const characters = [
                             reputation: 0,
                             performance: -20
                         },
-                        resultInfo: `<p> Autism can be comorbid with a variety of intellectual or learning disabilities, though it isn't inherently. Regardless, figuring out ways to make educational material work for students with autism can help them learn more. Not being able to process the material in a traditional classroom can be extremely frustrating, or having students push themselves to understand things can lead to negative outcomes like burnout and health issues. </p>`,
+                        resultInfo: `<p> Autism can be combined with a variety of intellectual or learning disabilities, though it isn't inherently. Regardless, figuring out ways to make educational material work for students with autism can help them learn more. Not being able to process the material in a traditional classroom can be extremely frustrating, or having students push themselves to understand things can lead to negative outcomes like burnout and health issues. </p>`,
                     }
                 ]
             },

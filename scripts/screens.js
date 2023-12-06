@@ -23,17 +23,17 @@ class GameScreen {
 const screens = {
     home: new GameScreen(`<div id="exposition">
     <p>
-        <strong>1 in every 36 children</strong> is diagnosed with <strong>Autism Spectrum Disorder</strong> (ASD) as of 2022. They strain themselves every day just to fit in to society, yet their peers typically <strong>understand very little</strong> about what life is like for them.
+        As of 2022, <strong>1 in every 36 children</strong> is diagnosed with <strong>Autism Spectrum Disorder</strong> (ASD). These individuals face daily challenges to fit into society, and yet, their peers often <strong>understand very little</strong> about what life is like for them.
     </p>
     <p>
-        Are <strong>you</strong> willing to take a walk in their shoes?
+        Are <strong>you</strong> ready to step into their shoes?
     </p>
-    </div>
-    <div id="options">
+</div>
+<div id="options">
     <button id="button-begin">
         Begin
     </button>
-    </div>`),
+</div>`),
     characterSelect: new GameScreen(`<div id="exposition" class="no-vertical-pad">
     <p>
         Select your story:
@@ -50,15 +50,15 @@ const screens = {
 `),
     disclaimer: new GameScreen(`<div id="exposition">
     <p>
-        This story you are about to play through is inspired by <strong>real stories from the ASD community</strong>.
+        The story you are about to experience draws inspiration from <strong>real stories within the ASD community</strong>.
     </p>
     <p>
-        However, this is just <strong>one story of many</strong>. Everybody's experience is different, and no one story can provide a complete understanding of the Autistic experience.
+        However, it's important to recognize that this is just <strong>one narrative among many</strong>. Each individual's journey is unique, and no single story can fully encapsulate the diverse experiences within the Autistic community.
     </p>
 </div>
 <div id="options">
     <button class="button-continue">
-        I understand
+        I acknowledge
     </button>
 </div>`),
     scenario: new GameScreen(`<div id="exposition"></div>
