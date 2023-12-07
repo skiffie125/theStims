@@ -410,15 +410,19 @@ function handle_start_game() {
 }
 
 /**
- * Executes any effects of the response, then goes to the response screen
+ * Executes any effects of the response, then goes to the response screen. Given a story slide, it skips any responses and loads the next scenario
  * @param {ScenarioResponse} r 
  */
 function handle_select_response(r) {
     // Game.chosenCharacter.adjustStress(r.stressEffect);
-    r.applyEffects(Game);
-    console.log(r.buttonText);
-    logDebug();
-    render_scenarioResponse(r);
+    if(r.resultExposition != null){
+        r.applyEffects(Game);
+        console.log(r.buttonText);
+        logDebug();
+        render_scenarioResponse(r);
+    }else{
+        handle_next_scenario();
+    }
 }
 
 /**
@@ -683,7 +687,7 @@ function render_scenarioResponse(r) {
     dom_hud.classList.remove('hide');
 
     // Generate screen content from response data
-    dom_main.querySelector('#exposition').innerHTML = r.resultExposition;
+   dom_main.querySelector('#exposition').innerHTML = r.resultExposition;
 
     // Don't set the theme since we just want the previous theme to carry over
     // document.body.dataset.bg = 'school';
@@ -691,7 +695,7 @@ function render_scenarioResponse(r) {
     // set up initial animations
     let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
     reveal_children_consecutively(dom_main.querySelector('#options'), 500, 250, delay, false, false);
-
+    
     dom_main.querySelector('.button-continue').addEventListener('click', () => handle_response_continue(r));
 }
 

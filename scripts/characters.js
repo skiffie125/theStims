@@ -344,6 +344,24 @@ const characters = [
                     }
                 ]
             },
+            
+            // REMOVE THIS AFTER TESTING
+                
+            {
+                exposition: `<p>This is a test of the no-result exposition scenarios for scenes in which the user does not need to input.</p>`,
+                theme: 'bedroom',
+                responses: [
+                    {
+                        buttonText: 'Continue',
+                        resultExposition: null,
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        }
+                    }
+                ]
+            },
             {
                 exposition: `<p> You are in English class, your first class of the day. You are trying to pay attention in class but your mind keeps wandering. The book you are discussing couldn't be more boring, and it feels painful to try and keep your focus. What do you do? </p>`,
                 theme: 'classroom 1',
@@ -649,10 +667,10 @@ const characters = [
         }
     },
     {
-        name: 'Roman',
-        age: '31',
+        name: 'Clint',
+        age: '42',
         gender: 'male',
-        icon: './assets/roman.png',
+        icon: './assets/clint.png',
         bio: 'Roman is a retail worker at a home improvement shop in Portland, Oregon, and lives in a nearby apartment with his mother. He was diagnosed with Autism at age 5 and received therapies throughout his adolescence to help develop his social skills. He speaks very politely and tries his best to be approachable, but for some reason, people often seem intimidated by him and he has never held a job for longer than 6 months.',
         scenarioList: [
 
