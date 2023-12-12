@@ -11,9 +11,6 @@ let dom_bg;
 let dom_ftext;
 
 
-let sound;
-
-
 /**
  * Singleton object responsible for holding game state and observers
 */
@@ -26,6 +23,7 @@ let Game = (function () {
     let doStressEffects = false;
     let doFloatingText = false;
     let textSpawner;
+    let ft_emphasis_chance = 0.2;
     let audioEnabledPrivate = undefined;
     
     /** @type {Pizzicato.Sound[]} Keeps track of sound objects currently playing/loaded */
@@ -42,6 +40,8 @@ let Game = (function () {
     Object.values(global_sfx).forEach(effect => { sound_group.addEffect(effect); });
     
     const STAT_MAX = 100;
+    const STRESS_LOW = 70;
+    const STRESS_HIGH = 50;
 
     const floating_text_pool = [
         `The world is too loud.`,
@@ -107,13 +107,20 @@ let Game = (function () {
     const updateStressEffects = () => {
         if (doStressEffects)
         {
-            document.body.dataset.stressEffects = Game.stress <= 70 ? Game.stress <= 50 ? 'high' : 'low' : 'none';
+            const low = Game.stress <= STRESS_LOW;
+            const high = Game.stress <= STRESS_HIGH;
+
+            document.body.dataset.stressEffects = low ? high ? 'high' : 'low' : 'none';
             global_sfx.distortion.gain = 1 - (Game.stress/STAT_MAX);
+            Game.floatingText(low);
+            ft_emphasis_chance = high ? 0.1 : 0.05;
+
         }
         else
         {
             document.body.dataset.stressEffects = 'none';
             global_sfx.distortion.gain = 0;
+            Game.floatingText(false);
         }
     }
 
@@ -234,6 +241,10 @@ let Game = (function () {
 
             el.style.left = `${x}%`;
             el.style.top = `${y}%`;
+            if(Math.random() < ft_emphasis_chance)
+            {
+                el.classList.add('emphasized');
+            }
 
             el.animate(
                 [
@@ -497,7 +508,7 @@ function handle_scroll_main(direction) {
  * Renders the home screen
  */
 function render_home() {
-    Game.floatingText(true);
+    // Game.floatingText(true);
 
     // overwrite contents of main
     dom_main.innerHTML = screens.home.htmlContent;
