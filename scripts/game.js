@@ -98,6 +98,54 @@ let Game = (function () {
         "school bus": {
             audio: 'school_bus_ride.mp3',
             backdrop: './assets/school_bus.jpg',
+        },
+        "dining hall": {
+            audio: 'dining_hall.wav',
+            backdrop: './assets/dining_hall.jpg',
+        },
+        "classroom 3": {
+            audio: 'keyboard.m4a',
+            backdrop: './assets/classroom_3.jpg',
+        },
+        "classroom 4": {
+            audio: 'quiet_classroom.wav',
+            backdrop: './assets/classroom_4.jpg',
+        },
+        "phone": {
+            audio: 'background_chatter.mp3',
+            backdrop: './assets/phone.jpg',
+        },
+        "college club": {
+            audio: 'background_chatter.mp3',
+            backdrop: './assets/club_room.jpg',
+        },
+        "dorm room": {
+            audio: 'dorm_ambient.wav',
+            backdrop: './assets/dorm_room.jpg',
+        },
+        "dorm desk": {
+            audio: 'gum.wav',
+            backdrop: './assets/dorm_desk.jpg',
+        },
+        "trailer": {
+            audio: 'trailer.mp3',
+            backdrop: './assets/trailer.jpg',
+        },
+        "outside trailer":{
+            audio: 'trailer.mp3',
+            backdrop: './assets/outside_trailer.png',
+        },
+        "morning drive": {
+            audio: 'morning_drive.mp3',
+            backdrop: './assets/morning_drive.png',
+        },
+        "morning party": {
+            audio: 'morning_drive2.mp3',
+            backdrop: './assets/morning_drive2.png',
+        },
+        "walking campsites": {
+            audio: 'walking_campsites.mp3',
+            backdrop: './assets/walking_campsites.png',
         }
     }
 
@@ -698,7 +746,7 @@ function render_scenarioResponse(r) {
     dom_hud.classList.remove('hide');
 
     // Generate screen content from response data
-   dom_main.querySelector('#exposition').innerHTML = r.resultExposition;
+    dom_main.querySelector('#exposition').innerHTML = r.resultExposition;
 
     // Don't set the theme since we just want the previous theme to carry over
     // document.body.dataset.bg = 'school';

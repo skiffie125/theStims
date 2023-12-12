@@ -66,6 +66,78 @@ body {
     background-size: cover;
 }
 
+#backdrop[data-bg="dining hall"] {
+    background-image: url('../assets/dining_hall.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="classroom 3"] {
+    background-image: url('../assets/classroom_3.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="classroom 4"] {
+    background-image: url('../assets/classroom_4.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="phone"] {
+    background-image: url('../assets/phone.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="college club"] {
+    background-image: url('../assets/club_room.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="dorm room"] {
+    background-image: url('../assets/dorm_room.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="dorm desk"] {
+    background-image: url('../assets/dorm_desk.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="trailer"] {
+    background-image: url('../assets/trailer.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="outside trailer"] {
+    background-image: url('../assets/outside_trailer.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="morning drive"] {
+    background-image: url('../assets/morning_drive.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="morning party"] {
+    background-image: url('../assets/morning_drive2.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="walking campsites"] {
+    background-image: url('../assets/walking_campsites.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
 #backdrop {
     position: absolute;
     z-index: -1;
