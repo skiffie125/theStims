@@ -384,12 +384,6 @@ window.addEventListener('load', event => {
             case 'ArrowUp':
                 handle_scroll_main(-1);
                 break;
-            case 'm': // TODO: Remove this
-                show_message(`<p>testing testing!</p>
-                <p>testing testing!</p>
-                <p>testing testing!</p>
-                <p>testing testing!</p>`, () => { console.log('clicked continue') });
-                break;
         }
     });
 
@@ -672,7 +666,26 @@ function render_disclaimer() {
     let delay = reveal_children_consecutively(dom_main.querySelector('#exposition'), 1000, 1000);
     reveal_children_consecutively(dom_main.querySelector('#options'), 500, 250, delay, false, false);
 
-    dom_main.querySelector('.button-continue').addEventListener('click', handle_start_game);
+    // dom_main.querySelector('.button-continue').addEventListener('click', handle_start_game);
+    dom_main.querySelector('.button-continue').addEventListener('click', () => {
+        show_message(`
+        <h3>
+            How to Play:
+        </h3>
+        <p>
+            Throughout this story, you will be presented with various choices.
+        </p>
+        <p>
+            The choices you make will affect your character's emotional state, relationships and performance at their job/school. One common trait of Autism is <strong>alexithymia</strong>, which means a difficulty with identifying one's own emotions, so likewise, you will not be able to see the exact impacts of your choices until the end of the story.
+        </p>
+        <p>
+            Some future choices may be disabled based on the consequences of your <strong>previous decisions</strong>. 
+        </p>
+        <p>
+            If your character gets too overwhelmed, they will have a <strong>meltdown</strong>. Try to avoid this if possible! <strong>Visual & audio effects</strong> will warn you when you are getting close to a meltdown. 
+        </p>
+        `, handle_start_game);
+    });
 }
 
 /**
@@ -720,6 +733,7 @@ function render_scenario(s) {
         // console.log(response.condition,response.condition(Game));
         const enabled = response.condition(Game);
         newButton.disabled = !enabled;
+        if(!enabled) newButton.prepend(htmlToElement(`<img src="./assets/ui_icons/forbidden.svg" alt="disabled">`));
         newButton.title = enabled ? "Choose this option" : 'Something is preventing you from choosing this option...';
         options.appendChild(newButton);
 

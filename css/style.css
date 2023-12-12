@@ -492,11 +492,8 @@ main.theme-active #options {
     background-color: #2b8e9baa;
 }
 
-/* body:not([data-bg='none']) #options {
-    background-color: #4a6f6ee0;
-} */
-
 button {
+    min-height: 4rem;
     padding: 1rem 2rem;
     font-size: 14pt;
     color: #edc265;
@@ -521,10 +518,15 @@ button:active {
     box-shadow: 0 0 0.5rem #212d3b inset;
 }
 
+button img {
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+
 button:disabled {
-    background-color: #6c4e4e;
+    background-color: #635e5e;
     box-shadow: 0 0 0.5rem #381c25 inset;
-    color: #381c25;
+    color: #fa8a9b;
 }
 
 button:disabled:active {
@@ -633,6 +635,10 @@ button:disabled:active {
 .modal-content > * {
     margin: 0;
     text-align: center;
+}
+
+.modal-content strong {
+    color: #e28025;
 }
 
 .modal-choice-list {

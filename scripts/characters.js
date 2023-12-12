@@ -675,24 +675,6 @@ const characters = [
                     }
                 ]
             },
-            
-            // REMOVE THIS AFTER TESTING
-                
-            {
-                exposition: `<p>This is a test of the no-result exposition scenarios for scenes in which the user does not need to input.</p>`,
-                theme: 'bedroom',
-                responses: [
-                    {
-                        buttonText: 'Continue',
-                        resultExposition: null,
-                        effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
-                        }
-                    }
-                ]
-            },
             {
                 exposition: `<p> You are in English class, your first class of the day. You are trying to pay attention in class but your mind keeps wandering. The book you are discussing couldn't be more boring, and it feels painful to try and keep your focus. What do you do? </p>`,
                 theme: 'classroom 1',
