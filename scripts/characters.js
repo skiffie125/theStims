@@ -1009,18 +1009,153 @@ const characters = [
                 theme: 'trailer',
                 responses: [
                     {
-                        buttonText: 'Slowly get up and brush your teeth.',
-                        resultExposition: `<p>As you brush your teeth, you reflect. Some find it strange, but you exclusively use a specific toothbrush and toothpaste, and have your entire life. </p>`,
+                        buttonText: `Slowly get up and brush your teeth.`,
+                        resultExposition: `<p>As you brush your teeth, you reflect. Some find it strange, but you exclusively use a specific toothbrush and toothpaste, and have for your entire life. </p>`,
                         effects: {
                             stress: 0,
                             reputation: 0,
                             performance: 0
                         },
-                        resultInfo: '<p>People with Autism often experience <strong>sensory issues</strong>. These individuals often attempt to stick to routines to avoid such issues.</p>'
+                        resultInfo: `<p>People with Autism often experience <strong>sensory issues</strong>. These individuals often attempt to stick to routines to avoid unnecessary discomfort.</p>`
                     }
                 ]
             },
-        ]
+            {
+                exposition: 'The sounds of the birds singing and the crickets chirping are refreshing, and the breeze this morning lulls particularly lazily, catching on the trees and lightly nipping the face.',
+                theme: 'outside trailer',
+                responses: [
+                    {
+                        buttonText:'Get in the truck and do the morning drive.',
+                        resultExposition: null,
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        }
+                    }
+                ]
+            },
+            {
+                exposition: 'Your morning drive goes as normal. The scenic route stretches ahead, twisting and turning through a picturesque, mountainous forest scene. It is early, and the few campers who frequent this park are resting quietly.',
+                theme: 'morning drive',
+                responses: [
+                    {
+                    buttonText:'Continue down the road.',
+                    resultExposition: null,
+                    effects: {
+                        stress: 0,
+                        reputation: 0,
+                        performance: 0
+                    }
+                }
+                ]
+            },
+            {
+                exposition: 'Your attention shifts suddenly. You hear yelling and shouting, laughter, and boisterous speech. As you approach, you notice a group of young adults. They look to be from the local university. Garbage is strewn throughout their site, and empty cans litter a once scenic meadow.',
+                theme: 'morning party',
+                responses: [
+                    {
+                        buttonText:'Reprimand them about the trash',
+                        resultExposition: 'They are taken aback by your sudden annoyance. Confused expressions stare back at you.',
+                        effects: {
+                            stress: 0,
+                            reputation: -20,
+                            performance: 20
+                        }
+                    },
+                    {
+                        buttonText:'Attempt to explain park rules politely.',
+                        resultExposition: 'Some of them look embarrassed, while other stare at you with uncaring expressions.',
+                        effects: {
+                            stress: 20,
+                            reputation: 20,
+                            performance: 20
+                        }
+                    },
+                    {
+                        buttonText:'Say nothing.',
+                        resultExposition: 'Your boss is not going to like this.',
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: -20
+                        }
+                    }
+                ]
+            },
+            {
+                exposition: 'You are back from your drive. After the stress this morning, you decide to take a short walk on some of the trails closest to the campsites.',
+                theme: 'walking campsites',
+                responses:[
+                    {
+                        buttonText: ' Walk the cute riverside campsite trail.',
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        }
+                    }
+                ]
+            },
+            {
+                exposition: '<p> You are <strong>flagged</strong> down by an elderly couple. They are wondering where wood for a fire can be found </p>',
+                theme: 'walking campsites',
+                responses:[
+                    {
+                        buttonText: 'Stay silent and stare at them.',
+                        resultExposition: 'They look at you with confused expressions. After some time, they continue along their path.',
+                        effects: {
+                            stress: -40,
+                            reputation: -20,
+                            performance: -20
+                        }
+                    },
+                    {
+                        buttonText: 'This is a forrest, there is wood everywhere.',
+                        resultExposition: 'They chuckle and smile awkwardly, they think you are joking.',
+                        effects: {
+                            stress: -20,
+                            reputation: -10,
+                            performance: 0
+                        }
+                    },
+                    {
+                        buttonText: 'It\'s by my trailer.',
+                        resultExposition: 'You dislike when people go near your things, you often find them disturbed. Either way, these people want quality firewood and you are not about to bar them from it.',
+                        effects: {
+                            stress: -20,
+                            reputation: 10,
+                            performance: 10
+                        },
+                        condition: (Game) => (Game.stress >= 80)
+                    },
+                    {
+                        buttonText: 'Cut them down a tree.',
+                        resultExposition: 'They look at you with confused expressions. It takes time and effort, but the small tree has fallen, and they have their firewood. They thank you with annoyed frowns.',
+                        effects: {
+                            stress: 0,
+                            reputation: -10,
+                            performance: 10
+                        }
+                    }
+                ]
+            }
+        ],
+        overwhelmScenario: {
+            exposition: `<p> Test! </p>`,
+            //theme: 
+            responses: [
+                {
+                    buttonText: `Continue`,
+                    resultExposition: `<p> You go get away as soon as you can. You to the bathroom and cross your arms with your hands on your shoulders. You breathe in a way your aunt showed you and it helps you calm down for the moment. You go through what just happened in your head, looking for what made you feel overwhelmed. It takes you a while to sort it all out. </p>`,
+                    effects: {
+                        stress: 20,
+                        reputation: -10,
+                        performance: -10
+                    }
+                }
+            ]
+        }
     }
 ].map(c => Character.buildCharacter(c));
 

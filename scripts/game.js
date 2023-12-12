@@ -131,6 +131,22 @@ let Game = (function () {
             audio: 'trailer.mp3',
             backdrop: './assets/trailer.jpg',
         },
+        "outside trailer":{
+            audio: 'trailer.mp3',
+            backdrop: './assets/outside_trailer.png',
+        },
+        "morning drive": {
+            audio: 'morning_drive.mp3',
+            backdrop: './assets/morning_drive.png',
+        },
+        "morning party": {
+            audio: 'morning_drive2.mp3',
+            backdrop: './assets/morning_drive2.png',
+        },
+        "walking campsites": {
+            audio: 'walking_campsites.mp3',
+            backdrop: './assets/walking_campsites.png',
+        }
     }
 
     /**
@@ -719,7 +735,7 @@ function render_scenarioResponse(r) {
     dom_hud.classList.remove('hide');
 
     // Generate screen content from response data
-   dom_main.querySelector('#exposition').innerHTML = r.resultExposition;
+    dom_main.querySelector('#exposition').innerHTML = r.resultExposition;
 
     // Don't set the theme since we just want the previous theme to carry over
     // document.body.dataset.bg = 'school';
