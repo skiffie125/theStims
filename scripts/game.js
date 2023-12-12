@@ -769,9 +769,6 @@ function render_end() {
     Game.theme = 'none';
     Game.stressEffects(false);
 
-    // stop audio 
-    sound.pause();
-
     dom_main.querySelector('#button-play-again').addEventListener('click', () => { render_home() });
 }
 
