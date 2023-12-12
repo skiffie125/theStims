@@ -107,47 +107,6 @@ class Character {
             //may need a map to be the correct object here?
             data.overwhelmScenario == undefined ? undefined : buildScenario(data.overwhelmScenario));
     }
-
-    /* adjustStress(stress) {
-        this.stress_level += stress;
-        this.stress_level = Math.max(this.stress_level, 0);
-        this.stress_level = Math.min(this.stress_level, 100);
-        // Trigger effects if stress reaches a certian 
-    }
-
-    adjustReputation(reputation) {
-        this.reputation_level += reputation;
-        this.reputation_level = Math.max(this.reputation_level, 0);
-        this.reputation_level = Math.min(this.reputation_level, 100);
-    }
-
-    getLetterReputation() {
-        if (this.reputation_level == 100)
-        {
-            return 'A+';
-        } else if (reputation_level >= 90)
-        {
-            return 'A';
-        } else if (reputation_level >= 88)
-        {
-            return 'B+';
-        } else if (reputation_level >= 80)
-        {
-            return 'B';
-        } else if (reputation_level >= 78)
-        {
-            return 'C+';
-        } else if (reputation_level >= 70)
-        {
-            return 'C';
-        } else if (reputation_level >= 68)
-        {
-            return 'D+';
-        } else
-        {
-            return 'D';
-        }
-    } */
 }
 
 /**
@@ -1043,9 +1002,24 @@ const characters = [
         age: '42',
         gender: 'male',
         icon: './assets/clint.png',
-        bio: 'Roman is a retail worker at a home improvement shop in Portland, Oregon, and lives in a nearby apartment with his mother. He was diagnosed with Autism at age 5 and received therapies throughout his adolescence to help develop his social skills. He speaks very politely and tries his best to be approachable, but for some reason, people often seem intimidated by him and he has never held a job for longer than 6 months.',
+        bio: 'Clint is a 42-year-old park ranger working at a national park in Washington State. Previously diagnosed with what was known as Asperger’s syndrome, Clint experienced lots of bullying growing up and likes to keep his diagnosis quiet. Clint loves nature and has a special interest in native flora and fauna identification. Clint adores his job, and the isolation of his particular park allows him lots of freedom in his day. Recently, an influx of college campers has taken the park by storm, and a once quiet and calm place has become rambunctious and loud. Clint’s story is about his struggle to adapt to this sudden change.',
         scenarioList: [
-
+            {
+                exposition: `<p>You awake groggily to the sound of your alarm ringing <strong>loudly</strong> in your ear.</p>`,
+                theme: 'trailer',
+                responses: [
+                    {
+                        buttonText: 'Slowly get up and brush your teeth.',
+                        resultExposition: `<p>As you brush your teeth, you reflect. Some find it strange, but you exclusively use a specific toothbrush and toothpaste, and have your entire life. </p>`,
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        resultInfo: '<p>People with Autism often experience <strong>sensory issues</strong>. These individuals often attempt to stick to routines to avoid such issues.</p>'
+                    }
+                ]
+            },
         ]
     }
 ].map(c => Character.buildCharacter(c));

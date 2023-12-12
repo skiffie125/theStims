@@ -126,7 +126,11 @@ let Game = (function () {
         "dorm desk": {
             audio: 'gum.wav',
             backdrop: './assets/dorm_desk.jpg',
-        }
+        },
+        "trailer": {
+            audio: 'trailer.mp3',
+            backdrop: './assets/trailer.jpg',
+        },
     }
 
     /**
