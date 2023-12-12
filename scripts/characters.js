@@ -292,15 +292,387 @@ class ResponseEffects {
  * @type {Character[]}
  */
 const characters = [
-    {
-        name: 'August',
-        age: '20',
-        gender: 'female',
-        icon: './assets/august.png',
-        bio: 'August is in her second year of her associates degree at a local community college in Arizona. She comes from a suburban middle-class family, and has a mother, father, and 2 younger sisters who love her very much but put heavy pressure on her to succeed in school. She has diagnosed ADHD and an anxiety disorder, but nobody suspects that she may also have Autism.',
-        scenarioList: [
+    // {
+    //     name: 'August',
+    //     age: '20',
+    //     gender: 'female',
+    //     icon: './assets/august.png',
+    //     bio: 'August is in her second year of her associates degree at a local community college in Arizona. She comes from a suburban middle-class family, and has a mother, father, and 2 younger sisters who love her very much but put heavy pressure on her to succeed in school. She has diagnosed ADHD and an anxiety disorder, but nobody suspects that she may also have Autism.',
+    //     scenarioList: [
 
-        ]
+    //     ]
+    // },
+    {
+        name: 'Riley',
+        age: '19',
+        gender: 'Nonbinary',
+        icon: './assets/august.png',
+        bio: 'Riley is a 19 year old college student studying biology who was diagnosed with autism and ADHD in their senior year of highschool. They have a special interest in mollusks, which was part of why they decided to major in biology. College is harder than they anticipated, they are facing burnout and having a lot of difficulties with their roommate. They have a few friends, but they struggle with making new ones.',
+        scenarioList: [
+            {
+                exposition: '<p>You head to the dining hall for breakfast and discover that they are out of your favorite cereal.  You go to grab a bowl of oatmeal instead and discover with horror that it\'s been sitting on the hot plate for too long and it looks very thick and dried out.  You <strong>always</strong> have cereal or oatmeal for breakfast and the thought of eating something else feels <strong>overwhelming</strong>.</p>',
+                theme: 'dining hall',
+                responses: [
+                    {
+                        buttonText: 'Eat overcooked oatmeal',
+                        resultExposition: `<p>You try to get down some of the oatmeal, but the texture feels wrong in your mouth and you can’t bring yourself to eat more than a couple bites.</p>`,
+                        effects: {
+                            stress: -20,
+                            reputation: 0,
+                            performance: 0
+                        }
+                    },
+                    {
+                        buttonText: 'Force yourself to eat something different',
+                        resultExposition: '<p>You look over the options available and decide to grab some pancakes. Sometimes you can eat pancakes, but only if they are cooked right.  You take a bite and immediately can tell that they are undercooked. The middle feels pasty and wrong in your mouth.  You think about spitting it out, but you manage to choke it down. You can’t bring yourself to take another bite. You try grabbing some scrambled eggs instead, but the texture is repulsive.</p>',
+                        effects: {
+                            stress: -30,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        resultInfo: '<p> People with Autism may experience <strong>over-sensitivity</strong> to certain textures which can cause discomfort or even panic in extreme cases. What you\'re sensitive to, though, and how severely <strong>varies greatly depending on the person</strong>. </p>'
+                    },
+                    {
+                        buttonText: 'Skip breakfast',
+                        resultExposition: '<p>You decide to skip breakfast. You know you’ll feel hungry later, but right now the thought of dealing with food with a bad texture is too much.</p>',
+                        effects: {
+                            stress: -10,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    }
+                ]
+            },
+            {
+                exposition: `<p>You walk into your math class and discover that the softer warm light bulbs in your classroom were replaced with harsh fluorescent brights.  The light hurts your eyes and you feel overwhelmed and on edge.  You know within the next couple of minutes you are going to start getting a headache.</p>`,
+                theme: 'classroom 3',
+                responses: [
+                    {
+                        buttonText: 'Put on the sunglasses in your backpack',
+                        resultExposition: '<p>You put on the sunglasses. You feel a little self conscious, but your eyes don’t hurt anymore and you can focus on the lecture. After class the person next to you asks why you are wearing sunglasses inside.  Not expecting to have to explain yourself, you stammer through an explanation about the lights being too bright.  They give you a weird look and say “They’re just lights, I don’t get what the big deal is…” before walking away.</p>',
+                        effects: {
+                            stress: 0,
+                            reputation: -30,
+                            performance: 0
+                        }
+                    },
+                    {
+                        buttonText: 'Tough it out',
+                        resultExposition: '<p>You try your best to focus on the lecture and take notes, but the lights are overwhelming and your head hurts.  You don’t absorb any of the material and you leave the class feeling exhausted.</p>',
+                        effects: {
+                            stress: -50,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                    {
+                        buttonText: 'Skip class',
+                        resultExposition: '<p>You get up and walk out of the classroom and find a quiet space to sit and read the textbook instead.  Hopefully you will be able to get notes from someone on what was covered in the lecture.</p>',
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: -50
+                        },
+                    }
+                ]
+            },
+            {
+                exposition: `<p>Your next class of the day is biology.  As you are walking there you worry that they changed the lights in all of the classrooms, but when you walk in you see that the lights are still the same and you breathe a sigh of relief.  </p>`,
+                responses: [
+                    {
+                        buttonText: 'Continue',
+                        resultExposition: null,
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        }
+                    }
+                ]
+            },
+            {
+                exposition: `<p>At the end of the lecture your professor reminds you that you have an exam in 2 days and you suddenly realize that you never talked to this professor about accommodations.  Because of your autism and ADHD, you’re allowed to wear headphones during tests to help with sensory overload and you receive 50% extra time.  You would typically just send an email, but you aren’t sure that she will see it before the exam.  What do you do?</p>`,
+                theme: 'classroom 4',
+                responses: [
+                    {
+                        buttonText: `Talk to her after class`,
+                        resultExposition: `<p> "You talk to your professor and she is very understanding, which is a big relief. You’ve had some experiences in the past with professors telling you that you didn’t need your accommodations or that they were unreasonable, despite the fact that they aren’t allowed to deny you access to your accommodations once you have received a note from your doctor and had it approved by the university’s disability access office.</p>`,
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 50)
+                    },
+                    {
+                        buttonText: 'Send an email and hope she receives it in time',
+                        resultExposition: '<p>You send her an email and hope that she receives it before the exam.</p>',
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: -40
+                        },
+                    },
+                    {
+                        buttonText: 'Do nothing',
+                        resultExposition: `<p>You don’t bother asking for your accommodations.  You know you will regret it once you are in the exam.</p>`,
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: -40
+                        },
+                    }
+                ]
+            },
+            {
+                exposition: `<p>You check your phone and see a message from a classmate you’d like to be friends with asking if you want to come study with them until your next  class.  However, they are studying in one of the loudest and most crowded spots on campus.</p>`,
+                theme: 'phone',
+                responses: [
+                    {
+                        buttonText: `Accept the invitation`,
+                        resultExposition: `<p> You know the environment will be overwhelming, but you don’t know if you’ll ever get another invitation if you decline this one so you agree to go.  There’s too much noise for you to get any work done.  You try your best to pay attention when they talk to you and respond appropriately, but it's difficult when there's so much else going on.</p>`,
+                        effects: {
+                            stress: -30,
+                            reputation: 0,
+                            performance: -20
+                        },
+                        condition: (Game) => (Game.stress >= 50)
+                    },
+                    {
+                        buttonText: 'Decline the invitation',
+                        resultExposition: `<p>You decline the invitation and try to explain that you just don’t have the energy.  You tack a “I’d love to some other time though!” onto the end in hopes that they don’t interpret this as a lack of interest, but you worry that there won’t be another invitation in the future.</p>`,
+                        effects: {
+                            stress: 0,
+                            reputation: -30,
+                            performance: 0
+                        },
+                    },
+                    {
+                        buttonText: 'Ask to move to a different location',
+                        resultExposition: `<p>You ask if it would be possible to switch to another spot that is quieter and thankfully they agree!  You study together in your favorite corner of the library.</p>`,
+                        effects: {
+                            stress: 10,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 30)
+                    }
+                ]
+            },
+            {
+                exposition: `<p>The first meeting of the new marine biology club is today.  You are nervous because when you’ve gone to clubs in the past you’ve always just felt awkward, but your love of marine biology is enough motivation to go.  You walk in a few minutes early and sit down next to a girl you’ve seen in a couple of your classes, but have never talked to.</p>`,
+                theme: 'college club',
+                responses: [
+                    {
+                        buttonText: `Ask her if she wants to hear a fun fact about cephalopods`,
+                        resultExposition: `<p> "You tell her about how octopi’s brains are shaped like donuts with their esophagus going through the middle, so if their food isn’t chewed well enough it can give them brain damage.  However, this isn’t usually an issue since they have a serrated radula, which is basically like mollusk’s equivalent of a tongue.  She smiles and says “Huh, that’s really neat!”</p>`,
+                        effects: {
+                            stress: 0,
+                            reputation: 10,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 40)
+                    },
+                    {
+                        buttonText: 'Try to make small talk',
+                        resultExposition: `<p>You go through your script for small talk and ask what her major is, what classes she’s taking, and how she's liking her classes.  Once you go through those questions you don’t know what to say anymore.  You sit in awkward silence, racking your brain for another normal small talk thing to say and coming up empty.</p>`,
+                        effects: {
+                            stress: -20,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 60)
+                    },
+                    {
+                        buttonText: 'Sit in silence',
+                        resultExposition: `<p>You do your best to ignore the people around you and just sit in silence.  You worry about people thinking that you are weird for just sitting there so you pull out your phone and pretend to message someone to look busy.</p>`,
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    }
+                ]
+            },
+            {
+                exposition: `<p>A few minutes later the meeting starts and the officers introduce themselves. The rest of the meeting is just talking about ideas for future meetings, which is a bit disappointing, but some of the future meeting topics sound cool.  You plan on going again next week.</p>`,
+                theme: 'college club',
+                responses: [
+                    {
+                        buttonText: `Head to the dining hall`,
+                        resultExposition: null,
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                ]
+            },
+            {
+                exposition: `<p>You walk to the dining hall and meet up with your friends.  You go to grab food and are relieved to find that they have chicken sandwiches today. You all sit in a quiet corner and chat. One of your friends asks for the group's opinion on a situation with one of their friends who did something inconsiderate.  You know this person and you don’t like them.</p>`,
+                theme: 'dining hall',
+                responses: [
+                    {
+                        buttonText: `Speak your mind`,
+                        resultExposition: `<p>You say something about how they have always been kind of selfish and that your friend shouldn’t put up with it anymore. The table goes quiet and you quickly realize you misread the tone.  Apparently your friend was joking, they weren’t actually bothered or asking for advice.  You apologize profusely and try to explain that you misunderstood, but the damage has been done.  The rest of dinner is painfully awkward.</p>`,
+                        effects: {
+                            stress: 0,
+                            reputation: -30,
+                            performance: 0
+                        },
+                    },
+                    {
+                        buttonText: 'Stay quiet',
+                        resultExposition: `<p>You decide not to say anything and as the conversation continues you realize that your friend was joking and isn’t actually upset with this person or looking for advice.  You are incredibly relieved you didn’t say anything given how badly you had misread their tone.</p>`,
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                    {
+                        buttonText: 'Change the topic',
+                        resultExposition: `<p>You aren’t sure how you are supposed to respond here so you quickly change the topic and start talking about how mediocre the dining hall food is.</p>`,
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 40)
+                    }
+                ]
+            },
+            {
+                exposition: `<p>You walk back to your dorm room.  It feels good to be home. You can hear people being loud down the hall, but you try to ignore them.  You have a bit of free time, what do you do?</p>`,
+                theme: 'dorm room',
+                responses: [
+                    {
+                        buttonText: `Watch videos online about the evolutionary history of mollusks`,
+                        resultExposition: `<p>You spend about an hour watching videos and you feel a bit better afterwards.</p>`,
+                        effects: {
+                            stress: 20,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 30)
+                    },
+                    {
+                        buttonText: 'Browse your favorite marine biology internet forum',
+                        resultExposition: `<p>You spend about an hour looking through forums and you feel a bit better afterwards.</p>`,
+                        effects: {
+                            stress: 20,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 30)
+                    },
+                    {
+                        buttonText: 'Read a book about squids',
+                        resultExposition: `<p>You spend about an hour reading and you feel a bit better afterwards.</p>`,
+                        effects: {
+                            stress: 20,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 50)
+                    },
+                    {
+                        buttonText: 'Get started on homework immediately',
+                        resultExposition: `<p>You start working on your homework.</p>`,
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 20
+                        },
+                        condition: (Game) => (Game.stress >= 80)
+                    },
+                    {
+                        buttonText: 'Scroll through your social media feed',
+                        resultExposition: `<p>You spend about an hour scrolling through social media and don't really feel any better afterwards.</p>`,
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    }
+                ]
+            },
+            {
+                exposition: `<p>You start working on an assignment for your math class and realize you have no idea how to solve one of the problems. The tutoring center is still open for another hour, but having to interact with people sounds exhausting.  Do you go?</p>`,
+                theme: 'dorm desk',
+                responses: [
+                    {
+                        buttonText: `Go to the tutoring center`,
+                        resultExposition: `<p>You pack up your stuff and head to the tutoring center.  It isn’t pleasant, but you get the help you need for your homework.</p>`,
+                        effects: {
+                            stress: -20,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 50)
+                    },
+                    {
+                        buttonText: 'Don’t go to the tutoring center',
+                        resultExposition: `<p>You write down a guess and move on, you’re pretty sure it's wrong, but it's better than nothing.</p>`,
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: -20
+                        },
+                    }
+                ]
+            },
+            {
+                exposition: `<p>You are trying to study, but the sound of your roommate chewing gum is driving you insane.  You go to put on your noise-canceling headphones only to discover that the battery is dead.</p>`,
+                theme: 'dorm desk',
+                responses: [
+                    {
+                        buttonText: `Ask them to stop`,
+                        resultExposition: `<p>Hey, I’m really sorry but could you stop chewing the gum?  I just can’t deal with the noise right now and my headphones are dead and I really need to study.”  Jules looks over and just says “Okay” and spits it out before going back to what they were doing.  Are they annoyed?  Was that a genuine “Okay” or an passive aggressive “Okay”?  You can never tell.</p>`,
+                        effects: {
+                            stress: 0,
+                            reputation: -20,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 30)
+                    },
+                    {
+                        buttonText: 'Try to ignore it',
+                        resultExposition: `<p>You try to just tune it out and focus on the work, but the noise is impossible to ignore.  The sound makes your skin crawl and you are starting to feel panicky.  There's no way you are getting your work done.</p>`,
+                        effects: {
+                            stress: -60,
+                            reputation: 0,
+                            performance: -20
+                        },
+                    },
+                    {
+                        buttonText: 'Go and study somewhere else',
+                        resultExposition: `<p>You pack up your things and go to study somewhere else.  Unfortunately, none of the lounges in your building are empty and all of the nearby buildings on campus are closed at this hour.  You pick the lounge with the quietest people, but the background chatter is still enough that you struggle to tune it out.  You wish your headphones were charged.</p>`,
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    }
+                ]
+            },
+        ],
+        overwhelmScenario: {
+            exposition: `<p> You feel like your skin is crawling and every little sound feels like its far too loud. You know you need to find a quiet place to calm down. </p>`,
+            //theme: 
+            responses: [
+                {
+                    buttonText: `Continue`,
+                    resultExposition: `<p> You go hide in the bathroom as soon as you can.  You pace back and forth rapidly while flapping your hands to try and release some of the stress. After a few minutes you feel a bit calmer.</p>`,
+                    effects: {
+                        stress: 20,
+                        reputation: -10,
+                        performance: -10
+                    }
+                }
+            ]
+        }
     },
     {
         name: 'Nora',

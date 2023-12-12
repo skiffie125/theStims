@@ -66,6 +66,48 @@ body {
     background-size: cover;
 }
 
+#backdrop[data-bg="dining hall"] {
+    background-image: url('../assets/dining_hall.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="classroom 3"] {
+    background-image: url('../assets/classroom_3.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="classroom 4"] {
+    background-image: url('../assets/classroom_4.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="phone"] {
+    background-image: url('../assets/phone.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="college club"] {
+    background-image: url('../assets/club_room.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="dorm room"] {
+    background-image: url('../assets/dorm_room.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="dorm desk"] {
+    background-image: url('../assets/dorm_desk.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
 #backdrop {
     position: absolute;
     z-index: -1;

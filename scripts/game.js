@@ -98,6 +98,34 @@ let Game = (function () {
         "school bus": {
             audio: 'school_bus_ride.mp3',
             backdrop: './assets/school_bus.jpg',
+        },
+        "dining hall": {
+            audio: 'dining_hall.wav',
+            backdrop: './assets/dining_hall.jpg',
+        },
+        "classroom 3": {
+            audio: 'keyboard.m4a',
+            backdrop: './assets/classroom_3.jpg',
+        },
+        "classroom 4": {
+            audio: 'quiet_classroom.wav',
+            backdrop: './assets/classroom_4.jpg',
+        },
+        "phone": {
+            audio: 'background_chatter.mp3',
+            backdrop: './assets/phone.jpg',
+        },
+        "college club": {
+            audio: 'background_chatter.mp3',
+            backdrop: './assets/club_room.jpg',
+        },
+        "dorm room": {
+            audio: 'dorm_ambient.wav',
+            backdrop: './assets/dorm_room.jpg',
+        },
+        "dorm desk": {
+            audio: 'gum.wav',
+            backdrop: './assets/dorm_desk.jpg',
         }
     }
 
