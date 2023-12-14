@@ -138,6 +138,25 @@ body {
     background-size: cover;
 }
 
+#backdrop[data-bg="phone call"] {
+    background-image: url('../assets/phone_call.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="after call"] {
+    background-image: url('../assets/after_call.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="nature hike 1"] {
+    background-image: url('../assets/nature_hike_1.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+
 #backdrop {
     position: absolute;
     z-index: -1;

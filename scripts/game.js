@@ -146,7 +146,20 @@ let Game = (function () {
         "walking campsites": {
             audio: 'walking_campsites.mp3',
             backdrop: './assets/walking_campsites.png',
-        }
+        },
+        "phone call": {
+            audio: 'phone_call.mp3',
+            backdrop: './assets/phone_call.png',
+        },
+        "after call": {
+            audio: 'walking_campsites.mp3',
+            backdrop: './assets/after_call.png',
+        },
+        "nature hike 1": {
+            audio: 'nature_hike_1.mp3',
+            backdrop: './assets/nature_hike_1.png',
+        },
+        
     }
 
     /**

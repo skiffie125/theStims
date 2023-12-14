@@ -1098,17 +1098,17 @@ const characters = [
                         buttonText: 'Stay silent and stare at them.',
                         resultExposition: 'They look at you with confused expressions. After some time, they continue along their path.',
                         effects: {
-                            stress: -40,
-                            reputation: -20,
-                            performance: -20
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
                         }
                     },
                     {
                         buttonText: 'This is a forrest, there is wood everywhere.',
                         resultExposition: 'They chuckle and smile awkwardly, they think you are joking.',
                         effects: {
-                            stress: -20,
-                            reputation: -10,
+                            stress: 0,
+                            reputation: 0,
                             performance: 0
                         }
                     },
@@ -1116,9 +1116,9 @@ const characters = [
                         buttonText: 'It\'s by my trailer.',
                         resultExposition: 'You dislike when people go near your things, you often find them disturbed. Either way, these people want quality firewood and you are not about to bar them from it.',
                         effects: {
-                            stress: -20,
-                            reputation: 10,
-                            performance: 10
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
                         },
                         condition: ScenarioResponse.stressCondition(80)
                     },
@@ -1131,6 +1131,128 @@ const characters = [
                             performance: 10
                         }
                     }
+                ]
+            },
+            {
+                exposition: '<p>On the way back from your walk, you feel you walkie-talkie buzzing with a call. You check and see that it is your <strong>boss</strong> Phil.</p>',
+                theme: 'phone call',
+                responses:[
+                    {
+                        buttonText: 'Pick up the phone.',
+                        resultExposition: "You don't like Phil. He loves to make you uncomfortable, and he believes you to be too inflexible for this position. This will not be an easy call.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        }
+                    }
+                ]
+            },
+            {
+                exposition: '<p>Due to the recent influx of new campers, your boss asks you to lead a nature hike. He <strong>knows</strong> that you dislike working with people, and knows that it is the reason you chose this job in the first place. He does this often, and your complaints often fall on deaf ears.</p>',
+                theme: 'after call',
+                responses:[
+                    {
+                        buttonText: 'Get ready for the hike.',
+                        resultExposition: "You like to come prepared. You have mapped out a safe, but interesting trail to the best spot in the park. You have packed extensive safety gear. You have brought snacks for everyone, and even included gluten-free and vegetarian options. This can't go wrong.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        }
+                    }
+                ]
+            },
+            {
+                exposition: '<p>It is time for the hike. Surrounding you at the foot of the trail is a group of about 10 -15 campers of varying ages. Their eyes questioning and full of <strong>expectation.</strong></p>',
+                theme: 'nature hike 1',
+                responses:[
+                    {
+                        buttonText: 'Explain the safety rules.',
+                        resultExposition: "Phil knows that public speaking is not one of your skills. Either way, you manage to explain the rules without too much trouble. It's time for the hike",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 70)
+                    },
+                    {
+                        buttonText: 'Freeze and look at the ground.',
+                        resultExposition: "Phil knows that public speaking is not one of your skills. This is all too much right now. You freeze up and stare deep into the ground. The hikers begin without you. You'll catch up in a minute.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 70)
+                    },
+                    {
+                        buttonText: 'Start walking quickly.',
+                        resultExposition: "Phil knows that public speaking is not one of your skills. You decide to get moving early. The hikers are startled, they expected a safety speech. They will catch up soon.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 70)
+                    },
+                    {
+                        buttonText: 'Talk to the person closest too you.',
+                        resultExposition: "You strike up a conversation with the person closest too you. The rest of their group overhears and gets involved. You are able to give the safety talk to a smaller and more manageable group. Hope Phil doesn't mind.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 70)
+                    }
+                ]
+            },
+            {
+                exposition: '<p>It is time for the hike. Surrounding you at the foot of the trail is a group of about 10 -15 campers of varying ages. Their eyes questioning and full of <strong>expectation.</strong></p>',
+                theme: 'nature hike 1',
+                responses:[
+                    {
+                        buttonText: 'Explain the safety rules.',
+                        resultExposition: "Phil knows that public speaking is not one of your skills. Either way, you manage to explain the rules without too much trouble. It's time for the hike",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 70)
+                    },
+                    {
+                        buttonText: 'Freeze and look at the ground.',
+                        resultExposition: "Phil knows that public speaking is not one of your skills. This is all too much right now. You freeze up and stare deep into the ground. The hikers begin without you. You'll catch up in a minute.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 70)
+                    },
+                    {
+                        buttonText: 'Start walking quickly.',
+                        resultExposition: "Phil knows that public speaking is not one of your skills. You decide to get moving early. The hikers are startled, they expected a safety speech. They will catch up soon.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 70)
+                    },
+                    {
+                        buttonText: 'Talk to the person closest too you.',
+                        resultExposition: "You strike up a conversation with the person closest too you. The rest of their group overhears and gets involved. You are able to give the safety talk to a smaller and more manageable group. Hope Phil doesn't mind.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 70)
+                    } 
                 ]
             }
         ],
