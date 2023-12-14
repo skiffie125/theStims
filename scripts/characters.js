@@ -255,7 +255,7 @@ const characters = [
         name: 'Riley',
         age: '19',
         gender: 'Nonbinary',
-        icon: './assets/august.png',
+        icon: './assets/riley.png',
         bio: 'Riley is a 19 year old college student studying biology who was diagnosed with autism and ADHD in their senior year of highschool. They have a special interest in mollusks, which was part of why they decided to major in biology. College is harder than they anticipated, they are facing burnout and having a lot of difficulties with their roommate. They have a few friends, but they struggle with making new ones.',
         scenarioList: [
             {
