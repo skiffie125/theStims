@@ -251,16 +251,6 @@ class ResponseEffects {
  * @type {Character[]}
  */
 const characters = [
-    // {
-    //     name: 'August',
-    //     age: '20',
-    //     gender: 'female',
-    //     icon: './assets/august.png',
-    //     bio: 'August is in her second year of her associates degree at a local community college in Arizona. She comes from a suburban middle-class family, and has a mother, father, and 2 younger sisters who love her very much but put heavy pressure on her to succeed in school. She has diagnosed ADHD and an anxiety disorder, but nobody suspects that she may also have Autism.',
-    //     scenarioList: [
-
-    //     ]
-    // },
     {
         name: 'Riley',
         age: '19',
@@ -274,16 +264,17 @@ const characters = [
                 responses: [
                     {
                         buttonText: 'Eat overcooked oatmeal',
-                        resultExposition: `<p>You try to get down some of the oatmeal, but the texture feels wrong in your mouth and you can’t bring yourself to eat more than a couple bites.</p>`,
+                        resultExposition: `<p>You try to get down some of the oatmeal, but <strong>the texture feels wrong in your mouth</strong> and you can’t bring yourself to eat more than a couple bites.</p>`,
                         effects: {
                             stress: -20,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
+                        resultInfo: '<p> People with Autism may experience <strong>over-sensitivity</strong> to certain textures which can cause discomfort or even panic in extreme cases. What you\'re sensitive to, though, and how severely <strong>varies greatly depending on the person</strong>. </p>'
                     },
                     {
                         buttonText: 'Force yourself to eat something different',
-                        resultExposition: '<p>You look over the options available and decide to grab some pancakes. Sometimes you can eat pancakes, but only if they are cooked right.  You take a bite and immediately can tell that they are undercooked. The middle feels pasty and wrong in your mouth.  You think about spitting it out, but you manage to choke it down. You can’t bring yourself to take another bite. You try grabbing some scrambled eggs instead, but the texture is repulsive.</p>',
+                        resultExposition: '<p>You look over the options available and decide to grab some pancakes. Sometimes you can eat pancakes, but only if they are cooked right.  You take a bite and immediately can tell that they are undercooked. The middle <strong>feels pasty and wrong in your mouth</strong>.  You think about spitting it out, but you manage to choke it down. You can’t bring yourself to take another bite. You try grabbing some scrambled eggs instead, but <strong>the texture is repulsive</strong>.</p>',
                         effects: {
                             stress: -30,
                             reputation: 0,
@@ -293,36 +284,39 @@ const characters = [
                     },
                     {
                         buttonText: 'Skip breakfast',
-                        resultExposition: '<p>You decide to skip breakfast. You know you’ll feel hungry later, but right now the thought of dealing with food with a bad texture is too much.</p>',
+                        resultExposition: '<p>You decide to skip breakfast. You know you’ll feel hungry later, but right now the thought of dealing with food with a <strong>bad texture</strong> is too much.</p>',
                         effects: {
                             stress: -10,
                             reputation: 0,
                             performance: 0
                         },
-                    }
+                        resultInfo: '<p> People with Autism may experience <strong>over-sensitivity</strong> to certain textures which can cause discomfort or even panic in extreme cases. What you\'re sensitive to, though, and how severely <strong>varies greatly depending on the person</strong>. </p>',
+                    },
                 ]
             },
             {
-                exposition: `<p>You walk into your math class and discover that the softer warm light bulbs in your classroom were replaced with harsh fluorescent brights.  The light hurts your eyes and you feel overwhelmed and on edge.  You know within the next couple of minutes you are going to start getting a headache.</p>`,
+                exposition: `<p>You walk into your math class and discover that the softer warm light bulbs in your classroom were replaced with harsh fluorescent brights.  <strong>The light hurts your eyes and you feel overwhelmed and on edge</strong>.  You know within the next couple of minutes you are going to start getting a headache.</p>`,
                 theme: 'classroom 3',
                 responses: [
                     {
                         buttonText: 'Put on the sunglasses in your backpack',
-                        resultExposition: '<p>You put on the sunglasses. You feel a little self conscious, but your eyes don’t hurt anymore and you can focus on the lecture. After class the person next to you asks why you are wearing sunglasses inside.  Not expecting to have to explain yourself, you stammer through an explanation about the lights being too bright.  They give you a weird look and say “They’re just lights, I don’t get what the big deal is…” before walking away.</p>',
+                        resultExposition: '<p>You put on the sunglasses. You feel a little <strong>self conscious</strong>, but your eyes don’t hurt anymore and you can focus on the lecture. After class the person next to you asks why you are wearing sunglasses inside.  Not expecting to have to explain yourself, you stammer through an explanation about the lights being too bright.  They give you a weird look and say <strong>“They’re just lights, I don’t get what the big deal is…”</strong> before walking away.</p>',
                         effects: {
                             stress: 0,
                             reputation: -30,
                             performance: 0
-                        }
+                        },
+                        resultInfo: '<p>Many autistic people are <strong>hypersensitive to bright lights</strong>. Being in environments where the lighting is too bright can cause discomfort, difficulty focusing, fatigue, or emotional distress.</p>',
                     },
                     {
                         buttonText: 'Tough it out',
-                        resultExposition: '<p>You try your best to focus on the lecture and take notes, but the lights are overwhelming and your head hurts.  You don’t absorb any of the material and you leave the class feeling exhausted.</p>',
+                        resultExposition: '<p>You try your best to focus on the lecture and take notes, but the lights are overwhelming and your head hurts.  You don’t absorb any of the material and you leave the class feeling <strong>exhausted</strong>.</p>',
                         effects: {
                             stress: -50,
                             reputation: 0,
                             performance: 0
                         },
+                        resultInfo: '<p>Many autistic people are <strong>hypersensitive to bright lights</strong>. Being in environments where the lighting is too bright can cause discomfort, difficulty focusing, fatigue, or emotional distress.</p>',
                     },
                     {
                         buttonText: 'Skip class',
@@ -332,11 +326,12 @@ const characters = [
                             reputation: 0,
                             performance: -50
                         },
+                        resultInfo: '<p>Many autistic people are <strong>hypersensitive to bright lights</strong>. Being in environments where the lighting is too bright can cause discomfort, difficulty focusing, fatigue, or emotional distress.</p>',
                     }
                 ]
             },
             {
-                exposition: `<p>Your next class of the day is biology.  As you are walking there you worry that they changed the lights in all of the classrooms, but when you walk in you see that the lights are still the same and you breathe a sigh of relief.  </p>`,
+                exposition: `<p>Your next class of the day is biology.  As you are walking there you worry that they changed the lights in all of the classrooms, but when you walk in you see that the lights are still the same and you breathe a sigh of relief. </p>`,
                 responses: [
                     {
                         buttonText: 'Continue',
@@ -389,17 +384,17 @@ const characters = [
                 responses: [
                     {
                         buttonText: `Accept the invitation`,
-                        resultExposition: `<p> You know the environment will be overwhelming, but you don’t know if you’ll ever get another invitation if you decline this one so you agree to go.  There’s too much noise for you to get any work done.  You try your best to pay attention when they talk to you and respond appropriately, but it's difficult when there's so much else going on.</p>`,
+                        resultExposition: `<p> You know the environment will be <strong>overwhelming</strong>, but you don’t know if you’ll ever get another invitation if you decline this one so you agree to go.  There’s too much noise for you to get any work done.  You try your best to pay attention when they talk to you and respond appropriately, but it's difficult when there's so much else going on.</p>`,
                         effects: {
                             stress: -30,
                             reputation: 0,
                             performance: -20
                         },
-                        condition: (Game) => (Game.stress >= 50)
+                        condition: (Game) => (Game.stress >= 60)
                     },
                     {
                         buttonText: 'Decline the invitation',
-                        resultExposition: `<p>You decline the invitation and try to explain that you just don’t have the energy.  You tack a “I’d love to some other time though!” onto the end in hopes that they don’t interpret this as a lack of interest, but you worry that there won’t be another invitation in the future.</p>`,
+                        resultExposition: `<p>You decline the invitation and try to explain that you just don’t have the energy.  You tack a “I’d love to some other time though!” onto the end in hopes that they don’t interpret this as a lack of interest, but <strong>you worry that there won’t be another invitation in the future</strong>.</p>`,
                         effects: {
                             stress: 0,
                             reputation: -30,
@@ -410,7 +405,7 @@ const characters = [
                         buttonText: 'Ask to move to a different location',
                         resultExposition: `<p>You ask if it would be possible to switch to another spot that is quieter and thankfully they agree!  You study together in your favorite corner of the library.</p>`,
                         effects: {
-                            stress: 10,
+                            stress: 0,
                             reputation: 0,
                             performance: 0
                         },
@@ -419,17 +414,18 @@ const characters = [
                 ]
             },
             {
-                exposition: `<p>The first meeting of the new marine biology club is today.  You are nervous because when you’ve gone to clubs in the past you’ve always just felt awkward, but your love of marine biology is enough motivation to go.  You walk in a few minutes early and sit down next to a girl you’ve seen in a couple of your classes, but have never talked to.</p>`,
+                exposition: `<p>The first meeting of the new marine biology club is today.  You are nervous because when you’ve gone to clubs in the past you’ve always just felt awkward, but your love of marine biology is enough motivation to go. You really hope that at some point there will be a meeting on mollusks since they are your <strong>special interest</strong>. You walk in a few minutes early and sit down next to a girl you’ve seen in a couple of your classes, but have never talked to.</p>`,
                 theme: 'college club',
                 responses: [
                     {
                         buttonText: `Ask her if she wants to hear a fun fact about cephalopods`,
-                        resultExposition: `<p> "You tell her about how octopi’s brains are shaped like donuts with their esophagus going through the middle, so if their food isn’t chewed well enough it can give them brain damage.  However, this isn’t usually an issue since they have a serrated radula, which is basically like mollusk’s equivalent of a tongue.  She smiles and says “Huh, that’s really neat!”</p>`,
+                        resultExposition: `<p>You tell her about how octopi’s brains are shaped like donuts with their esophagus going through the middle, so if their food isn’t chewed well enough it can give them brain damage.  However, this isn’t usually an issue since they have a serrated radula, which is basically like mollusk’s equivalent of a tongue.  She smiles and says “Huh, that’s really neat!”</p>`,
                         effects: {
                             stress: 0,
                             reputation: 10,
                             performance: 0
                         },
+                    	resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often derive a lot of joy from learning more about, engaging in, or talking about their special interest with others. </p>',
                         condition: (Game) => (Game.stress >= 40)
                     },
                     {
@@ -440,6 +436,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
+                        resultInfo: '<p>Having a “script” for small talk is an example of a behavior known as <strong>masking</strong>. People with autism can learn behaviors that make them seem as if they aren’t struggling or are more “normal”. Masking is not solely found in people with Autism. </p>',
                         condition: (Game) => (Game.stress >= 60)
                     },
                     {
@@ -474,12 +471,13 @@ const characters = [
                 responses: [
                     {
                         buttonText: `Speak your mind`,
-                        resultExposition: `<p>You say something about how they have always been kind of selfish and that your friend shouldn’t put up with it anymore. The table goes quiet and you quickly realize you misread the tone.  Apparently your friend was joking, they weren’t actually bothered or asking for advice.  You apologize profusely and try to explain that you misunderstood, but the damage has been done.  The rest of dinner is painfully awkward.</p>`,
+                        resultExposition: `<p>You say something about how they have always been kind of selfish and that your friend shouldn’t put up with it anymore. The table goes quiet and you quickly realize <strong>you misread the tone</strong>.  Apparently your friend was joking, they weren’t actually bothered or asking for advice.  You apologize profusely and try to explain that you misunderstood, but the damage has been done.  The rest of dinner is painfully awkward.</p>`,
                         effects: {
                             stress: 0,
-                            reputation: -30,
+                            reputation: -40,
                             performance: 0
                         },
+                        resultInfo: '<p>Autistic people often struggle to interpret social cues and read people’s tone, which can somtimes result in very awkward misunderstandings. </p>',
                     },
                     {
                         buttonText: 'Stay quiet',
@@ -489,10 +487,11 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
+                        resultInfo: '<p>Autistic people often struggle to interpret social cues and read people’s tone, which can sometimes result in very awkward misunderstandings. </p>',
                     },
                     {
                         buttonText: 'Change the topic',
-                        resultExposition: `<p>You aren’t sure how you are supposed to respond here so you quickly change the topic and start talking about how mediocre the dining hall food is.</p>`,
+                        resultExposition: `<p><strong>You aren’t sure how you are supposed to respond</strong> here so you quickly change the topic and start talking about how mediocre the dining hall food is.</p>`,
                         effects: {
                             stress: 0,
                             reputation: 0,
@@ -503,7 +502,7 @@ const characters = [
                 ]
             },
             {
-                exposition: `<p>You walk back to your dorm room.  It feels good to be home. You can hear people being loud down the hall, but you try to ignore them.  You have a bit of free time, what do you do?</p>`,
+                exposition: `<p>You walk back to your dorm room.  It feels good to be home. You can hear <strong>people being loud</strong> down the hall, but you try to ignore them.  You have a bit of free time, what do you do?</p>`,
                 theme: 'dorm room',
                 responses: [
                     {
@@ -514,6 +513,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
+                        resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often spend a large portion of their free time engaging in or learning more about their special interest.  </p>',
                         condition: (Game) => (Game.stress >= 30)
                     },
                     {
@@ -524,6 +524,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
+                        resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often spend a large portion of their free time engaging in or learning more about their special interest.  </p>',
                         condition: (Game) => (Game.stress >= 30)
                     },
                     {
@@ -534,6 +535,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
+                        resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often spend a large portion of their free time engaging in or learning more about their special interest.  </p>',
                         condition: (Game) => (Game.stress >= 50)
                     },
                     {
@@ -558,7 +560,7 @@ const characters = [
                 ]
             },
             {
-                exposition: `<p>You start working on an assignment for your math class and realize you have no idea how to solve one of the problems. The tutoring center is still open for another hour, but having to interact with people sounds exhausting.  Do you go?</p>`,
+                exposition: `<p>You start working on an assignment for your math class and realize you have no idea how to solve one of the problems. The tutoring center is still open for another hour, but having to <strong>interact with people</strong> sounds <strong>exhausting</strong>.  Do you go?</p>`,
                 theme: 'dorm desk',
                 responses: [
                     {
@@ -594,6 +596,7 @@ const characters = [
                             reputation: -20,
                             performance: 0
                         },
+                        resultInfo: '<p><strong>Hypersensitivity</strong> to certain sounds is common in people with autism.  Hearing these sounds can cause intense distress, overwhelm, panic, or exhaustion if they are exposed to them for an extended period of time. Some autistic people wear noise cancelling headphones to mitigate this.</p>',
                         condition: (Game) => (Game.stress >= 30)
                     },
                     {
@@ -604,6 +607,8 @@ const characters = [
                             reputation: 0,
                             performance: -20
                         },
+                        resultInfo: '<p><strong>Hypersensitivity</strong> to certain sounds is common in people with autism.  Hearing these sounds can cause intense distress, overwhelm, panic, or exhaustion if they are exposed to them for an extended period of time. Some autistic people wear noise cancelling headphones to mitigate this.</p>',
+                        condition: (Game) => (Game.stress >= 40)
                     },
                     {
                         buttonText: 'Go and study somewhere else',
@@ -613,19 +618,20 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
+                        resultInfo: '<p><strong>Hypersensitivity</strong> to certain sounds is common in people with autism.  Hearing these sounds can cause intense distress, overwhelm, panic, or exhaustion if they are exposed to them for an extended period of time. Some autistic people wear noise cancelling headphones to mitigate this.</p>',
                     }
                 ]
             },
         ],
         overwhelmScenario: {
-            exposition: `<p> You feel like your skin is crawling and every little sound feels like its far too loud. You know you need to find a quiet place to calm down. </p>`,
+            exposition: `<p> You feel like <strong>your skin is crawling</strong> and every little sound feels like its far <strong>too loud</strong>. You know you need to find a quiet place to calm down. </p>`,
             //theme: 
             responses: [
                 {
                     buttonText: `Continue`,
                     resultExposition: `<p> You go hide in the bathroom as soon as you can.  You pace back and forth rapidly while flapping your hands to try and release some of the stress. After a few minutes you feel a bit calmer.</p>`,
                     effects: {
-                        stress: 20,
+                        stress: 30,
                         reputation: -10,
                         performance: -10
                     }
@@ -971,7 +977,7 @@ const characters = [
                     buttonText: `Continue`,
                     resultExposition: `<p> You go get away as soon as you can. You to the bathroom and cross your arms with your hands on your shoulders. You breathe in a way your aunt showed you and it helps you calm down for the moment. You go through what just happened in your head, looking for what made you feel overwhelmed. It takes you a while to sort it all out. </p>`,
                     effects: {
-                        stress: 20,
+                        stress: 30,
                         reputation: -10,
                         performance: -10
                     }
@@ -1131,7 +1137,7 @@ const characters = [
                     buttonText: `Continue`,
                     resultExposition: `<p> You go get away as soon as you can. You to the bathroom and cross your arms with your hands on your shoulders. You breathe in a way your aunt showed you and it helps you calm down for the moment. You go through what just happened in your head, looking for what made you feel overwhelmed. It takes you a while to sort it all out. </p>`,
                     effects: {
-                        stress: 20,
+                        stress: 30,
                         reputation: -10,
                         performance: -10
                     }
