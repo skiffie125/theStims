@@ -513,7 +513,7 @@ function handle_next_scenario() {
     if (Game.storyProgress + 1 < Game.chosenCharacter.scenarioList.length)
     {
         // not sure if this is the correct place to put this or not
-        if (Game.stress <= 40)
+        if (Game.stress <= 0)
         {
             render_scenario(Game.chosenCharacter.overwhelmScenario);
         } else

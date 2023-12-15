@@ -361,7 +361,17 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(50)
+                        // condition: ScenarioResponse.stressCondition(50)
+                        condition: (Game) => {
+                            if(Game.stress >= )
+                            {
+                              return [true];
+                            }
+                            else
+                            {
+                              return [false, 'You are not awesome enough to choose this option'];
+                            }
+                          }
                     },
                     {
                         buttonText: 'Send an email and hope she receives it in time',
