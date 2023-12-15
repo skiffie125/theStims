@@ -1159,7 +1159,7 @@ const characters = [
                 ]
             },
             {
-                exposition: '<p>It is time for the hike. Surrounding you at the foot of the trail is a group of about 10 -15 campers of varying ages. Their eyes questioning and full of <strong>expectation.</strong></p>',
+                exposition: '<p>It is time for the hike. Surrounding you at the foot of the trail is a group of about 10 - 15 campers of varying ages. Their eyes questioning and full of <strong>expectation.</strong></p>',
                 theme: 'nature hike 1',
                 responses:[
                     {
@@ -1170,7 +1170,6 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: (Game) => (Game.stress >= 70)
                     },
                     {
                         buttonText: 'Freeze and look at the ground.',
@@ -1180,7 +1179,6 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: (Game) => (Game.stress >= 70)
                     },
                     {
                         buttonText: 'Start walking quickly.',
@@ -1190,7 +1188,6 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: (Game) => (Game.stress >= 70)
                     },
                     {
                         buttonText: 'Talk to the person closest too you.',
@@ -1200,26 +1197,102 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: (Game) => (Game.stress >= 70)
                     }
                 ]
             },
             {
                 exposition: '<p>You follow an old trail that hugs tightly to the side of a sandy cliff. Tangled madrones sprawl out of the ground, blending into the evergreen scene seamlessly. The local harbor is visible in the distance, and many sailboats dot the water. This may not have been what you <strong>wanted</strong> to do today, but you wouldn’t show these hikers anything but the <strong>best</strong>.</p>',
+<<<<<<< Updated upstream
                 theme: 'nature hike 1',
+=======
+                theme: 'nature hike 2',
+>>>>>>> Stashed changes
                 responses:[
                     {
-                        buttonText: 'Explain the safety rules.',
-                        resultExposition: "Phil knows that public speaking is not one of your skills. Either way, you manage to explain the rules without too much trouble. It's time for the hike",
+                        buttonText: 'Identify some local plants.',
+                        resultExposition: "<p><strong><i>Gaultheria shallon</i></strong>, otherwise known as Salal, looks to be a favorite among the hikers. Lucky for them, it is also a favorite of yours. You speak to the interested campers, gathering a small crowd in the process. You talk about the plants usage in native anti-cramping and anti-inflammatory medicine, and it's appetite suppressing properties. </p>",
                         effects: {
                             stress: 0,
                             reputation: 0,
                             performance: 0
                         },
+<<<<<<< Updated upstream
 
                     }
+=======
+                    },
+                    {
+                        buttonText: 'Identify local birds.',
+                        resultExposition: "<p>Through the trees you spot <strong><i>Spinus tristis</i></strong>, otherwise known as the American Goldfinch, the state bird of Washington State! Near it flies a <strong><i>Cyanocitta stelleri</i></strong>, or a Steller's Jay. You start too name a few other North American Birds, gathering a small interested crowd.</p>",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                    {
+                        buttonText: 'Look out at the harbor.',
+                        resultExposition: "It's a stunningly bright day, and the harbor is teeming with life. Sailboats and beach-goers comb the shores alike, and the arial view provides you with a sense of comfort and relaxation.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                    {
+                        buttonText: 'Talk to the nervous looking hiker.',
+                        resultExposition: "One of the hikers is alone and looks lost. You have been there many times before. You approach them and make small conversation about the hike and the park. You can tell that your words are approached, and the hiker looks visibly more at ease",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    } 
+>>>>>>> Stashed changes
                 ]
-            }
+            },
+            {
+                exposition: '<p> You are nearing the end of the hike, the sun is setting and you ask everyone politely to pause and watch. You have timed it <strong>perfectly</strong>, and you and your group of hikers have made it to the best scenic viewing spot in the park.</p>',
+                theme: 'nature hike 3',
+                responses:[
+                    {
+                        buttonText: 'Take a seat and let people enjoy the view.',
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    }
+                ]
+            },
+            {
+                exposition: '<p>Out of the corner of your eye, you can see one of the college campers messing around with a plant. You recognize it as a <strong><i>Urtica dioica</i></strong>, otherwise known as stinging nettle. A native plant that can cause intense stinging when lightly brushed. Before you can intervene, they bring the nettle down like a hammer upon their friend. Two screams <strong>pierce</strong> your ears.</p>',
+                theme: 'nature hike 4',
+                responses:[
+                    {
+                        buttonText: ' I am prepared for this.',
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    }
+                ]
+            },
+            {
+                exposition: '<p>One camper lies clutching their hand, and the other, their arm. You have multiple ways that you know how to deal with this.</p>',
+                theme: 'nature hike 5',
+                responses:[
+                    {
+                        buttonText: ' I am prepared for this.',
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    }
+                ]
+            },
         ],
         overwhelmScenario: {
             exposition: `<p> Test! </p>`,
