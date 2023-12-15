@@ -208,7 +208,7 @@ let Game = (function () {
             backdrop: './assets/camp_party_2.png',
         },
         "camp party 3'": {
-            audio: 'outside_office.mp3',
+            audio: 'camp_party_3.mp3',
             backdrop: './assets/camp_party_3.png',
         },
         "walk_home'": {
