@@ -361,7 +361,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        // condition: ScenarioResponse.stressCondition(50)
+                        condition: ScenarioResponse.stressCondition(50)
                         condition: (Game) => {
                             if(Game.stress >= )
                             {
@@ -670,7 +670,7 @@ const characters = [
                         resultExposition: `<p>You feel comfortable in your own skin. You might get a few looks when you step onto the bus, but who cares?</p>`,
                         effects: {
                             stress: 0,
-                            reputation: -20,
+                            reputation: -25,
                             performance: 0
                         }
                     },
@@ -678,7 +678,7 @@ const characters = [
                         buttonText: 'Wear something you hate',
                         resultExposition: `<p>The tag on the back of your shirt scrapes the back of your neck at unpredictable intervals, and the weight of your pants feels off. The waistband of your pants pinches, and the absence of the usual comforting pressure from a sweatshirt makes everything feel ungrounded. You feel self-conscious and know that you will be constantly adjusting your clothes.</p>`,
                         effects: {
-                            stress: -20,
+                            stress: -25,
                             reputation: 0,
                             performance: 0
                         },
@@ -688,11 +688,40 @@ const characters = [
                         buttonText: 'Try to clean your clothes before school',
                         resultExposition: `<p> It's not perfect, the oil stain on your shirt still shows a little bit, but it's <strong>better</strong> than it would otherwise be. It messed up your usual morning routine which makes you feel even more tired but at least when you get on the bus to go to school you don't feel like crawling out of your own skin. </p>`,
                         effects: {
-                            stress: -10,
+                            stress: -15,
                             reputation: 0,
                             performance: 0
                         },
                         resultInfo: `<p> Changes to routines can have a greater impact on people with Autism than on people without autism. Changes can affect them even if they are doing an activity that will help their well-being. </p>`
+                    }
+                ]
+            },
+            {
+                exposition: `<p>You are walking into school and are 10 minutes early, what do you do with your time?</p>`,
+                theme: 'cafeteria',
+                responses: [
+                    {
+                        buttonText: 'Hang out with friends in the commons',
+                        resultExposition: `<p> You join your friends in the cafeteria and talk about your friend's dog, a video game one of them played, and your latest art project. It's there are a lot of people around so it's loud and it makes it hard to pay attention, but before you know it, the bell rings and it's time to get to class</p>`,
+                        effects: {
+                            stress: -15,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        resultInfo: `<p>Large loud crowds are often hard for people with autism, as it can be a lot sensory-wise. </p>`
+                    },
+                    {
+                        buttonText: 'Get to your first class early',
+                        resultExposition: `<p>You go down the halls of the school, luckily there are fewer people and less noise now than during the usual passing periods. Because of the lack of people you can hear two people around a corner.</p>
+                        <p>“Oh my god, and she never makes eye contact, it's so weird.” </p>
+                        <p>“I know right, and all she ever talks about is her art stuff, and it's not even good”. </p>
+                        <p>You walk away before you can see them, but you recognize those voices. They are in one of your classes. It hurts to know that traits you thought were fine clearly bother others.  </p>`,
+                        effects: {
+                            stress: -15,
+                            reputation: -30,
+                            performance: 0
+                        },
+                        resultInfo: `<p>Students with disabilities are often the targets of bullying, and people with autism are no exception. Part of autism is difficulty with social interaction which can be a point of mockery and can make it difficult to seek help or stand up for themselves.</p>`
                     }
                 ]
             },
@@ -704,12 +733,12 @@ const characters = [
                         buttonText: `Do everything you can to pay attention`,
                         resultExposition: `<p> You take intense notes and by the time class is over the words you wrote and the words the teacher is saying are blurring together. You definitely understood a lot, but that didn't stop your mind from blanking occasionally. You leave for the next class tired. </p>`,
                         effects: {
-                            stress: -20,
+                            stress: -30,
                             reputation: 0,
                             performance: 0
                         },
                         resultInfo: `<p> Autism can be combined with a variety of intellectual or learning disabilities, though it isn't inherently. Regardless, figuring out ways to make educational material work for students with autism can help them learn more. Not being able to process the material in a traditional classroom can be extremely frustrating, or having students push themselves to understand things can lead to negative outcomes like burnout and health issues. </p>`,
-                        condition: ScenarioResponse.stressCondition(90)
+                        condition: ScenarioResponse.stressCondition(80)
                     },
                     {
                         buttonText: `Doodle scenes from the book`,
@@ -717,7 +746,7 @@ const characters = [
                         effects: {
                             stress: 0,
                             reputation: 0,
-                            performance: -10
+                            performance: -15
                         },
                         resultInfo: `<p> Autism can be combined with a variety of intellectual or learning disabilities, though it isn't inherently. Regardless, figuring out ways to make educational material work for students with autism can help them learn more. Not being able to process the material in a traditional classroom can be extremely frustrating, or having students push themselves to understand things can lead to negative outcomes like burnout and health issues. </p>`,
                     },
@@ -727,7 +756,7 @@ const characters = [
                         effects: {
                             stress: 0,
                             reputation: 0,
-                            performance: -20
+                            performance: -30
                         },
                         resultInfo: `<p> Autism can be combined with a variety of intellectual or learning disabilities, though it isn't inherently. Regardless, figuring out ways to make educational material work for students with autism can help them learn more. Not being able to process the material in a traditional classroom can be extremely frustrating, or having students push themselves to understand things can lead to negative outcomes like burnout and health issues. </p>`,
                     }
@@ -742,28 +771,28 @@ const characters = [
                         resultExposition: `<p> "It was a joke, Nora." Your friend responds, and the rest laugh. You didn't fully catch what was said. This happens a lot when you are with larger groups of people, you are noticing. </p>`,
                         effects: {
                             stress: 0,
-                            reputation: -10,
+                            reputation: -15,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(70)
+                        condition: ScenarioResponse.stressCondition(50)
                     },
                     {
                         buttonText: `Laugh and nod`,
                         resultExposition: `<p> You smile and while you don't say anything significant it was enough to get you through the interaction. </p>`,
                         effects: {
-                            stress: -10,
+                            stress: -20,
                             reputation: 0,
                             performance: 0
                         },
                         resultInfo: `<p> This is a behavior known as masking. People with autism can learn behaviors that make them seem as if they aren’t struggling or are more “normal”. Masking is not solely found in people with Autism. </p>`,
-                        condition: ScenarioResponse.stressCondition(80)
+                        condition: ScenarioResponse.stressCondition(65)
                     },
                     {
                         buttonText: `Don't respond at all`,
                         resultExposition: `<p> You don't make eye contact and just stare down at the lunch table, you don't have a good response so you don't say anything. You get some looks from the people around you but the conversation shifts away from you and you can finish eating. </p>`,
                         effects: {
                             stress: 0,
-                            reputation: -20,
+                            reputation: -30,
                             performance: 0
                         }
                     },
@@ -771,11 +800,11 @@ const characters = [
                         buttonText: `Take a second to process what was said`,
                         resultExposition: `<p> You take a second and realize what she is actually saying. You are then able to respond in kind, and get smiles from your friends. It makes you feel good that you were able to communicate but it feels like it took more work for you than everyone else. </p>`,
                         effects: {
-                            stress: -20,
+                            stress: -30,
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(90)
+                        condition: ScenarioResponse.stressCondition(80)
                     }
                 ]
             },
@@ -787,30 +816,30 @@ const characters = [
                         buttonText: `Ask the teacher anyway`,
                         resultExposition: `<p>  You raise your hand and ask the teacher despite the warning. Your teacher turns and starts yelling at you and the class. You shrink back in your seat. Talking in class is already stressful for you and you feel like everyone's eyes are drilling into you. He gives you a detention slip. All you wanted to do was understand the assignment like you are supposed to. </p>`,
                         effects: {
-                            stress: -20,
+                            stress: -30,
                             reputation: 0,
-                            performance: -10
+                            performance: -15
                         }
                     },
                     {
                         buttonText: `Ask your neighbor`,
                         resultExposition: `<p> You turn and whisper to your neighbor, asking them what do to. You feel self-conscious like you are the only one who doesn't understand. You don't know why everyone else seems to get it but you just can't. They tell you what you need to know and then you both get to work. </p>`,
                         effects: {
-                            stress: -10,
+                            stress: -15,
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(80)
+                        condition: ScenarioResponse.stressCondition(60)
                     },
                     {
                         buttonText: `Attempt to complete the assignment anyway`,
                         resultExposition: `<p> You do your best but when you go over it at the end of the period you realize you missed a big piece of the assignment. You feel like if the teacher was just clear it would have been fine but you did your best with the information you have. </p>`,
                         effects: {
-                            stress: -10,
+                            stress: -15,
                             reputation: 0,
-                            performance: -10
+                            performance: -15
                         },
-                        condition: ScenarioResponse.stressCondition(90)
+                        condition: ScenarioResponse.stressCondition(75)
                     },
                     {
                         buttonText: `Don't do the assignment `,
@@ -818,7 +847,7 @@ const characters = [
                         effects: {
                             stress: 0,
                             reputation: 0,
-                            performance: -20
+                            performance: -30
                         }
                     }
                 ]
@@ -831,7 +860,7 @@ const characters = [
                         buttonText: `Join the chaos in the back`,
                         resultExposition: `<p> You sit laughing loudly with everyone but you feel tired and drained when you get off the bus. </p>`,
                         effects: {
-                            stress: -20,
+                            stress: -30,
                             reputation: 0,
                             performance: 0
                         },
@@ -845,7 +874,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(70)
+                        condition: ScenarioResponse.stressCondition(50)
                     },
                     {
                         buttonText: `Sit across from one of your friends and sketch`,
@@ -855,7 +884,7 @@ const characters = [
                             reputation: -10,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(80)
+                        condition: ScenarioResponse.stressCondition(40)
                     },
                     {
                         buttonText: `Sit by yourself and cover your ears`,
@@ -876,21 +905,21 @@ const characters = [
                         buttonText: `Get a snack and take a nap`,
                         resultExposition: `<p> It feels good to take a second and just relax, you wake up feeling a little better </p>`,
                         effects: {
-                            stress: 10,
+                            stress: 15,
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(60)
+                        condition: ScenarioResponse.stressCondition(35)
                     },
                     {
                         buttonText: `Stim and draw`,
                         resultExposition: `<p> You are able to drop your mask and let your leg start bouncing like it wants too. You start a drawing that you have been thinking about all day. It feels good to just take a second to do something that actually interests you. </p>`,
                         effects: {
-                            stress: 10,
+                            stress: 15,
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(70)
+                        condition: ScenarioResponse.stressCondition(45)
                     },
                     {
                         buttonText: `Sit in front of the TV `,
@@ -906,20 +935,20 @@ const characters = [
                         resultExposition: `<p> You get a chance to go hang out with your neighbor and you play a game together, a wonderful way to spend the afternoon. </p>`,
                         effects: {
                             stress: 10,
-                            reputation: 0,
+                            reputation: 10,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(80)
+                        condition: ScenarioResponse.stressCondition(60)
                     },
                     {
                         buttonText: `Get started on chores immediately`,
                         resultExposition: `<p> Your family is happy to see that the kitchen is clean. </p>`,
                         effects: {
-                            stress: 10,
+                            stress: -15,
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(90)
+                        condition: ScenarioResponse.stressCondition(70)
                     }
                 ]
             },
@@ -931,11 +960,11 @@ const characters = [
                         buttonText: `Do it`,
                         resultExposition: `<p> You complete your homework </p>`,
                         effects: {
-                            stress: -20,
+                            stress: -30,
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(70)
+                        condition: ScenarioResponse.stressCondition(45)
                     },
                     {
                         buttonText: `Don't`,
@@ -943,7 +972,7 @@ const characters = [
                         effects: {
                             stress: 0,
                             reputation: 0,
-                            performance: -20
+                            performance: -30
                         }
                     }
                 ]
@@ -956,11 +985,11 @@ const characters = [
                         buttonText: `Eat it`,
                         resultExposition: `<p> You try it and like it, your dad is very happy. </p>`,
                         effects: {
-                            stress: -20,
+                            stress: -30,
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(90)
+                        condition: ScenarioResponse.stressCondition(50)
                     },
                     {
                         buttonText: `Attempt to eat it`,
@@ -970,7 +999,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(70)
+                        condition: ScenarioResponse.stressCondition(30)
                     },
                     {
                         buttonText: `Refuse`,
