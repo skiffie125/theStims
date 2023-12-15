@@ -54,7 +54,7 @@ class Character {
         this.stress_start = stress_start;
         this.reputation_start = reputation_start;
         this.performance_start = performance_start;
-        
+
         // this.stress_level = 0;
         // this.reputation_level = 65; // Default to a D reputation socre, to be changed
     }
@@ -95,7 +95,8 @@ class Character {
                             r.effects.extra),
                         r.condition);
                 }),
-                s.theme)};
+                s.theme)
+        };
         // TODO: implement
         return new Character(
             data.name,
@@ -362,15 +363,15 @@ const characters = [
                             performance: 0
                         },
                         condition: (Game) => {
-                            if(Game.stress >= 30)
+                            if (Game.stress >= 30)
                             {
-                              return [true];
+                                return [true];
                             }
                             else
                             {
-                              return [false, 'You are too overwhelmed to talk to your teacher right now'];
+                                return [false, 'You are too overwhelmed to talk to your teacher right now'];
                             }
-                          }
+                        }
                     },
                     {
                         buttonText: 'Send an email and hope she receives it in time',
@@ -405,16 +406,16 @@ const characters = [
                             performance: -20
                         },
                         condition: (Game) => {
-                            if(Game.stress >= 30)
+                            if (Game.stress >= 30)
                             {
-                              return [true];
+                                return [true];
                             }
                             else
                             {
-                              return [false, 'You too overwhelmed to socialize'];
+                                return [false, 'You too overwhelmed to socialize'];
                             }
-                          }                    
-                        },
+                        }
+                    },
                     {
                         buttonText: 'Decline the invitation',
                         resultExposition: `<p>You decline the invitation and try to explain that you just don’t have the energy.  You tack a “I’d love to some other time though!” onto the end in hopes that they don’t interpret this as a lack of interest, but <strong>you worry that there won’t be another invitation in the future</strong>.</p>`,
@@ -433,13 +434,13 @@ const characters = [
                             performance: 0
                         },
                         condition: (Game) => {
-                            if(Game.stress >= 30)
+                            if (Game.stress >= 30)
                             {
-                              return [true];
+                                return [true];
                             }
                             else
                             {
-                              return [false, 'You are too overwhelmed to socialize'];
+                                return [false, 'You are too overwhelmed to socialize'];
                             }
                         }
                     }
@@ -457,17 +458,17 @@ const characters = [
                             reputation: 10,
                             performance: 0
                         },
-                    	resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often derive a lot of joy from learning more about, engaging in, or talking about their special interest with others. </p>',
+                        resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often derive a lot of joy from learning more about, engaging in, or talking about their special interest with others. </p>',
                         condition: (Game) => {
-                            if(Game.stress >= 30)
+                            if (Game.stress >= 30)
                             {
-                              return [true];
+                                return [true];
                             }
                             else
                             {
-                              return [false, 'You are too overwhelmed to socialize'];
+                                return [false, 'You are too overwhelmed to socialize'];
                             }
-                          }
+                        }
                     },
                     {
                         buttonText: 'Try to make small talk',
@@ -479,25 +480,25 @@ const characters = [
                         },
                         resultInfo: '<p>Having a “script” for small talk is an example of a behavior known as <strong>masking</strong>. People with autism can learn behaviors that make them seem as if they aren’t struggling or are more “normal”. Masking is not solely found in people with Autism. </p>',
                         condition: (Game) => {
-                            if(Game.stress >= 40)
+                            if (Game.stress >= 40)
                             {
-                              return [true];
+                                return [true];
                             }
                             else
                             {
-                              return [false, 'You are too overwhelmed to mask'];
+                                return [false, 'You are too overwhelmed to mask'];
                             }
-                          }                    
-                        },
-                        {
-                            buttonText: 'Sit in silence',
-                            resultExposition: `<p>You do your best to ignore the people around you and just sit in silence.  You worry about people thinking that you are weird for just sitting there so you pull out your phone and pretend to message someone to look busy.</p>`,
-                            effects: {
-                                stress: 0,
-                                reputation: -20,
-                                performance: 0
-                            },
                         }
+                    },
+                    {
+                        buttonText: 'Sit in silence',
+                        resultExposition: `<p>You do your best to ignore the people around you and just sit in silence.  You worry about people thinking that you are weird for just sitting there so you pull out your phone and pretend to message someone to look busy.</p>`,
+                        effects: {
+                            stress: 0,
+                            reputation: -20,
+                            performance: 0
+                        },
+                    }
                 ]
             },
             {
@@ -548,15 +549,15 @@ const characters = [
                             performance: 0
                         },
                         condition: (Game) => {
-                            if(Game.stress >= 30)
+                            if (Game.stress >= 30)
                             {
-                              return [true];
+                                return [true];
                             }
                             else
                             {
-                              return [false, 'You are too overwhelmed to come up with this as an option'];
+                                return [false, 'You are too overwhelmed to come up with this as an option'];
                             }
-                          }
+                        }
                     }
                 ]
             },
@@ -574,15 +575,16 @@ const characters = [
                         },
                         resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often spend a large portion of their free time engaging in or learning more about their special interest.  </p>',
                         condition: (Game) => {
-                            if(Game.stress >= 30)
+                            if (Game.stress >= 30)
                             {
-                              return [true];
+                                return [true];
                             }
                             else
                             {
-                              return [false, 'You are too overwhelmed'];
+                                return [false, 'You are too overwhelmed'];
                             }
-                          }                    },
+                        }
+                    },
                     {
                         buttonText: 'Browse your favorite marine biology internet forum',
                         resultExposition: `<p>You spend about an hour looking through forums and you feel a bit better afterwards.</p>`,
@@ -593,15 +595,16 @@ const characters = [
                         },
                         resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often spend a large portion of their free time engaging in or learning more about their special interest.  </p>',
                         condition: (Game) => {
-                            if(Game.stress >= 30)
+                            if (Game.stress >= 30)
                             {
-                              return [true];
+                                return [true];
                             }
                             else
                             {
-                              return [false, 'You are too overwhelmed'];
+                                return [false, 'You are too overwhelmed'];
                             }
-                          }                    },
+                        }
+                    },
                     {
                         buttonText: 'Read a book about squids',
                         resultExposition: `<p>You spend about an hour reading and you feel a bit better afterwards.</p>`,
@@ -612,15 +615,16 @@ const characters = [
                         },
                         resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often spend a large portion of their free time engaging in or learning more about their special interest.  </p>',
                         condition: (Game) => {
-                            if(Game.stress >= 30)
+                            if (Game.stress >= 30)
                             {
-                              return [true];
+                                return [true];
                             }
                             else
                             {
-                              return [false, 'You are too overwhelmed'];
+                                return [false, 'You are too overwhelmed'];
                             }
-                          }                    },
+                        }
+                    },
                     {
                         buttonText: 'Get started on homework immediately',
                         resultExposition: `<p>You start working on your homework.</p>`,
@@ -630,15 +634,16 @@ const characters = [
                             performance: 20
                         },
                         condition: (Game) => {
-                            if(Game.stress >= 60)
+                            if (Game.stress >= 60)
                             {
-                              return [true];
+                                return [true];
                             }
                             else
                             {
-                              return [false, 'You are too overwhelmed'];
+                                return [false, 'You are too overwhelmed'];
                             }
-                          }                    },
+                        }
+                    },
                     {
                         buttonText: 'Scroll through your social media feed',
                         resultExposition: `<p>You spend about an hour scrolling through social media and don't really feel any better afterwards.</p>`,
@@ -663,15 +668,16 @@ const characters = [
                             performance: 0
                         },
                         condition: (Game) => {
-                            if(Game.stress >= 30)
+                            if (Game.stress >= 30)
                             {
-                              return [true];
+                                return [true];
                             }
                             else
                             {
-                              return [false, 'You are too overwhelmed'];
+                                return [false, 'You are too overwhelmed'];
                             }
-                          }                    },
+                        }
+                    },
                     {
                         buttonText: 'Don’t go to the tutoring center',
                         resultExposition: `<p>You write down a guess and move on, you’re pretty sure it's wrong, but it's better than nothing.</p>`,
@@ -697,15 +703,16 @@ const characters = [
                         },
                         resultInfo: '<p><strong>Hypersensitivity</strong> to certain sounds is common in people with autism.  Hearing these sounds can cause intense distress, overwhelm, panic, or exhaustion if they are exposed to them for an extended period of time. Some autistic people wear noise cancelling headphones to mitigate this.</p>',
                         condition: (Game) => {
-                            if(Game.stress >= 40)
+                            if (Game.stress >= 40)
                             {
-                              return [true];
+                                return [true];
                             }
                             else
                             {
-                              return [false, 'You are too overwhelmed to have this conversation'];
+                                return [false, 'You are too overwhelmed to have this conversation'];
                             }
-                          }                    },
+                        }
+                    },
                     {
                         buttonText: 'Try to ignore it',
                         resultExposition: `<p>You try to just tune it out and focus on the work, but the noise is impossible to ignore.  The sound makes your skin crawl and you are starting to feel panicky.  There's no way you are getting your work done.</p>`,
@@ -1148,7 +1155,7 @@ const characters = [
                 theme: 'outside trailer',
                 responses: [
                     {
-                        buttonText:'Get in the truck and do the morning drive.',
+                        buttonText: 'Get in the truck and do the morning drive.',
                         resultExposition: null,
                         effects: {
                             stress: 0,
@@ -1163,14 +1170,14 @@ const characters = [
                 theme: 'morning drive',
                 responses: [
                     {
-                    buttonText:'Continue down the road.',
-                    resultExposition: null,
-                    effects: {
-                        stress: 0,
-                        reputation: 0,
-                        performance: 0
+                        buttonText: 'Continue down the road.',
+                        resultExposition: null,
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        }
                     }
-                }
                 ]
             },
             {
@@ -1178,7 +1185,7 @@ const characters = [
                 theme: 'morning party',
                 responses: [
                     {
-                        buttonText:'Reprimand them about the trash',
+                        buttonText: 'Reprimand them about the trash',
                         resultExposition: 'They are taken aback by your sudden annoyance. Confused expressions stare back at you.',
                         effects: {
                             stress: 0,
@@ -1187,7 +1194,7 @@ const characters = [
                         }
                     },
                     {
-                        buttonText:'Attempt to explain park rules politely.',
+                        buttonText: 'Attempt to explain park rules politely.',
                         resultExposition: 'Some of them look embarrassed, while other stare at you with uncaring expressions.',
                         effects: {
                             stress: 20,
@@ -1196,7 +1203,7 @@ const characters = [
                         }
                     },
                     {
-                        buttonText:'Say nothing.',
+                        buttonText: 'Say nothing.',
                         resultExposition: 'Your boss is not going to like this.',
                         effects: {
                             stress: 0,
@@ -1209,7 +1216,7 @@ const characters = [
             {
                 exposition: 'You are back from your drive. After the stress this morning, you decide to take a short walk on some of the trails closest to the campsites.',
                 theme: 'walking campsites',
-                responses:[
+                responses: [
                     {
                         buttonText: ' Walk the cute riverside campsite trail.',
                         effects: {
@@ -1223,7 +1230,7 @@ const characters = [
             {
                 exposition: '<p> You are <strong>flagged</strong> down by an elderly couple. They are wondering where wood for a fire can be found </p>',
                 theme: 'walking campsites',
-                responses:[
+                responses: [
                     {
                         buttonText: 'Stay silent and stare at them.',
                         resultExposition: 'They look at you with confused expressions. After some time, they continue along their path.',
@@ -1266,7 +1273,7 @@ const characters = [
             {
                 exposition: '<p>On the way back from your walk, you feel you walkie-talkie buzzing with a call. You check and see that it is your <strong>boss</strong> Phil.</p>',
                 theme: 'phone call',
-                responses:[
+                responses: [
                     {
                         buttonText: 'Pick up the phone.',
                         resultExposition: "You don't like Phil. He loves to make you uncomfortable, and he believes you to be too inflexible for this position. This will not be an easy call.",
@@ -1281,7 +1288,7 @@ const characters = [
             {
                 exposition: '<p>Due to the recent influx of new campers, your boss asks you to lead a nature hike. He <strong>knows</strong> that you dislike working with people, and knows that it is the reason you chose this job in the first place. He does this often, and your complaints often fall on deaf ears.</p>',
                 theme: 'after call',
-                responses:[
+                responses: [
                     {
                         buttonText: 'Get ready for the hike.',
                         resultExposition: "You like to come prepared. You have mapped out a safe, but interesting trail to the best spot in the park. You have packed extensive safety gear. You have brought snacks for everyone, and even included gluten-free and vegetarian options. This can't go wrong.",
@@ -1296,7 +1303,7 @@ const characters = [
             {
                 exposition: '<p>It is time for the hike. Surrounding you at the foot of the trail is a group of about 10 -15 campers of varying ages. Their eyes questioning and full of <strong>expectation.</strong></p>',
                 theme: 'nature hike 1',
-                responses:[
+                responses: [
                     {
                         buttonText: 'Explain the safety rules.',
                         resultExposition: "Phil knows that public speaking is not one of your skills. Either way, you manage to explain the rules without too much trouble. It's time for the hike",
@@ -1305,7 +1312,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: (Game) => (Game.stress >= 70)
+                        condition: ScenarioResponse.stressCondition(70)
                     },
                     {
                         buttonText: 'Freeze and look at the ground.',
@@ -1315,7 +1322,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: (Game) => (Game.stress >= 70)
+                        condition: ScenarioResponse.stressCondition(70)
                     },
                     {
                         buttonText: 'Start walking quickly.',
@@ -1325,7 +1332,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: (Game) => (Game.stress >= 70)
+                        condition: ScenarioResponse.stressCondition(70)
                     },
                     {
                         buttonText: 'Talk to the person closest too you.',
@@ -1335,14 +1342,14 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: (Game) => (Game.stress >= 70)
+                        condition: ScenarioResponse.stressCondition(70)
                     }
                 ]
             },
             {
                 exposition: '<p>It is time for the hike. Surrounding you at the foot of the trail is a group of about 10 -15 campers of varying ages. Their eyes questioning and full of <strong>expectation.</strong></p>',
                 theme: 'nature hike 1',
-                responses:[
+                responses: [
                     {
                         buttonText: 'Explain the safety rules.',
                         resultExposition: "Phil knows that public speaking is not one of your skills. Either way, you manage to explain the rules without too much trouble. It's time for the hike",
@@ -1351,7 +1358,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: (Game) => (Game.stress >= 70)
+                        condition: ScenarioResponse.stressCondition(70)
                     },
                     {
                         buttonText: 'Freeze and look at the ground.',
@@ -1361,7 +1368,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: (Game) => (Game.stress >= 70)
+                        condition: ScenarioResponse.stressCondition(70)
                     },
                     {
                         buttonText: 'Start walking quickly.',
@@ -1371,7 +1378,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: (Game) => (Game.stress >= 70)
+                        condition: ScenarioResponse.stressCondition(70)
                     },
                     {
                         buttonText: 'Talk to the person closest too you.',
@@ -1381,8 +1388,8 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: (Game) => (Game.stress >= 70)
-                    } 
+                        condition: ScenarioResponse.stressCondition(70)
+                    }
                 ]
             }
         ],

@@ -87,10 +87,9 @@ const screens = {
             <button id="button-play-again">
                 New Story
             </button>
-            <a href="https://autisticadvocacy.org/resources/" id="button-resources">
-                <button>
-                    Resources for individuals with Autism
-                </button>
+            <button typeid="button-resources" onclick="window.location.href='https://autisticadvocacy.org/resources/'">
+                Resources for individuals with Autism
+            </button>
             <button id="button-survey">
                 Help us improve!
             </button>
