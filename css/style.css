@@ -192,8 +192,60 @@ body {
     background-size: cover;
 }
 
+#backdrop[data-bg="nature hike 6"] {
+    background-image: url('../assets/nature_hike_6.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="report"] {
+    background-image: url('../assets/report.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="outside office"] {
+    background-image: url('../assets/outside_office.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
 
 
+#backdrop[data-bg="evening route 1"] {
+    background-image: url('../assets/evening_route_1.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="evening route 2"] {
+    background-image: url('../assets/evening_route_2.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="camp party 1"] {
+    background-image: url('../assets/camp_party_1.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="camp party 2"] {
+    background-image: url('../assets/camp_party_2.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="camp party 3"] {
+    background-image: url('../assets/camp_party_3.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="walk home"] {
+    background-image: url('../assets/walk_home.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
 
 #backdrop {
     position: absolute;

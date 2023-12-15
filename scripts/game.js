@@ -179,7 +179,42 @@ let Game = (function () {
             audio: 'nature_hike_5.mp3',
             backdrop: './assets/nature_hike_5.png',
         },
-        
+        "nature hike 6": {
+            audio: 'nature_hike_6.mp3',
+            backdrop: './assets/nature_hike_6.png',
+        },
+        "report": {
+            audio: 'report.mp3',
+            backdrop: './assets/report.png',
+        },
+        "outside office": {
+            audio: 'outside_office.mp3',
+            backdrop: './assets/outside_office.png',
+        },
+        "evening route 1": {
+            audio: 'evening_route_1.mp3',
+            backdrop: './assets/evening_route_1.png',
+        },
+        "evening route 2": {
+            audio: 'evening_route_1.mp3',
+            backdrop: './assets/evening_route_2.png',
+        },
+        "camp party 1": {
+            audio: 'camp_party_1.mp3',
+            backdrop: './assets/camp_party_1.png',
+        },
+        "camp party 2": {
+            audio: 'camp_party_1.mp3',
+            backdrop: './assets/camp_party_2.png',
+        },
+        "camp party 3'": {
+            audio: 'outside_office.mp3',
+            backdrop: './assets/camp_party_3.png',
+        },
+        "walk_home'": {
+            audio: 'nature_hike_6.mp3',
+            backdrop: './assets/walk_home.png',
+        },
     }
 
     /**

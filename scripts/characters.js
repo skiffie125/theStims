@@ -1417,7 +1417,17 @@ const characters = [
                 theme: 'nature hike 5',
                 responses:[
                     {
-                        buttonText: ' I am prepared for this.',
+                        buttonText: 'I have baking soda.',
+                        resultExposition: "This is a known hazard when hiking in the Pacific Northwest. You always come prepared with baking soda for various types of stings. After applying a mixture of baking soda and water onto both of the injured hiker's wounds, you see their expressions visibly ease. They thank you profusely.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                    {
+                        buttonText: 'Pick the jewelweed.',
+                        resultExposition: "<p>This is a known hazard when hiking in the Pacific Northwest. Lucky for you, a native remedy comes to mind. You grab the stem of a nearby <strong><i>Impatiens capensis</strong></i>, a jewelweed plant, crushing it in your hands. You apply it to the wounds of the injured hiker's, and you see their expressions visibly ease. They thank you profusely.</p>",
                         effects: {
                             stress: 0,
                             reputation: 0,
@@ -1426,14 +1436,203 @@ const characters = [
                     }
                 ]
             },
+            {
+                exposition: '<p>Crisis averted, your group of hikers move quickly down the trail, attempting to make it to camp as soon as possible. The injured campers are uncomfortable, but okay. At the head of the trail, you make a closing statement to the tired group of hikers about trail safety, and let people go on their way. The two injured campers stay behind to thank you again.</p>',
+                theme: 'nature hike 6',
+                responses:[
+                    {
+                        buttonText: 'Time to make a report.',
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                ]
+            },
+            {
+                exposition: "<p>You are not excited about this. You hate making reports. Phil nitpicks and always seems to find an issue with everything you do, and you know that you will be taking the blame for today's incident. You type out the events <strong>exactly</strong> as they occur, being sure to leave out no details. Almost immediately, you receive a buzzing call on your walkie.</p>",
+                theme: 'report',
+                responses:[
+                    {
+                        buttonText: 'Pick up the call.',
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                ]
+            },
+            {
+                exposition: "<p>You are immediately put on the defensive, and your boss's accusatory tone leaves no room for explaining yourself. He questions your solution to the situation, calling it careless and sloppy.</p>",
+                theme: 'report',
+                responses:[
+                    {
+                        buttonText: 'I am not sloppy.',
+                        resultExposition: "Phil explodes. He chews you out for 30 minutes straight, and you are unable to get a single word in. He never listens.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                    {
+                        buttonText: 'Hang up.',
+                        resultExposition: "You have dealt with a lot today, and honestly you can do without a night of Phil. He will be livid in the morning.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                    {
+                        buttonText: 'Stay quiet and listen.',
+                        resultExposition: "You suck it up and take the abuse. Your job means too much to you for you to put it on the line over something silly.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                ]
+            },
+            {
+                exposition: "<p>It has been a very long day, you are exhausted, but it is not over just yet. Your days end similar to how they start, and it is time for your evening route.</p>",
+                theme: 'outside office',
+                responses:[
+                    {
+                        buttonText: 'Get in the truck and start driving.',
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                ]
+            },
+            {
+                exposition: "<p>The familiar twisting road lulls slowly ahead. You are taking your time, and you deserve it. As the road stretches and turns, you see lights dance and voices shout from a recognizable campsite.</p>",
+                theme: 'evening route 1',
+                responses:[
+                    {
+                        buttonText: 'Not this again.',
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                ]
+            },
+            {
+                exposition: "<p>You pull up to the familiar campsite of the college students. They seem to be in the middle of a quite rambunctious party.</p>",
+                theme: 'evening route 2',
+                responses:[
+                    {
+                        buttonText: 'Intervene.',
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                ]
+            },
+            {
+                exposition: "<p>As you approach the scene, you can see that they have made their fire <strong>unsafely</strong>. There is lots of yelling and rambunctious play, and you worry that someone may be burned. Before you can say anything, the two college students from the hike approach you.</p>",
+                theme: 'camp party 1',
+                responses:[
+                    {
+                        buttonText: 'Oh, uh. Hello.',
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                ]
+            },
+            {
+                exposition: "<p>They thank you profusely again, stating that their previous injuries are feeling much better. They see the stressed expression on your face and look around them with self-aware expressions. “Are we being too loud?” they ask.</p>",
+                theme: 'camp party 2',
+                responses:[
+                    {
+                        buttonText: 'Yes you are.',
+                        resultExposition: "They start apologizing immediately. They gather their friends around you and the group promises you they will be more aware of the noise.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                    {
+                        buttonText: "Yes, but I'm more worried about the fire.",
+                        resultExposition: "They start apologizing immediately. They gather their friends around you and the group promises you they will be more aware of the noise. One of them asks you if you can help them with the fire. You assist them, creating a safer fire pit that is up to park regulation.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                    {
+                        buttonText: 'Stay silent.',
+                        resultExposition: "One of them notices your discomfort. They apologize profusely and promise to keep their friends under control.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                ]
+            },
+            {
+                exposition: "<p>With the party quieted to a manageable level, energy levels stay high and faces are still smiling brightly. You have instructed the students how to build a safe fire pit, and they work excitedly on the new and improved fire. A small group approaches and asks if you would like to stay and listen to ghost stories.</p>",
+                theme: 'camp party 3',
+                responses:[
+                    {
+                        buttonText: 'Stay for a bit.',
+                        resultExposition: "You stay and tell your favorite ghost story. You twist a tale of an erie mansion on an old hill. Screams heard in the night, cyclical like clockwork. Neighbors with smiles that never leave their faces. An missing persons case, still unsolved. The campers stare in horror and delight. They seem very pleased with your story.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                    {
+                        buttonText: "I should be leaving.",
+                        resultExposition: "It has been a very long day and you deserve your rest. Well done.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                ]
+            },
+            {
+                exposition: "<p>You have decided to walk back to your trailer, taking some personal time for yourself. It has been a difficult, but gratifying day. The stars are visible above, twinkling brightly against the night sky. The air is cold and crisp, and as you reach your trailer, you release a big sigh of relief.</p>",
+                theme: 'walk home',
+                responses:[
+                    {
+                        buttonText: 'Finally home.',
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                    },
+                ]
+            },
+            
         ],
         overwhelmScenario: {
-            exposition: `<p> Test! </p>`,
+            exposition: `<p>You vision narrows. You break into a cold sweat. Your mind both racing and unmoving, and you are immobilized in place. Like a statue, you are stuck.</p>`,
             //theme: 
             responses: [
                 {
-                    buttonText: `Continue`,
-                    resultExposition: `<p> You go get away as soon as you can. You to the bathroom and cross your arms with your hands on your shoulders. You breathe in a way your aunt showed you and it helps you calm down for the moment. You go through what just happened in your head, looking for what made you feel overwhelmed. It takes you a while to sort it all out. </p>`,
+                    buttonText: `Get me out of here.`,
+                    resultExposition: `<p>You sprint away, finding the nearest trail to pace. This is all to much, your stomach lies tied in a knot, twisting and churning in your core. The lights are much too bright. You need to close your eyes for a moment.</p>`,
                     effects: {
                         stress: 30,
                         reputation: -10,
