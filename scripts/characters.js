@@ -1189,17 +1189,17 @@ const characters = [
                         resultExposition: 'They are taken aback by your sudden annoyance. Confused expressions stare back at you.',
                         effects: {
                             stress: 0,
-                            reputation: -20,
-                            performance: 20
+                            reputation: -30,
+                            performance: 30
                         }
                     },
                     {
                         buttonText: 'Attempt to explain park rules politely.',
                         resultExposition: 'Some of them look embarrassed, while other stare at you with uncaring expressions.',
                         effects: {
-                            stress: 20,
-                            reputation: 20,
-                            performance: 20
+                            stress: -30,
+                            reputation: 30,
+                            performance: 30
                         }
                     },
                     {
@@ -1208,7 +1208,7 @@ const characters = [
                         effects: {
                             stress: 0,
                             reputation: 0,
-                            performance: -20
+                            performance: -30
                         }
                     }
                 ]
@@ -1235,29 +1235,29 @@ const characters = [
                         buttonText: 'Stay silent and stare at them.',
                         resultExposition: 'They look at you with confused expressions. After some time, they continue along their path.',
                         effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            stress: 30,
+                            reputation: -30,
+                            performance: -30
                         }
                     },
                     {
                         buttonText: 'This is a forrest, there is wood everywhere.',
                         resultExposition: 'They chuckle and smile awkwardly, they think you are joking.',
                         effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            stress: 20,
+                            reputation: -20,
+                            performance: -20
                         }
                     },
                     {
                         buttonText: 'It\'s by my trailer.',
                         resultExposition: 'You dislike when people go near your things, you often find them disturbed. Either way, these people want quality firewood and you are not about to bar them from it.',
                         effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            stress: -20,
+                            reputation: 20,
+                            performance: 20
                         },
-                        condition: ScenarioResponse.stressCondition(80)
+                        condition: ScenarioResponse.stressCondition(70)
                     },
                     {
                         buttonText: 'Cut them down a tree.',
@@ -1308,37 +1308,40 @@ const characters = [
                         buttonText: 'Explain the safety rules.',
                         resultExposition: "Phil knows that public speaking is not one of your skills. Either way, you manage to explain the rules without too much trouble. It's time for the hike",
                         effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            stress: -30,
+                            reputation: 40,
+                            performance: 40
                         },
+                        condition: ScenarioResponse.stressCondition(60)
                     },
                     {
                         buttonText: 'Freeze and look at the ground.',
                         resultExposition: "Phil knows that public speaking is not one of your skills. This is all too much right now. You freeze up and stare deep into the ground. The hikers begin without you. You'll catch up in a minute.",
                         effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            stress: 40,
+                            reputation: -40,
+                            performance: -40
                         },
                     },
                     {
                         buttonText: 'Start walking quickly.',
                         resultExposition: "Phil knows that public speaking is not one of your skills. You decide to get moving early. The hikers are startled, they expected a safety speech. They will catch up soon.",
                         effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            stress: 20,
+                            reputation: -20,
+                            performance: -20
                         },
+                        condition: ScenarioResponse.stressCondition(30)
                     },
                     {
                         buttonText: 'Talk to the person closest too you.',
                         resultExposition: "You strike up a conversation with the person closest too you. The rest of their group overhears and gets involved. You are able to give the safety talk to a smaller and more manageable group. Hope Phil doesn't mind.",
                         effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            stress: -10,
+                            reputation: 10,
+                            performance: -10
                         },
+                        condition: ScenarioResponse.stressCondition(50)
                     }
                 ]
             },
@@ -1351,24 +1354,25 @@ const characters = [
                         resultExposition: "<p><strong><i>Gaultheria shallon</i></strong>, otherwise known as Salal, looks to be a favorite among the hikers. Lucky for them, it is also a favorite of yours. You speak to the interested campers, gathering a small crowd in the process. You talk about the plants usage in native anti-cramping and anti-inflammatory medicine, and it's appetite suppressing properties. </p>",
                         effects: {
                             stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            reputation: 20,
+                            performance: 20
                         },
+                        condition: ScenarioResponse.stressCondition(60)
                     },
                     {
                         buttonText: 'Identify local birds.',
                         resultExposition: "<p>Through the trees you spot <strong><i>Spinus tristis</i></strong>, otherwise known as the American Goldfinch, the state bird of Washington State! Near it flies a <strong><i>Cyanocitta stelleri</i></strong>, or a Steller's Jay. You start too name a few other North American Birds, gathering a small interested crowd.</p>",
                         effects: {
                             stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            reputation: 20,
+                            performance: 20
                         },
                     },
                     {
                         buttonText: 'Look out at the harbor.',
                         resultExposition: "It's a stunningly bright day, and the harbor is teeming with life. Sailboats and beach-goers comb the shores alike, and the arial view provides you with a sense of comfort and relaxation.",
                         effects: {
-                            stress: 0,
+                            stress: 20,
                             reputation: 0,
                             performance: 0
                         },
@@ -1377,10 +1381,11 @@ const characters = [
                         buttonText: 'Talk to the nervous looking hiker.',
                         resultExposition: "One of the hikers is alone and looks lost. You have been there many times before. You approach them and make small conversation about the hike and the park. You can tell that your words are approached, and the hiker looks visibly more at ease",
                         effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            stress: 10,
+                            reputation: 30,
+                            performance: 30
                         },
+                        condition: ScenarioResponse.stressCondition(60)
                     } 
                 ]
             },
@@ -1420,7 +1425,7 @@ const characters = [
                         buttonText: 'I have baking soda.',
                         resultExposition: "This is a known hazard when hiking in the Pacific Northwest. You always come prepared with baking soda for various types of stings. After applying a mixture of baking soda and water onto both of the injured hiker's wounds, you see their expressions visibly ease. They thank you profusely.",
                         effects: {
-                            stress: 0,
+                            stress: -20,
                             reputation: 0,
                             performance: 0
                         },
@@ -1429,7 +1434,7 @@ const characters = [
                         buttonText: 'Pick the jewelweed.',
                         resultExposition: "<p>This is a known hazard when hiking in the Pacific Northwest. Lucky for you, a native remedy comes to mind. You grab the stem of a nearby <strong><i>Impatiens capensis</strong></i>, a jewelweed plant, crushing it in your hands. You apply it to the wounds of the injured hiker's, and you see their expressions visibly ease. They thank you profusely.</p>",
                         effects: {
-                            stress: 0,
+                            stress: 20,
                             reputation: 0,
                             performance: 0
                         },
@@ -1472,27 +1477,28 @@ const characters = [
                         buttonText: 'I am not sloppy.',
                         resultExposition: "Phil explodes. He chews you out for 30 minutes straight, and you are unable to get a single word in. He never listens.",
                         effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            stress: 40,
+                            reputation: -20,
+                            performance: -40
                         },
+                        condition: ScenarioResponse.stressCondition(40)
                     },
                     {
                         buttonText: 'Hang up.',
                         resultExposition: "You have dealt with a lot today, and honestly you can do without a night of Phil. He will be livid in the morning.",
                         effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            stress: 20,
+                            reputation: -20,
+                            performance: -20
                         },
                     },
                     {
                         buttonText: 'Stay quiet and listen.',
                         resultExposition: "You suck it up and take the abuse. Your job means too much to you for you to put it on the line over something silly.",
                         effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            stress: -20,
+                            reputation: 20,
+                            performance: 30
                         },
                     },
                 ]
@@ -1561,27 +1567,29 @@ const characters = [
                         buttonText: 'Yes you are.',
                         resultExposition: "They start apologizing immediately. They gather their friends around you and the group promises you they will be more aware of the noise.",
                         effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            stress: -20,
+                            reputation: 20,
+                            performance: 20
                         },
+                        condition: ScenarioResponse.stressCondition(60)
                     },
                     {
                         buttonText: "Yes, but I'm more worried about the fire.",
                         resultExposition: "They start apologizing immediately. They gather their friends around you and the group promises you they will be more aware of the noise. One of them asks you if you can help them with the fire. You assist them, creating a safer fire pit that is up to park regulation.",
                         effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            stress: -30,
+                            reputation: 30,
+                            performance: 30
                         },
+                        condition: ScenarioResponse.stressCondition(80)
                     },
                     {
                         buttonText: 'Stay silent.',
                         resultExposition: "One of them notices your discomfort. They apologize profusely and promise to keep their friends under control.",
                         effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
+                            stress: 40,
+                            reputation: -20,
+                            performance: -20
                         },
                     },
                 ]
@@ -1594,8 +1602,8 @@ const characters = [
                         buttonText: 'Stay for a bit.',
                         resultExposition: "You stay and tell your favorite ghost story. You twist a tale of an erie mansion on an old hill. Screams heard in the night, cyclical like clockwork. Neighbors with smiles that never leave their faces. An missing persons case, still unsolved. The campers stare in horror and delight. They seem very pleased with your story.",
                         effects: {
-                            stress: 0,
-                            reputation: 0,
+                            stress: -20,
+                            reputation: 40,
                             performance: 0
                         },
                     },
@@ -1603,7 +1611,7 @@ const characters = [
                         buttonText: "I should be leaving.",
                         resultExposition: "It has been a very long day and you deserve your rest. Well done.",
                         effects: {
-                            stress: 0,
+                            stress: 100,
                             reputation: 0,
                             performance: 0
                         },
