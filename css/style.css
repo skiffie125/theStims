@@ -162,6 +162,38 @@ body {
     background-size: cover;
 }
 
+#backdrop[data-bg="nature hike 1"] {
+    background-image: url('../assets/nature_hike_1.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="nature hike 2"] {
+    background-image: url('../assets/nature_hike_2.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="nature hike 3"] {
+    background-image: url('../assets/nature_hike_3.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="nature hike 4"] {
+    background-image: url('../assets/nature_hike_3.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+#backdrop[data-bg="nature hike 5"] {
+    background-image: url('../assets/nature_hike_3.png');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
+
+
 
 #backdrop {
     position: absolute;
