@@ -1161,7 +1161,7 @@ const characters = [
                             stress: 0,
                             reputation: 0,
                             performance: 0
-                        }
+                        },
                     }
                 ]
             },
@@ -1188,11 +1188,13 @@ const characters = [
                         buttonText: 'Reprimand them about the trash',
                         resultExposition: 'They are taken aback by your sudden annoyance. Confused expressions stare back at you.',
                         effects: {
-                            stress: 0,
+                            stress: -30,
                             reputation: -30,
                             performance: 30
-                        }
+                        },
+                        resultInfo: "<p>Autistic individuals can often come off as rude to unfamiliar people. Particularly in the workplace, a strict adhesion to the rules can be seen as standoffish and inflexible.</p>"
                     },
+
                     {
                         buttonText: 'Attempt to explain park rules politely.',
                         resultExposition: 'Some of them look embarrassed, while other stare at you with uncaring expressions.',
@@ -1200,7 +1202,8 @@ const characters = [
                             stress: -30,
                             reputation: 30,
                             performance: 30
-                        }
+                        },
+                        resultInfo:"<p>Gaging tone can be difficult for people with autism. Autistic individuals often spend lots of effort to make sure that they are not being perceived as unintentionally rude.</p>"
                     },
                     {
                         buttonText: 'Say nothing.',
@@ -1209,7 +1212,7 @@ const characters = [
                             stress: 0,
                             reputation: 0,
                             performance: -30
-                        }
+                        },
                     }
                 ]
             },
@@ -1238,7 +1241,8 @@ const characters = [
                             stress: 30,
                             reputation: -30,
                             performance: -30
-                        }
+                        },
+                        resultInfo: "<p>It is not uncommon for autistic individuals to freeze during stressful situations. It is often described as 'shutting down', and can involve sudden loss of words and staring into empty space.</p>"
                     },
                     {
                         buttonText: 'This is a forrest, there is wood everywhere.',
@@ -1247,7 +1251,8 @@ const characters = [
                             stress: 20,
                             reputation: -20,
                             performance: -20
-                        }
+                        },
+                        resultInfo: "<p>Autistic individuals often take peoples words at face value. This can result in confusion and harassment, and can mistakenly lead people to disregard them and their skills.</p>"
                     },
                     {
                         buttonText: 'It\'s by my trailer.',
@@ -1267,7 +1272,7 @@ const characters = [
                             reputation: -10,
                             performance: 10
                         }
-                    }
+                    },
                 ]
             },
             {
@@ -1643,10 +1648,12 @@ const characters = [
                     resultExposition: `<p>You sprint away, finding the nearest trail to pace. This is all to much, your stomach lies tied in a knot, twisting and churning in your core. The lights are much too bright. You need to close your eyes for a moment.</p>`,
                     effects: {
                         stress: 30,
-                        reputation: -10,
-                        performance: -10
-                    }
+                        reputation: -20,
+                        performance: -20
+                    },
+                    resultInfo: "<p>You have just experienced a <strong>panic attack</strong>. Individuals with ASD often experience panic attacks as symptoms of overstimulation. They can be debilitating and frightening experiences, and cause feeling of intense emotion. When someone you know looks to be experiencing a panic attack, ask them how you can help.</p>"
                 }
+
             ]
         }
     }
