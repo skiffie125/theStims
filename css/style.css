@@ -108,6 +108,12 @@ body {
     background-size: cover;
 }
 
+#backdrop[data-bg="dorm desk roommate chewing"] {
+    background-image: url('../assets/dorm_desk.jpg');
+    background-position: 0 100%;
+    background-size: cover;
+}
+
 #backdrop[data-bg="trailer"] {
     background-image: url('../assets/trailer.jpg');
     background-position: 0 100%;

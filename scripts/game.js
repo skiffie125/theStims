@@ -40,8 +40,8 @@ let Game = (function () {
     Object.values(global_sfx).forEach(effect => { sound_group.addEffect(effect); });
     
     const STAT_MAX = 100;
-    const STRESS_LOW = 70;
-    const STRESS_HIGH = 50;
+    const STRESS_LOW = 60;
+    const STRESS_HIGH = 30;
 
     const floating_text_pool = [
         `The world is too loud.`,
@@ -112,11 +112,11 @@ let Game = (function () {
             backdrop: './assets/classroom_4.jpg',
         },
         "phone": {
-            audio: 'background_chatter.mp3',
+            audio: 'background_chatter.wav',
             backdrop: './assets/phone.jpg',
         },
         "college club": {
-            audio: 'background_chatter.mp3',
+            audio: 'background_chatter.wav',
             backdrop: './assets/club_room.jpg',
         },
         "dorm room": {
@@ -124,6 +124,10 @@ let Game = (function () {
             backdrop: './assets/dorm_room.jpg',
         },
         "dorm desk": {
+            audio: 'dorm_ambient.wav',
+            backdrop: './assets/dorm_desk.jpg',
+        },
+        "dorm desk roommate chewing": {
             audio: 'gum.wav',
             backdrop: './assets/dorm_desk.jpg',
         },

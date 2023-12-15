@@ -361,15 +361,14 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        // condition: ScenarioResponse.stressCondition(50)
                         condition: (Game) => {
-                            if(Game.stress >= )
+                            if(Game.stress >= 30)
                             {
                               return [true];
                             }
                             else
                             {
-                              return [false, 'You are not awesome enough to choose this option'];
+                              return [false, 'You are too overwhelmed to talk to your teacher right now'];
                             }
                           }
                     },
@@ -405,8 +404,17 @@ const characters = [
                             reputation: 0,
                             performance: -20
                         },
-                        condition: ScenarioResponse.stressCondition(60)
-                    },
+                        condition: (Game) => {
+                            if(Game.stress >= 30)
+                            {
+                              return [true];
+                            }
+                            else
+                            {
+                              return [false, 'You too overwhelmed to socialize'];
+                            }
+                          }                    
+                        },
                     {
                         buttonText: 'Decline the invitation',
                         resultExposition: `<p>You decline the invitation and try to explain that you just don’t have the energy.  You tack a “I’d love to some other time though!” onto the end in hopes that they don’t interpret this as a lack of interest, but <strong>you worry that there won’t be another invitation in the future</strong>.</p>`,
@@ -424,7 +432,16 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(30)
+                        condition: (Game) => {
+                            if(Game.stress >= 30)
+                            {
+                              return [true];
+                            }
+                            else
+                            {
+                              return [false, 'You are too overwhelmed to socialize'];
+                            }
+                        }
                     }
                 ]
             },
@@ -441,28 +458,46 @@ const characters = [
                             performance: 0
                         },
                     	resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often derive a lot of joy from learning more about, engaging in, or talking about their special interest with others. </p>',
-                        condition: ScenarioResponse.stressCondition(40)
+                        condition: (Game) => {
+                            if(Game.stress >= 30)
+                            {
+                              return [true];
+                            }
+                            else
+                            {
+                              return [false, 'You are too overwhelmed to socialize'];
+                            }
+                          }
                     },
                     {
                         buttonText: 'Try to make small talk',
                         resultExposition: `<p>You go through your script for small talk and ask what her major is, what classes she’s taking, and how she's liking her classes.  Once you go through those questions you don’t know what to say anymore.  You sit in awkward silence, racking your brain for another normal small talk thing to say and coming up empty.</p>`,
                         effects: {
-                            stress: -20,
+                            stress: -30,
                             reputation: 0,
                             performance: 0
                         },
                         resultInfo: '<p>Having a “script” for small talk is an example of a behavior known as <strong>masking</strong>. People with autism can learn behaviors that make them seem as if they aren’t struggling or are more “normal”. Masking is not solely found in people with Autism. </p>',
-                        condition: ScenarioResponse.stressCondition(60)
-                    },
-                    {
-                        buttonText: 'Sit in silence',
-                        resultExposition: `<p>You do your best to ignore the people around you and just sit in silence.  You worry about people thinking that you are weird for just sitting there so you pull out your phone and pretend to message someone to look busy.</p>`,
-                        effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
+                        condition: (Game) => {
+                            if(Game.stress >= 40)
+                            {
+                              return [true];
+                            }
+                            else
+                            {
+                              return [false, 'You are too overwhelmed to mask'];
+                            }
+                          }                    
                         },
-                    }
+                        {
+                            buttonText: 'Sit in silence',
+                            resultExposition: `<p>You do your best to ignore the people around you and just sit in silence.  You worry about people thinking that you are weird for just sitting there so you pull out your phone and pretend to message someone to look busy.</p>`,
+                            effects: {
+                                stress: 0,
+                                reputation: -20,
+                                performance: 0
+                            },
+                        }
                 ]
             },
             {
@@ -488,7 +523,7 @@ const characters = [
                         buttonText: `Speak your mind`,
                         resultExposition: `<p>You say something about how they have always been kind of selfish and that your friend shouldn’t put up with it anymore. The table goes quiet and you quickly realize <strong>you misread the tone</strong>.  Apparently your friend was joking, they weren’t actually bothered or asking for advice.  You apologize profusely and try to explain that you misunderstood, but the damage has been done.  The rest of dinner is painfully awkward.</p>`,
                         effects: {
-                            stress: 0,
+                            stress: -30,
                             reputation: -40,
                             performance: 0
                         },
@@ -512,7 +547,16 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(40)
+                        condition: (Game) => {
+                            if(Game.stress >= 30)
+                            {
+                              return [true];
+                            }
+                            else
+                            {
+                              return [false, 'You are too overwhelmed to come up with this as an option'];
+                            }
+                          }
                     }
                 ]
             },
@@ -529,8 +573,16 @@ const characters = [
                             performance: 0
                         },
                         resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often spend a large portion of their free time engaging in or learning more about their special interest.  </p>',
-                        condition: ScenarioResponse.stressCondition(30)
-                    },
+                        condition: (Game) => {
+                            if(Game.stress >= 30)
+                            {
+                              return [true];
+                            }
+                            else
+                            {
+                              return [false, 'You are too overwhelmed'];
+                            }
+                          }                    },
                     {
                         buttonText: 'Browse your favorite marine biology internet forum',
                         resultExposition: `<p>You spend about an hour looking through forums and you feel a bit better afterwards.</p>`,
@@ -540,8 +592,16 @@ const characters = [
                             performance: 0
                         },
                         resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often spend a large portion of their free time engaging in or learning more about their special interest.  </p>',
-                        condition: ScenarioResponse.stressCondition(30)
-                    },
+                        condition: (Game) => {
+                            if(Game.stress >= 30)
+                            {
+                              return [true];
+                            }
+                            else
+                            {
+                              return [false, 'You are too overwhelmed'];
+                            }
+                          }                    },
                     {
                         buttonText: 'Read a book about squids',
                         resultExposition: `<p>You spend about an hour reading and you feel a bit better afterwards.</p>`,
@@ -551,8 +611,16 @@ const characters = [
                             performance: 0
                         },
                         resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often spend a large portion of their free time engaging in or learning more about their special interest.  </p>',
-                        condition: ScenarioResponse.stressCondition(50)
-                    },
+                        condition: (Game) => {
+                            if(Game.stress >= 30)
+                            {
+                              return [true];
+                            }
+                            else
+                            {
+                              return [false, 'You are too overwhelmed'];
+                            }
+                          }                    },
                     {
                         buttonText: 'Get started on homework immediately',
                         resultExposition: `<p>You start working on your homework.</p>`,
@@ -561,8 +629,16 @@ const characters = [
                             reputation: 0,
                             performance: 20
                         },
-                        condition: ScenarioResponse.stressCondition(80)
-                    },
+                        condition: (Game) => {
+                            if(Game.stress >= 60)
+                            {
+                              return [true];
+                            }
+                            else
+                            {
+                              return [false, 'You are too overwhelmed'];
+                            }
+                          }                    },
                     {
                         buttonText: 'Scroll through your social media feed',
                         resultExposition: `<p>You spend about an hour scrolling through social media and don't really feel any better afterwards.</p>`,
@@ -580,14 +656,22 @@ const characters = [
                 responses: [
                     {
                         buttonText: `Go to the tutoring center`,
-                        resultExposition: `<p>You pack up your stuff and head to the tutoring center.  It isn’t pleasant, but you get the help you need for your homework.</p>`,
+                        resultExposition: `<p>You pack up your stuff and head to the tutoring center.  It is too loud and interacting with people is draining, but you get the help you need for your homework.</p>`,
                         effects: {
-                            stress: -20,
+                            stress: -30,
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(50)
-                    },
+                        condition: (Game) => {
+                            if(Game.stress >= 30)
+                            {
+                              return [true];
+                            }
+                            else
+                            {
+                              return [false, 'You are too overwhelmed'];
+                            }
+                          }                    },
                     {
                         buttonText: 'Don’t go to the tutoring center',
                         resultExposition: `<p>You write down a guess and move on, you’re pretty sure it's wrong, but it's better than nothing.</p>`,
@@ -601,7 +685,7 @@ const characters = [
             },
             {
                 exposition: `<p>You are trying to study, but the sound of your roommate chewing gum is driving you insane.  You go to put on your noise-canceling headphones only to discover that the battery is dead.</p>`,
-                theme: 'dorm desk',
+                theme: 'dorm desk roommate chewing',
                 responses: [
                     {
                         buttonText: `Ask them to stop`,
@@ -612,8 +696,16 @@ const characters = [
                             performance: 0
                         },
                         resultInfo: '<p><strong>Hypersensitivity</strong> to certain sounds is common in people with autism.  Hearing these sounds can cause intense distress, overwhelm, panic, or exhaustion if they are exposed to them for an extended period of time. Some autistic people wear noise cancelling headphones to mitigate this.</p>',
-                        condition: ScenarioResponse.stressCondition(30)
-                    },
+                        condition: (Game) => {
+                            if(Game.stress >= 40)
+                            {
+                              return [true];
+                            }
+                            else
+                            {
+                              return [false, 'You are too overwhelmed to have this conversation'];
+                            }
+                          }                    },
                     {
                         buttonText: 'Try to ignore it',
                         resultExposition: `<p>You try to just tune it out and focus on the work, but the noise is impossible to ignore.  The sound makes your skin crawl and you are starting to feel panicky.  There's no way you are getting your work done.</p>`,
@@ -623,7 +715,6 @@ const characters = [
                             performance: -20
                         },
                         resultInfo: '<p><strong>Hypersensitivity</strong> to certain sounds is common in people with autism.  Hearing these sounds can cause intense distress, overwhelm, panic, or exhaustion if they are exposed to them for an extended period of time. Some autistic people wear noise cancelling headphones to mitigate this.</p>',
-                        condition: ScenarioResponse.stressCondition(40)
                     },
                     {
                         buttonText: 'Go and study somewhere else',
