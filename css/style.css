@@ -210,7 +210,7 @@ body::after {
     /* background-color: #888888; */
 }
 
-[data-stress-effects="low"] :is(header,footer) {
+[data-stress-effects="low"] :is(header, footer) {
     background-color: #576c8f;
 }
 
@@ -218,15 +218,15 @@ body::after {
     filter: brightness(150%) contrast(150%) blur(4px);
 }
 
-[data-stress-effects="low"]::after{
+[data-stress-effects="low"]::after {
     box-shadow: 0 0 16rem #ffffff inset;
 }
 
-[data-stress-effects="low"] :is(main, #HUD){
+[data-stress-effects="low"] :is(main, #HUD) {
     filter: brightness(120%) contrast(120%);
 }
 
-[data-stress-effects="low"] main{
+[data-stress-effects="low"] main {
     animation: shake-low 0.6s linear infinite;
 }
 
@@ -236,11 +236,11 @@ body::after {
     background-color: #22b1b6;
 }
 
-[data-stress-effects="high"] :is(header,footer) {
+[data-stress-effects="high"] :is(header, footer) {
     background-color: #ffffff;
 }
 
-[data-stress-effects="high"] :is(header,footer) :is(h1, img) {
+[data-stress-effects="high"] :is(header, footer) :is(h1, img) {
     filter: drop-shadow(0 0 2px #5b0018);
 }
 
@@ -248,23 +248,24 @@ body::after {
     filter: brightness(200%) contrast(200%) blur(8px);
 }
 
-[data-stress-effects="high"]::after{
+[data-stress-effects="high"]::after {
     box-shadow: 0 0 16rem 2rem #ffffff inset;
 }
 
-[data-stress-effects="high"] :is(main, #HUD){
+[data-stress-effects="high"] :is(main, #HUD) {
     filter: brightness(180%) contrast(120%);
 }
 
-[data-stress-effects="high"] main{
+[data-stress-effects="high"] main {
     animation: shake-high 1s linear infinite;
 }
 
-header, footer {
+header,
+footer {
     transition: background-color 4s;
 }
 
-:is(header,footer) :is(h1, img) {
+:is(header, footer) :is(h1, img) {
     transition: filter 4s;
 }
 
@@ -273,22 +274,27 @@ header, footer {
         left: 0px;
         top: 0px;
     }
+
     12.5% {
         left: 1px;
         top: 0px;
     }
+
     37.5% {
         left: -1px;
         top: 0px;
     }
+
     62.5% {
         left: 0px;
         top: 1px;
     }
+
     87.5% {
         left: 0px;
         top: -1px;
     }
+
     100% {
         left: 0px;
         top: 0px;
@@ -300,42 +306,52 @@ header, footer {
         left: 0;
         top: 0;
     }
+
     10% {
         left: 2px;
         top: 1px;
     }
+
     20% {
         left: 1px;
         top: -1px;
     }
+
     30% {
         left: -1px;
         top: 2px;
     }
+
     40% {
         left: -2px;
         top: 0px;
     }
+
     50% {
         left: 0px;
         top: 1px;
     }
+
     60% {
         left: -2px;
         top: 2px;
     }
+
     70% {
         left: -1px;
         top: 0px;
     }
+
     80% {
         left: 0px;
         top: 2px;
     }
+
     90% {
         left: -2px;
         top: 1px;
     }
+
     100% {
         left: 0;
         top: 0;
@@ -370,6 +386,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: initial;
 
     transition: background-color 0.2s;
 }
@@ -562,12 +579,15 @@ button:disabled:active {
     0% {
         left: 0;
     }
+
     25% {
         left: -2px;
     }
+
     75% {
         left: 2px;
     }
+
     100% {
         left: 0;
     }
@@ -607,6 +627,49 @@ button:disabled:active {
     text-align: center;
 }
 
+#end-card h4 {
+    font-style: italic;
+    color: #f3f1d5;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+#results {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: #b08643;
+    border-radius: 1rem;
+    margin-block: 1rem;
+}
+
+#results .score {
+    display: block;
+    background-color: black;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    float: right;
+    width: 6rem;
+    text-align: center;
+    border: 2px solid white;
+    box-shadow: 0 0 8px white;
+    /* font-style: normal; */
+}
+
+#results .score.low {
+    background-color: #df343a;
+}
+
+#results .score.medium {
+    background-color: #f2bd4a;
+}
+
+#results .score.high {
+    background-color: #8bcc3c;
+}
+
 #end-buttons {
     justify-content: center;
     display: flex;
@@ -629,13 +692,13 @@ button:disabled:active {
     min-height: 10rem;
     display: flex;
     flex-direction: column;
-    
+
     color: #b08643;
     border-radius: 1rem;
     overflow: hidden;
-    
+
     position: relative;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
 }
@@ -657,7 +720,7 @@ button:disabled:active {
     align-items: center;
 }
 
-.modal-content > * {
+.modal-content>* {
     margin: 0;
     text-align: center;
 }

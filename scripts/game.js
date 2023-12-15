@@ -800,6 +800,20 @@ function render_end() {
     Game.theme = 'none';
     Game.stressEffects(false);
 
+    const getColorClass = (n) => (n >= 30 ? n >= 70 ? 'high' : 'medium' : 'low');
+
+    dom_main.querySelector('#results').innerHTML = `
+    <h4>
+        Stress Management: <span class="score ${getColorClass(Game.stress)}">${Game.stress/10} / 10</span>
+    </h4>
+    <h4>
+        Reputation: <span class="score ${getColorClass(Game.reputation)}">${Game.reputation/10} / 10</span>
+    </h4>
+    <h4>
+        School/Job Performance: <span class="score ${getColorClass(Game.performance)}">${Game.performance/10} / 10</span>
+    </h4>
+    `;
+
     dom_main.querySelector('#button-play-again').addEventListener('click', () => { render_home() });
 }
 

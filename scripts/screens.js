@@ -75,24 +75,9 @@ const screens = {
         <h2>You completed the game!</h2>
         <h3>Results:</h3>
         
-        <h4>Stress Management: 3/5</h4>
-        <p>
-            You managed to keep your stress level relatively under control.
-        </p>
-    
-        <h4>
-            Academic Performance: 2/5
-        </h4>
-        <p>
-            You were neglected your classwork at times, which may have saved you a bit of stress in the short term, but it's only going to make life harder in the long run. 
-        </p>
-    
-        <h4>
-            Social Standing: 4/5
-        </h4>
-        <p>
-            You managed to fit in pretty well with your peers! Your friends describe you as quirky but charming.
-        </p>
+        <div id="results">
+        
+        </div>
         
     
         <div id="end-buttons">
