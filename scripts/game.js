@@ -146,7 +146,20 @@ let Game = (function () {
         "walking campsites": {
             audio: 'walking_campsites.mp3',
             backdrop: './assets/walking_campsites.png',
-        }
+        },
+        "phone call": {
+            audio: 'phone_call.mp3',
+            backdrop: './assets/phone_call.png',
+        },
+        "after call": {
+            audio: 'walking_campsites.mp3',
+            backdrop: './assets/after_call.png',
+        },
+        "nature hike 1": {
+            audio: 'nature_hike_1.mp3',
+            backdrop: './assets/nature_hike.png',
+        },
+        
     }
 
     /**
@@ -731,10 +744,10 @@ function render_scenario(s) {
         newButton.textContent = response.buttonText;
         newButton.classList.add('button-option');
         // console.log(response.condition,response.condition(Game));
-        const [enabled, msg] = response.condition(Game);
+        const enabled = response.condition(Game);
         newButton.disabled = !enabled;
         if(!enabled) newButton.prepend(htmlToElement(`<img src="./assets/ui_icons/forbidden.svg" alt="disabled">`));
-        newButton.title = enabled ? "Choose this option" : msg ? msg : 'Something is preventing you from choosing this option...';
+        newButton.title = enabled ? "Choose this option" : 'Something is preventing you from choosing this option...';
         options.appendChild(newButton);
 
         newButton.addEventListener('click', () => { handle_select_response(response) });

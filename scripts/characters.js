@@ -171,10 +171,15 @@ class ScenarioResponse {
     effects;
 
     /**
-     * @type {(Game) => [Boolean, String]} used to determine if the response should be available to the player or disabled
-     * Also returns a message when response is disabled to explain the cause
+     * @type {(Game) => Boolean} used to determine if the response should be available to the player or disabled
      */
     condition;
+
+
+    // TODO:
+    // figure out how we want to represent other metrics 
+    // social and school in nora's case 
+
 
     /**
      * @param {String} buttonText Text to display on the button to choose this response
@@ -188,7 +193,7 @@ class ScenarioResponse {
         this.resultExposition = resultExposition;
         this.resultInfo = resultInfo;
         this.effects = effects;
-        this.condition = (condition == undefined) ? () => [true] : condition;
+        this.condition = (condition == undefined) ? () => true : condition;
     }
 
     /**
@@ -200,16 +205,6 @@ class ScenarioResponse {
         Game.reputation += this.effects.reputation;
         Game.performance += this.effects.performance;
         this.effects.extra(Game);
-    }
-
-    /**
-     * Creates a condition function which disables the response when stress falls below a certain threshold
-     * @param {number} threshold The stress level past which the condition should be disabled
-     */
-    static stressCondition(threshold) {
-        return (Game) => {
-            return Game.stress >= threshold ? [true] : [false, 'You feel too overwhelmed to choose this option.'];
-        }
     }
 }
 
@@ -361,7 +356,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(50)
+                        condition: (Game) => (Game.stress >= 50)
                     },
                     {
                         buttonText: 'Send an email and hope she receives it in time',
@@ -395,7 +390,7 @@ const characters = [
                             reputation: 0,
                             performance: -20
                         },
-                        condition: ScenarioResponse.stressCondition(60)
+                        condition: (Game) => (Game.stress >= 60)
                     },
                     {
                         buttonText: 'Decline the invitation',
@@ -414,7 +409,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(30)
+                        condition: (Game) => (Game.stress >= 30)
                     }
                 ]
             },
@@ -431,7 +426,7 @@ const characters = [
                             performance: 0
                         },
                     	resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often derive a lot of joy from learning more about, engaging in, or talking about their special interest with others. </p>',
-                        condition: ScenarioResponse.stressCondition(40)
+                        condition: (Game) => (Game.stress >= 40)
                     },
                     {
                         buttonText: 'Try to make small talk',
@@ -442,7 +437,7 @@ const characters = [
                             performance: 0
                         },
                         resultInfo: '<p>Having a “script” for small talk is an example of a behavior known as <strong>masking</strong>. People with autism can learn behaviors that make them seem as if they aren’t struggling or are more “normal”. Masking is not solely found in people with Autism. </p>',
-                        condition: ScenarioResponse.stressCondition(60)
+                        condition: (Game) => (Game.stress >= 60)
                     },
                     {
                         buttonText: 'Sit in silence',
@@ -502,7 +497,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(40)
+                        condition: (Game) => (Game.stress >= 40)
                     }
                 ]
             },
@@ -519,7 +514,7 @@ const characters = [
                             performance: 0
                         },
                         resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often spend a large portion of their free time engaging in or learning more about their special interest.  </p>',
-                        condition: ScenarioResponse.stressCondition(30)
+                        condition: (Game) => (Game.stress >= 30)
                     },
                     {
                         buttonText: 'Browse your favorite marine biology internet forum',
@@ -530,7 +525,7 @@ const characters = [
                             performance: 0
                         },
                         resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often spend a large portion of their free time engaging in or learning more about their special interest.  </p>',
-                        condition: ScenarioResponse.stressCondition(30)
+                        condition: (Game) => (Game.stress >= 30)
                     },
                     {
                         buttonText: 'Read a book about squids',
@@ -541,7 +536,7 @@ const characters = [
                             performance: 0
                         },
                         resultInfo: '<p>Many autistic people have <strong>special interests</strong>, which are intense or obsessive interests in specific topics. They often spend a large portion of their free time engaging in or learning more about their special interest.  </p>',
-                        condition: ScenarioResponse.stressCondition(50)
+                        condition: (Game) => (Game.stress >= 50)
                     },
                     {
                         buttonText: 'Get started on homework immediately',
@@ -551,7 +546,7 @@ const characters = [
                             reputation: 0,
                             performance: 20
                         },
-                        condition: ScenarioResponse.stressCondition(80)
+                        condition: (Game) => (Game.stress >= 80)
                     },
                     {
                         buttonText: 'Scroll through your social media feed',
@@ -576,7 +571,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(50)
+                        condition: (Game) => (Game.stress >= 50)
                     },
                     {
                         buttonText: 'Don’t go to the tutoring center',
@@ -602,7 +597,7 @@ const characters = [
                             performance: 0
                         },
                         resultInfo: '<p><strong>Hypersensitivity</strong> to certain sounds is common in people with autism.  Hearing these sounds can cause intense distress, overwhelm, panic, or exhaustion if they are exposed to them for an extended period of time. Some autistic people wear noise cancelling headphones to mitigate this.</p>',
-                        condition: ScenarioResponse.stressCondition(30)
+                        condition: (Game) => (Game.stress >= 30)
                     },
                     {
                         buttonText: 'Try to ignore it',
@@ -613,7 +608,7 @@ const characters = [
                             performance: -20
                         },
                         resultInfo: '<p><strong>Hypersensitivity</strong> to certain sounds is common in people with autism.  Hearing these sounds can cause intense distress, overwhelm, panic, or exhaustion if they are exposed to them for an extended period of time. Some autistic people wear noise cancelling headphones to mitigate this.</p>',
-                        condition: ScenarioResponse.stressCondition(40)
+                        condition: (Game) => (Game.stress >= 40)
                     },
                     {
                         buttonText: 'Go and study somewhere else',
@@ -699,7 +694,7 @@ const characters = [
                             performance: 0
                         },
                         resultInfo: `<p> Autism can be combined with a variety of intellectual or learning disabilities, though it isn't inherently. Regardless, figuring out ways to make educational material work for students with autism can help them learn more. Not being able to process the material in a traditional classroom can be extremely frustrating, or having students push themselves to understand things can lead to negative outcomes like burnout and health issues. </p>`,
-                        condition: ScenarioResponse.stressCondition(90)
+                        condition: (Game) => (Game.stress >= 90)
                     },
                     {
                         buttonText: `Doodle scenes from the book`,
@@ -735,7 +730,7 @@ const characters = [
                             reputation: -10,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(70)
+                        condition: (Game) => (Game.stress >= 70)
                     },
                     {
                         buttonText: `Laugh and nod`,
@@ -746,7 +741,7 @@ const characters = [
                             performance: 0
                         },
                         resultInfo: `<p> This is a behavior known as masking. People with autism can learn behaviors that make them seem as if they aren’t struggling or are more “normal”. Masking is not solely found in people with Autism. </p>`,
-                        condition: ScenarioResponse.stressCondition(80)
+                        condition: (Game) => (Game.stress >= 80)
                     },
                     {
                         buttonText: `Don't respond at all`,
@@ -765,7 +760,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(90)
+                        condition: (Game) => (Game.stress >= 90)
                     }
                 ]
             },
@@ -790,7 +785,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(80)
+                        condition: (Game) => (Game.stress >= 80)
                     },
                     {
                         buttonText: `Attempt to complete the assignment anyway`,
@@ -800,7 +795,7 @@ const characters = [
                             reputation: 0,
                             performance: -10
                         },
-                        condition: ScenarioResponse.stressCondition(90)
+                        condition: (Game) => (Game.stress >= 90)
                     },
                     {
                         buttonText: `Don't do the assignment `,
@@ -825,7 +820,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(60)
+                        condition: (Game) => (Game.stress >= 60)
                     },
                     {
                         buttonText: `Sit with one of your friends and chat`,
@@ -835,7 +830,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(70)
+                        condition: (Game) => (Game.stress >= 70)
                     },
                     {
                         buttonText: `Sit across from one of your friends and sketch`,
@@ -845,7 +840,7 @@ const characters = [
                             reputation: -10,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(80)
+                        condition: (Game) => (Game.stress >= 80)
                     },
                     {
                         buttonText: `Sit by yourself and cover your ears`,
@@ -870,7 +865,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(60)
+                        condition: (Game) => (Game.stress >= 60)
                     },
                     {
                         buttonText: `Stim and draw`,
@@ -880,7 +875,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(70)
+                        condition: (Game) => (Game.stress >= 70)
                     },
                     {
                         buttonText: `Sit in front of the TV `,
@@ -899,7 +894,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(80)
+                        condition: (Game) => (Game.stress >= 80)
                     },
                     {
                         buttonText: `Get started on chores immediately`,
@@ -909,7 +904,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(90)
+                        condition: (Game) => (Game.stress >= 90)
                     }
                 ]
             },
@@ -925,7 +920,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(70)
+                        condition: (Game) => (Game.stress >= 70)
                     },
                     {
                         buttonText: `Don't`,
@@ -950,7 +945,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(90)
+                        condition: (Game) => (Game.stress >= 90)
                     },
                     {
                         buttonText: `Attempt to eat it`,
@@ -960,7 +955,7 @@ const characters = [
                             reputation: 0,
                             performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(70)
+                        condition: (Game) => (Game.stress >= 70)
                     },
                     {
                         buttonText: `Refuse`,
@@ -1098,17 +1093,17 @@ const characters = [
                         buttonText: 'Stay silent and stare at them.',
                         resultExposition: 'They look at you with confused expressions. After some time, they continue along their path.',
                         effects: {
-                            stress: -40,
-                            reputation: -20,
-                            performance: -20
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
                         }
                     },
                     {
                         buttonText: 'This is a forrest, there is wood everywhere.',
                         resultExposition: 'They chuckle and smile awkwardly, they think you are joking.',
                         effects: {
-                            stress: -20,
-                            reputation: -10,
+                            stress: 0,
+                            reputation: 0,
                             performance: 0
                         }
                     },
@@ -1116,11 +1111,11 @@ const characters = [
                         buttonText: 'It\'s by my trailer.',
                         resultExposition: 'You dislike when people go near your things, you often find them disturbed. Either way, these people want quality firewood and you are not about to bar them from it.',
                         effects: {
-                            stress: -20,
-                            reputation: 10,
-                            performance: 10
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
                         },
-                        condition: ScenarioResponse.stressCondition(80)
+                        condition: (Game) => (Game.stress >= 80)
                     },
                     {
                         buttonText: 'Cut them down a tree.',
@@ -1130,6 +1125,98 @@ const characters = [
                             reputation: -10,
                             performance: 10
                         }
+                    }
+                ]
+            },
+            {
+                exposition: '<p>On the way back from your walk, you feel you walkie-talkie buzzing with a call. You check and see that it is your <strong>boss</strong> Phil.</p>',
+                theme: 'phone call',
+                responses:[
+                    {
+                        buttonText: 'Pick up the phone.',
+                        resultExposition: "You don't like Phil much. He loves to make you uncomfortable, and he believes you to be too inflexible for this position. This will not be an easy call.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        }
+                    }
+                ]
+            },
+            {
+                exposition: '<p>Due to the recent influx of new campers, your boss asks you to lead a nature hike. He <strong>knows</strong> that you dislike working with people, and knows that it is the reason you chose this job in the first place. He does this often, and your complaints often fall on deaf ears.</p>',
+                theme: 'after call',
+                responses:[
+                    {
+                        buttonText: 'Get ready for the hike.',
+                        resultExposition: "You like to come prepared. You have mapped out a safe, but interesting trail to the best spot in the park. You have packed extensive safety gear. You have brought snacks for everyone, and even included gluten-free and vegetarian options. This can't go wrong.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        }
+                    }
+                ]
+            },
+            {
+                exposition: '<p>It is time for the hike. Surrounding you at the foot of the trail is a group of about 10 -15 campers of varying ages. Their eyes questioning and full of <strong>expectation.</strong></p>',
+                theme: 'nature hike 1',
+                responses:[
+                    {
+                        buttonText: 'Explain the safety rules.',
+                        resultExposition: "Phil knows that public speaking is not one of your skills. Either way, you manage to explain the rules without too much trouble. It's time for the hike",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 70)
+                    },
+                    {
+                        buttonText: 'Freeze and look at the ground.',
+                        resultExposition: "Phil knows that public speaking is not one of your skills. This is all too much right now. You freeze up and stare deep into the ground. The hikers begin without you. You'll catch up in a minute.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 70)
+                    },
+                    {
+                        buttonText: 'Start walking quickly.',
+                        resultExposition: "Phil knows that public speaking is not one of your skills. You decide to get moving early. The hikers are startled, they expected a safety speech. They will catch up soon.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 70)
+                    },
+                    {
+                        buttonText: 'Talk to the person closest too you.',
+                        resultExposition: "You strike up a conversation with the person closest too you. The rest of their group overhears and gets involved. You are able to give the safety talk to a smaller and more manageable group. Hope Phil doesn't mind.",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+                        condition: (Game) => (Game.stress >= 70)
+                    }
+                ]
+            },
+            {
+                exposition: '<p>You follow an old trail that hugs tightly to the side of a sandy cliff. Tangled madrones sprawl out of the ground, blending into the evergreen scene seamlessly. The local harbor is visible in the distance, and many sailboats dot the water. This may not have been what you <strong>wanted</strong> to do today, but you wouldn’t show these hikers anything but the <strong>best</strong>.</p>',
+                theme: 'nature hike 1',
+                responses:[
+                    {
+                        buttonText: 'Explain the safety rules.',
+                        resultExposition: "Phil knows that public speaking is not one of your skills. Either way, you manage to explain the rules without too much trouble. It's time for the hike",
+                        effects: {
+                            stress: 0,
+                            reputation: 0,
+                            performance: 0
+                        },
+
                     }
                 ]
             }
