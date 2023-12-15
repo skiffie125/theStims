@@ -163,6 +163,22 @@ let Game = (function () {
             audio: 'nature_hike_1.mp3',
             backdrop: './assets/nature_hike_1.png',
         },
+        "nature hike 2": {
+            audio: 'nature_hike_1.mp3',
+            backdrop: './assets/nature_hike_2.png',
+        },
+        "nature hike 3": {
+            audio: 'nature_hike_3.mp3',
+            backdrop: './assets/nature_hike_3.png',
+        },
+        "nature hike 4": {
+            audio: 'nature_hike_4.mp3',
+            backdrop: './assets/nature_hike_4.png',
+        },
+        "nature hike 5": {
+            audio: 'nature_hike_5.mp3',
+            backdrop: './assets/nature_hike_5.png',
+        },
         
     }
 

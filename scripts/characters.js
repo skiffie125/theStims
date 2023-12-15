@@ -1301,52 +1301,6 @@ const characters = [
                 ]
             },
             {
-                exposition: '<p>It is time for the hike. Surrounding you at the foot of the trail is a group of about 10 -15 campers of varying ages. Their eyes questioning and full of <strong>expectation.</strong></p>',
-                theme: 'nature hike 1',
-                responses: [
-                    {
-                        buttonText: 'Explain the safety rules.',
-                        resultExposition: "Phil knows that public speaking is not one of your skills. Either way, you manage to explain the rules without too much trouble. It's time for the hike",
-                        effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
-                        },
-                        condition: ScenarioResponse.stressCondition(70)
-                    },
-                    {
-                        buttonText: 'Freeze and look at the ground.',
-                        resultExposition: "Phil knows that public speaking is not one of your skills. This is all too much right now. You freeze up and stare deep into the ground. The hikers begin without you. You'll catch up in a minute.",
-                        effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
-                        },
-                        condition: ScenarioResponse.stressCondition(70)
-                    },
-                    {
-                        buttonText: 'Start walking quickly.',
-                        resultExposition: "Phil knows that public speaking is not one of your skills. You decide to get moving early. The hikers are startled, they expected a safety speech. They will catch up soon.",
-                        effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
-                        },
-                        condition: ScenarioResponse.stressCondition(70)
-                    },
-                    {
-                        buttonText: 'Talk to the person closest too you.',
-                        resultExposition: "You strike up a conversation with the person closest too you. The rest of their group overhears and gets involved. You are able to give the safety talk to a smaller and more manageable group. Hope Phil doesn't mind.",
-                        effects: {
-                            stress: 0,
-                            reputation: 0,
-                            performance: 0
-                        },
-                        condition: ScenarioResponse.stressCondition(70)
-                    }
-                ]
-            },
-            {
                 exposition: '<p>It is time for the hike. Surrounding you at the foot of the trail is a group of about 10 - 15 campers of varying ages. Their eyes questioning and full of <strong>expectation.</strong></p>',
                 theme: 'nature hike 1',
                 responses:[

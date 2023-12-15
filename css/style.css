@@ -181,13 +181,13 @@ body {
 }
 
 #backdrop[data-bg="nature hike 4"] {
-    background-image: url('../assets/nature_hike_3.png');
+    background-image: url('../assets/nature_hike_4.png');
     background-position: 0 100%;
     background-size: cover;
 }
 
 #backdrop[data-bg="nature hike 5"] {
-    background-image: url('../assets/nature_hike_3.png');
+    background-image: url('../assets/nature_hike_5.png');
     background-position: 0 100%;
     background-size: cover;
 }
