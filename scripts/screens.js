@@ -102,9 +102,10 @@ const screens = {
             <button id="button-play-again">
                 New Story
             </button>
-            <button id="button-resources">
-                Resources for individuals with Autism
-            </button>
+            <a href="https://autisticadvocacy.org/resources/" id="button-resources">
+                <button>
+                    Resources for individuals with Autism
+                </button>
             <button id="button-survey">
                 Help us improve!
             </button>
